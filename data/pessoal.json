@@ -2,27 +2,27 @@
  "meses": [
   {
    "mes": "2026-05",
-   "valor": null,
+   "valor": 4004082.98,
    "pct_rcl": null,
-   "fonte": ""
+   "fonte": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2026&in_periodicidade=Q&nr_periodo=2&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=M&co_poder=E&id_ente=2700607"
   },
   {
    "mes": "2026-06",
-   "valor": null,
+   "valor": 3784287.81,
    "pct_rcl": null,
-   "fonte": ""
+   "fonte": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2026&in_periodicidade=Q&nr_periodo=2&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=M&co_poder=E&id_ente=2700607"
   },
   {
    "mes": "2026-07",
-   "valor": null,
+   "valor": 3859642.5,
    "pct_rcl": null,
-   "fonte": ""
+   "fonte": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2026&in_periodicidade=Q&nr_periodo=2&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=M&co_poder=E&id_ente=2700607"
   },
   {
    "mes": "2026-08",
-   "valor": null,
-   "pct_rcl": null,
-   "fonte": ""
+   "valor": 3835895.89,
+   "pct_rcl": 44.37,
+   "fonte": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2026&in_periodicidade=Q&nr_periodo=2&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=M&co_poder=E&id_ente=2700607"
   },
   {
    "mes": "2026-09",
@@ -41,13 +41,21 @@
   {
    "periodo": "1º quadrimestre 2026",
    "prazo": "2026-05-30",
-   "publicado": false
+   "publicado": true,
+   "entregue_em": "2026-06-09",
+   "dtp_12_meses": 44207513.49,
+   "pct_rcl": 44.67,
+   "fonte": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2026&in_periodicidade=Q&nr_periodo=1&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=M&co_poder=E&id_ente=2700607"
   },
   {
    "periodo": "2º quadrimestre 2026",
    "prazo": "2026-09-30",
-   "publicado": false
+   "publicado": true,
+   "entregue_em": "2026-09-29",
+   "dtp_12_meses": 46086105.67,
+   "pct_rcl": 44.37,
+   "fonte": "https://apidatalake.tesouro.gov.br/ords/siconfi/tt/rgf?an_exercicio=2026&in_periodicidade=Q&nr_periodo=2&co_tipo_demonstrativo=RGF&no_anexo=RGF-Anexo%2001&co_esfera=M&co_poder=E&id_ente=2700607"
   }
  ],
- "obs": "Folha mensal no portal Kalana (bloqueado para leitura externa); RGF de 2026 não localizado em fonte aberta."
+ "obs": "Fonte: Relatório de Gestão Fiscal da Prefeitura (Anexo 1), entregue ao Tesouro Nacional (Siconfi). \"valor\" é a despesa bruta com pessoal de cada mês. O percentual (44,37%) é o gasto com pessoal dos 12 meses até agosto/2026 sobre a receita corrente líquida, publicado no relatório; o limite da Prefeitura é 54% (alerta em 48,6% e prudencial em 51,3%). O relatório do 1º quadrimestre foi entregue em 09/06/2026, 10 dias depois do prazo de 30/05. Setembro e outubro só aparecem no relatório do 3º quadrimestre (prazo 30/01/2027)."
 }
