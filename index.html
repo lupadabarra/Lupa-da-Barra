@@ -275,6 +275,90 @@ html body .bsm :focus-visible{outline:3px solid rgba(37,99,235,.45);outline-offs
 /* barra do topo e voltar */
 html body .tb-nav a{font-size:13.5px;padding:8px 14px}
 html body .totop{width:52px;height:52px;background:linear-gradient(135deg,var(--blue),var(--sky));box-shadow:0 14px 28px -12px rgba(37,99,235,.8)}
+
+/* ================= V8 — hierarquia: alerta forte, neutro discreto ================= */
+:root{--alert:#e11d48;--alert2:#be123c;--warn2:#f59e0b;--neutral:#64748b}
+/* legenda */
+.colorkey{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;font-size:13.5px;color:#55627d;padding:12px 16px;background:#fff;border:1px solid #e2e8f4;border-radius:16px}
+.colorkey .ck-t{font-weight:700;color:#0b1b3a}
+.colorkey .ck{display:inline-flex;align-items:center;gap:6px}
+.colorkey .ck::before{content:"";width:14px;height:14px;border-radius:4px}
+.colorkey .ck-red::before{background:var(--alert)}.colorkey .ck-amb::before{background:var(--warn2)}.colorkey .ck-neu::before{background:#cbd5e1}
+.colorkey .ck-red b{color:var(--alert)}.colorkey .ck-amb b{color:#b45309}.colorkey .ck-neu b{color:var(--neutral)}
+/* abertura: só o alerta grita */
+html body .bsm .hstat.alert{background:linear-gradient(135deg,#e11d48,#f43f5e)!important;border-color:transparent;box-shadow:0 18px 36px -16px rgba(225,29,72,.8)}
+html body .bsm .hstat.alert .hk,html body .bsm .hstat.alert .hv,html body .bsm .hstat.alert .hn{color:#fff!important}
+html body .bsm .hstat.alert::after{content:"ALERTA";position:absolute;right:14px;top:14px;font:700 10px/1 'Inter',sans-serif;letter-spacing:.12em;padding:5px 8px;border-radius:999px;background:#fff;color:var(--alert)}
+html body .bsm .hstat:nth-child(3){background:rgba(255,255,255,.1);border-color:rgba(253,186,116,.7)}
+html body .bsm .hstat:nth-child(3) .hk{color:#fdba74}
+/* faixa de alertas */
+html body .tk-label{background:var(--alert)}
+/* cartões de alerta: grave x atenção */
+html body .bsm .inc.sev3{border:2px solid var(--alert);background:linear-gradient(180deg,#fff1f3,#fff 38%)!important;box-shadow:0 18px 40px -22px rgba(225,29,72,.55)}
+html body .bsm .inc.sev2{border:2px solid var(--warn2);background:linear-gradient(180deg,#fff8eb,#fff 38%)!important;box-shadow:0 18px 40px -22px rgba(245,158,11,.5)}
+html body .bsm .inc::before{height:6px!important}
+html body .bsm .inc.sev3::before{background:var(--alert)!important}html body .bsm .inc.sev2::before{background:var(--warn2)!important}
+html body .bsm .inc .rank{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+html body .bsm .inc .rank::before{font:800 10.5px/1 'Inter',sans-serif;letter-spacing:.1em;padding:6px 9px;border-radius:999px;color:#fff}
+html body .bsm .inc.sev3 .rank::before{content:"ALERTA GRAVE";background:var(--alert)}
+html body .bsm .inc.sev2 .rank::before{content:"ATENÇÃO";background:var(--warn2)}
+html body .bsm .inc.sev3 .iv{color:var(--alert2)}
+html body .bsm .inc.sev2 .iv{color:#b45309}
+html body .bsm .inc.sev2 .ir{background:#fff7e6;color:#7c3a03}
+html body .bsm .inc.sev2 .ir::before{background:var(--warn2)}
+html body .bsm .inc.sev3 .meter i{background:var(--alert)}html body .bsm .inc.sev2 .meter i{background:var(--warn2)}
+html body .bsm .inc.sev3 .cta{background:linear-gradient(135deg,var(--alert),#f43f5e);box-shadow:0 8px 18px -8px rgba(225,29,72,.7)}
+html body .bsm .inc.sev2 .cta{background:linear-gradient(135deg,#f59e0b,#f97316);box-shadow:0 8px 18px -8px rgba(245,158,11,.7)}
+html body .bsm .chip.c-bad{background:var(--alert);border-color:var(--alert);color:#fff;font-weight:700}
+html body .bsm .chip:not(.c-bad):not(.act){background:#f1f5f9;border-color:#e2e8f0;color:#475569}
+/* tabelas: linha com alerta salta, o resto fica neutro */
+html body .bsm tbody tr.clk td{color:#475569}
+html body .bsm tbody tr.flag{background:#fff1f3}
+html body .bsm tbody tr.flag td{color:#0b1b3a}
+html body .bsm tbody tr.flag td:first-child{box-shadow:inset 5px 0 0 var(--alert);font-weight:600}
+html body .bsm tbody tr.flag td:first-child::after{content:"ALERTA";margin-left:8px;font:800 9.5px/1 'Inter',sans-serif;letter-spacing:.08em;padding:4px 7px;border-radius:999px;background:var(--alert);color:#fff;vertical-align:2px}
+html body .bsm tbody tr.flag:hover{background:#ffe4e8}
+html body .bsm tbody tr.flag td:nth-last-child(2),html body #rank-fornecedores tbody tr.flag td:nth-child(5){color:var(--alert2);font-weight:700}
+html body .bsm .tag{background:#f1f5f9;border-color:#e2e8f0;color:#64748b}
+html body .bsm .tag.inx{background:var(--alert);border-color:var(--alert);color:#fff;font-weight:600}
+/* pódio */
+html body .pod{background:#fff!important;border-color:#e2e8f4!important}
+html body .pod.alerta{border:2px solid var(--alert)!important;background:linear-gradient(160deg,#fff1f3,#fff 60%)!important}
+html body .pod .pflag{align-self:flex-start;font:800 11px/1 'Inter',sans-serif;letter-spacing:.06em;padding:6px 10px;border-radius:999px;background:var(--alert);color:#fff}
+html body .pod .pok{align-self:flex-start;font-size:11px;padding:5px 9px;border-radius:999px;background:#f1f5f9;color:#64748b}
+html body .pod.alerta .pval{color:var(--alert2)}
+html body .pod .pbar i{background:#94a3b8}html body .pod.alerta .pbar i{background:var(--alert)}
+/* barras de categoria e orçamento: neutras */
+html body .bsm .seg{background:#a9bde3!important}
+html body .bsm .seg+.seg{background:#d6dff0!important}
+html body .bsm .sw{background:#a9bde3!important}html body .bsm i.sw[data-draw=sw1],html body .bsm i.sw[data-draw=sw1b]{background:#d6dff0!important}
+/* o que não aparece: problema = cor cheia */
+html body #ocultos .lrf.ruim{background:linear-gradient(135deg,#e11d48,#f43f5e)!important;border:0;color:#fff;box-shadow:0 18px 36px -18px rgba(225,29,72,.7)}
+html body #ocultos .lrf.ruim .k,html body #ocultos .lrf.ruim .n,html body #ocultos .lrf.ruim .v{color:#fff!important}
+html body #ocultos .lrf.ruim .st{background:#fff;color:var(--alert)!important;border:0;font-weight:700}
+html body #ocultos .lrf.ruim .st::before{background:var(--alert)!important}
+html body #ocultos .lrf.ruim .fis,html body #ocultos .lrf.ruim .det{color:#0b1b3a}
+/* limites: dentro = neutro; atenção = laranja; fora = vermelho; sem dado = cinza tracejado */
+html body .bsm .lrf.ok{background:#fff!important;border:1px solid #e2e8f4}
+html body .bsm .lrf.ok .st{color:#047857!important;background:#ecfdf5;border-color:#a7f3d0}
+html body .bsm .lrf.info{background:#fff!important}
+html body .bsm .lrf.atencao{background:linear-gradient(135deg,#f59e0b,#fbbf24)!important;border:0;color:#fff}
+html body .bsm .lrf.atencao .k,html body .bsm .lrf.atencao .v,html body .bsm .lrf.atencao .n{color:#fff!important}
+html body .bsm .lrf.ruim:not(#ocultos .lrf){background:linear-gradient(135deg,#e11d48,#f43f5e)!important;color:#fff}
+html body .bsm .lrf.semdado{background:#f8fafc!important;border:1.5px dashed #cbd5e1;box-shadow:none}
+html body .bsm .lrf.semdado .v{color:#94a3b8}
+html body .bsm .gauge .fillb{background:#94a3b8!important}
+/* pessoal: veredito em destaque */
+html body .pes-verdict{background:linear-gradient(135deg,#f59e0b,#f97316);border:0;color:#fff;box-shadow:0 18px 36px -18px rgba(245,158,11,.75)}
+html body .pes-verdict strong{color:#fff;font-size:16px;display:block;margin-bottom:4px}
+html body .pes-head .pk.real b{color:#b45309}
+html body .pes-head .pk.prev b{color:#475569}
+/* números das seções de alerta */
+html body #incomuns .part .num{background:linear-gradient(135deg,var(--alert),#f43f5e)!important}
+html body #ocultos .part .num{background:linear-gradient(135deg,#f59e0b,#f97316)!important}
+html body #pessoal .part .num{background:linear-gradient(135deg,#f59e0b,#f97316)!important}
+html body .bsm .sumline b{color:var(--alert)}
+html body .bsm .spot.amber{background:transparent;border:0;padding:0}
 </style></head><body>
 
 <style>
@@ -453,6 +537,7 @@ html body .totop{width:52px;height:52px;background:linear-gradient(135deg,var(--
   </header>
 
   <div class="ticker" data-draw="ticker" aria-label="Maiores alertas"></div>
+  <div class="colorkey" data-draw="colorKey"></div>
 
   <section class="sec" id="incomuns">
     <div class="part red"><div class="num">01</div><div><p class="eyebrow">Alertas</p><h2>Gastos incomuns</h2></div></div>

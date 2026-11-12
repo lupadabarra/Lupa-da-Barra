@@ -29,9 +29,9 @@
     const r = dash.data('rank_fornecedor');
     if (r.status !== 'ok' || !r.data || !r.data.length) return;
     r.data.slice(0, 3).forEach((x, i) => {
-      const c = el('button', 'pod p' + (i + 1)); c.type = 'button';
+      const c = el('button', 'pod p' + (i + 1) + (x.sinais ? ' alerta' : '')); c.type = 'button';
       const bar = el('div', 'pbar'); const fill = el('i'); fill.style.width = Math.max(4, x.pct) + '%'; bar.append(fill);
-      c.append(el('div', 'pn', String(i + 1)), el('div', 'pname', x.fornecedor), el('div', 'pval', F.brl(x.valor)), bar, el('div', 'ppct', F.pct(x.pct) + ' de tudo o que foi pago a fornecedores identificados' + (x.sinais ? ' · ⚑ tem alerta' : '')));
+      c.append(el('div', 'pn', String(i + 1)), el('div', 'pname', x.fornecedor), el('div', 'pval', F.brl(x.valor)), bar, el('div', 'ppct', F.pct(x.pct) + ' de tudo o que foi contratado com fornecedores identificados'), x.sinais ? el('span', 'pflag', '⚑ ' + x.sinais + (x.sinais > 1 ? ' alertas' : ' alerta')) : el('span', 'pok', 'sem alerta'));
       c.addEventListener('click', () => {
         const row = [...document.querySelectorAll('#rank-fornecedores tbody tr.clk')].find(t => t.dataset.key === x.fornecedor);
         if (row) { row.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'center'}); if (row.getAttribute('aria-expanded') !== 'true') row.click(); }
@@ -109,7 +109,7 @@
     const y = d3.scaleLinear().domain([0, d3.max(rows, r => r.tot) || 1]).nice().range([H - pb, pt]);
     const svg = d3.create('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Valor contratado por mês em 2026');
     const defs = svg.append('defs'); const g = defs.append('linearGradient').attr('id', 'gb').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
-    g.append('stop').attr('offset', 0).attr('stop-color', '#2563eb'); g.append('stop').attr('offset', 1).attr('stop-color', '#06b6d4');
+    g.append('stop').attr('offset', 0).attr('stop-color', '#b8c7e3'); g.append('stop').attr('offset', 1).attr('stop-color', '#d6dff0');
     y.ticks(4).forEach(t => svg.append('line').attr('x1', pl).attr('x2', W - pr).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', '#e9eef8'));
     const det = el('div', 'chart-det');
     const bars = svg.append('g');
@@ -123,7 +123,7 @@
       gg.on('click', open).on('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); } });
     });
     box.append(svg.node());
-    const lg = el('div', 'chart-legend'); const a = el('span'); const ai = el('i'); ai.style.background = 'linear-gradient(#2563eb,#06b6d4)'; a.append(ai, document.createTextNode('Total contratado no mês'));
+    const lg = el('div', 'chart-legend'); const a = el('span'); const ai = el('i'); ai.style.background = '#c3d0e8'; a.append(ai, document.createTextNode('Total contratado no mês (sem alerta)'));
     const b = el('span'); const bi = el('i'); bi.style.background = '#ef4444'; b.append(bi, document.createTextNode('Parte com alerta'));
     const semData = contratos().filter(c => !/^2026-\d\d/.test(c.data)).length;
     lg.append(a, b); if (semData) lg.append(el('span', null, semData + ' contrato(s) sem mês de 2026 informado (atas de dez/2025 ainda valendo ou sem data) não entram no gráfico.'));
@@ -134,7 +134,7 @@
   dash.draw('modDonut', box => {
     box.replaceChildren();
     const L = contratos().filter(c => +c.valor > 0);
-    const G = [['Sem concorrência', c => c.modalidade === 'Inexigibilidade' || c.modalidade === 'Dispensa', '#ef4444'], ['Com concorrência', c => /Pregão|Concorrência/.test(c.modalidade), '#2563eb'], ['Credenciamento', c => c.modalidade === 'Credenciamento', '#06b6d4'], ['Renovações', c => c.modalidade === 'Aditivo', '#7c3aed'], ['Não informada', c => true, '#94a3b8']];
+    const G = [['Sem concorrência', c => c.modalidade === 'Inexigibilidade' || c.modalidade === 'Dispensa', '#e11d48'], ['Com concorrência', c => /Pregão|Concorrência/.test(c.modalidade), '#a9bde3'], ['Credenciamento', c => c.modalidade === 'Credenciamento', '#f59e0b'], ['Renovações', c => c.modalidade === 'Aditivo', '#c7d2fe'], ['Não informada', c => true, '#e2e8f0']];
     const used = new Set(); const parts = G.map(([n, f, col]) => { const list = L.filter(c => !used.has(c.id) && f(c)); list.forEach(c => used.add(c.id)); return {n, col, list, v: d3.sum(list, c => +c.valor)}; }).filter(p => p.v > 0);
     const tot = d3.sum(parts, p => p.v);
     const S = 220, R = S / 2, svg = d3.create('svg').attr('viewBox', `0 0 ${S} ${S}`).attr('role', 'img').attr('aria-label', 'Divisão do valor contratado por forma de contratação');
@@ -211,6 +211,12 @@
     box.append(el('b', null, 'O que pedir pela Lei de Acesso à Informação:'), ul);
     const lk = el('div', 'chips'); [['https://kalana.com.br/transparencia/12263869000108/0000/servidores?m=false', 'Folha no portal Kalana ↗'], ['https://barradesaomiguel.al.gov.br/transparencia/lrf/', 'Página da LRF da Prefeitura ↗']].forEach(([u, t]) => { const a = el('a', 'chip act', t); a.href = u; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); });
     box.append(lk);
+  });
+
+  dash.draw('colorKey', box => {
+    box.replaceChildren();
+    box.append(el('span', 'ck-t', 'Como ler as cores:'));
+    [['ck-red', 'Vermelho', 'alerta grave: pede explicação'], ['ck-amb', 'Laranja', 'atenção: precisa conferir'], ['ck-neu', 'Cinza e azul', 'informação, sem problema encontrado']].forEach(([c, t, d]) => { const s = el('span', 'ck ' + c); s.append(el('b', null, t), document.createTextNode(' = ' + d)); box.append(s); });
   });
 
   /* contadores animados */

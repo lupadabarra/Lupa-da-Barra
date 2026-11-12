@@ -488,7 +488,7 @@ const incTags = (c) => {
   if (/incomum|atípic|alto|mais que/i.test(c.alerta || '')) t.push(['Fora do padrão', '']);
   return t;
 };
-const incSev = (c) => (isSem(c) || !(+c.valor > 0) || /pessoa física|não bate|sem CNPJ/i.test(c.alerta || '')) ? 3 : 2;
+const incSev = (c) => (isSem(c) || !(+c.valor > 0) || /pessoa física|não bate|não confere|sem CNPJ|não descrit|sem descrição/i.test((c.alerta || '') + ' ' + (c.objeto || ''))) ? 3 : 2;
 dash.draw('incomuns', el => {
   const list = contratos().filter(c => c.alerta).sort((a, b) => +b.valor - +a.valor);
   el.replaceChildren();
@@ -535,7 +535,7 @@ dash.draw('tabForn', tb => {
     box.append(kv([['Fornecedor', x.fornecedor], ['CNPJ', x.cnpj || 'não publicado no extrato'], ['Contrata com', x.orgaos], ['Total contratado', x.valor > 0 ? F.brl(x.valor) : 'não publicado'], ['Parte do total com fornecedor identificado', x.valor > 0 ? F.pct(x.pct) : null], ['Contratos com ponto de atenção', x.sinais || null], ['Consultar CNPJ', x.cnpj ? link('https://solucoes.receita.fazenda.gov.br/servicos/cnpjreva/cnpjreva_solicitacao.asp', 'Receita Federal ↗') : null]]));
     box.append(contractList(contratos().filter(c => c.fornecedor === x.fornecedor)));
     return box;
-  });
+  });  tb.querySelectorAll('tr.clk').forEach((tr, i) => { if (items[i] && items[i].sinais) tr.classList.add('flag'); });
 });
 
 dash.draw('tabCtr', tb => {
