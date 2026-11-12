@@ -150,6 +150,69 @@
     const wrap = el('div', 'donut-wrap'); wrap.append(svg.node(), list); box.append(wrap, det);
   });
 
+
+  /* destaque: gasto com funcionários x limite da lei (últimos 6 meses) */
+  const pesData = () => { const d = dash.data('pessoal'); return d.status === 'ok' && d.data && !Array.isArray(d.data) ? d.data : null; };
+  const prevPct = () => { const d = dash.data('lrf'); const r = d.status === 'ok' && d.data ? d.data.find(x => x.id === 'pessoal') : null; return r ? r.pct : null; };
+  dash.draw('pesHead', box => {
+    box.replaceChildren();
+    const P = pesData(); const pv = prevPct();
+    const reais = P ? P.meses.filter(m => m.pct_rcl != null) : [];
+    const k = (cls, n, t) => { const d = el('div', 'pk ' + cls); d.append(el('b', null, n), el('span', null, t)); box.append(d); };
+    k('lim', '60%', 'é o máximo que o município (Prefeitura + Câmara) pode gastar com pessoal, sobre a receita corrente líquida. Alerta em 54% e limite prudencial em 57%.');
+    if (pv != null) k('prev', F.pct(pv), 'é o que o orçamento de 2026 prevê gastar com pessoal (R$ 40,9 milhões), dentro do limite no papel.');
+    k('real', reais.length ? F.pct(reais[reais.length - 1].pct_rcl) : 'sem dado', reais.length ? 'foi o gasto real no último mês publicado.' : 'é o que existe de gasto real publicado em 2026. A folha mês a mês não está aberta ao público.');
+    const v = el('div', 'pes-verdict');
+    if (reais.length) {
+      const last = reais[reais.length - 1].pct_rcl;
+      v.innerHTML = last > 60 ? '<strong>Passou do limite da lei.</strong> O gasto com pessoal está acima de 60% da receita.' : last > 57 ? '<strong>Acima do limite prudencial.</strong> A Prefeitura fica proibida de dar aumentos, criar cargos e contratar (LRF, art. 22).' : last > 54 ? '<strong>Acima do limite de alerta.</strong> O Tribunal de Contas deve alertar a Prefeitura (LRF, art. 59).' : '<strong>Dentro do limite</strong> no último mês publicado.';
+    } else {
+      v.innerHTML = '<strong>Hoje não dá para dizer se a folha passou do limite</strong>, e isso já é um problema. A Prefeitura é obrigada a publicar o Relatório de Gestão Fiscal a cada 4 meses (prazos: 30/05 e 30/09), mostrando o gasto com pessoal mês a mês (LRF, arts. 54 e 55). Esses relatórios de 2026 não foram encontrados em fonte aberta, e a folha mensal só aparece no portal Kalana, que bloqueia a leitura. Deixar de publicar o relatório no prazo é infração punida com multa de 30% dos vencimentos anuais de quem deu causa (Lei 10.028/2000, art. 5º).';
+    }
+    box.append(v);
+  });
+  dash.draw('pesChart', box => {
+    box.replaceChildren();
+    const P = pesData(); if (!P) return; const pv = prevPct();
+    const items = [{lab: 'Previsto 2026', pct: pv, prev: true}].concat(P.meses.map(m => ({lab: MESES[+m.mes.slice(5, 7) - 1] + '/26', pct: m.pct_rcl})));
+    const W = 720, H = 300, pl = 40, pr = 8, pt = 16, pb = 30;
+    const x = d3.scaleBand().domain(items.map(i => i.lab)).range([pl, W - pr]).padding(.3);
+    const y = d3.scaleLinear().domain([0, 70]).range([H - pb, pt]);
+    const svg = d3.create('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Gasto com pessoal em relação ao limite da lei, últimos 6 meses');
+    [0, 20, 40, 60].forEach(t => { svg.append('line').attr('x1', pl).attr('x2', W - pr).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', '#e9eef8'); svg.append('text').attr('x', pl - 6).attr('y', y(t) + 4).attr('text-anchor', 'end').attr('style', 'font:11px Inter,sans-serif;fill:#7a879f').text(t + '%'); });
+    svg.append('rect').attr('x', pl).attr('width', W - pr - pl).attr('y', y(70)).attr('height', y(60) - y(70)).attr('fill', 'rgba(239,68,68,.07)');
+    [[60, '#ef4444', 'Máximo 60%', 1], [57, '#f97316', 'Prudencial 57%', .68], [54, '#f59e0b', 'Alerta 54%', .4]].forEach(([v, c, t, fx]) => {
+      svg.append('line').attr('x1', pl).attr('x2', W - pr).attr('y1', y(v)).attr('y2', y(v)).attr('stroke', c).attr('stroke-width', 2).attr('stroke-dasharray', v === 60 ? null : '6 5');
+      svg.append('text').attr('x', pl + (W - pr - pl) * fx - 4).attr('y', y(v) - 5).attr('text-anchor', 'end').attr('paint-order', 'stroke').attr('stroke', '#fff').attr('stroke-width', 4).attr('style', `font:600 11px Inter,sans-serif;fill:${c}`).text(t);
+    });
+    items.forEach(i => {
+      const bx = x(i.lab), bw = x.bandwidth();
+      if (i.pct != null) {
+        const col = i.prev ? '#2563eb' : i.pct > 60 ? '#ef4444' : i.pct > 54 ? '#f59e0b' : '#10b981';
+        svg.append('rect').attr('x', bx).attr('width', bw).attr('y', y(i.pct)).attr('height', y(0) - y(i.pct)).attr('rx', 8).attr('fill', col).attr('opacity', i.prev ? .9 : 1);
+        svg.append('text').attr('x', bx + bw / 2).attr('y', y(i.pct) - 6).attr('text-anchor', 'middle').attr('style', "font:700 13px 'Space Grotesk',sans-serif;fill:#0b1b3a").text(F.pct(i.pct));
+      } else {
+        svg.append('rect').attr('x', bx).attr('width', bw).attr('y', y(45)).attr('height', y(0) - y(45)).attr('rx', 8).attr('fill', '#f5f8ff').attr('stroke', '#c9d5ee').attr('stroke-dasharray', '5 4');
+        svg.append('text').attr('x', bx + bw / 2).attr('y', y(22)).attr('text-anchor', 'middle').attr('style', "font:700 20px 'Space Grotesk',sans-serif;fill:#9aa8c3").text('?');
+        svg.append('text').attr('x', bx + bw / 2).attr('y', y(22) + 18).attr('text-anchor', 'middle').attr('style', 'font:10px Inter,sans-serif;fill:#9aa8c3').text('não publicado');
+      }
+      svg.append('text').attr('x', bx + bw / 2).attr('y', H - 9).attr('text-anchor', 'middle').attr('style', 'font:11px Inter,sans-serif;fill:#55627d').text(i.lab);
+    });
+    box.append(svg.node());
+  });
+  dash.draw('pesLegend', box => {
+    box.replaceChildren();
+    const r = el('div', 'row2');
+    [['#ef4444', 'Máximo da lei: 60% (LRF, art. 19)'], ['#f97316', 'Prudencial: 57% (proíbe aumentos e contratações, art. 22)'], ['#f59e0b', 'Alerta: 54% (art. 59)']].forEach(([c, t]) => { const s = el('span'); const i = el('i'); i.style.background = c; s.append(i, document.createTextNode(t)); r.append(s); });
+    box.append(r);
+    box.append(el('span', null, 'Barra azul: o que o orçamento de 2026 prevê. Barras pontilhadas: meses cujo gasto real com funcionários não foi publicado. Quando a Prefeitura publicar, o gráfico se preenche sozinho na atualização automática.'));
+    const ul = el('ul', 'plain');
+    [['Peça a folha de pagamento mês a mês de maio a outubro de 2026, com o total gasto e o número de servidores efetivos, comissionados e contratados.'], ['Peça os Relatórios de Gestão Fiscal do 1º e 2º quadrimestres de 2026 (Anexo 1 – Despesa com Pessoal).']].forEach(([t]) => ul.append(el('li', null, t)));
+    box.append(el('b', null, 'O que pedir pela Lei de Acesso à Informação:'), ul);
+    const lk = el('div', 'chips'); [['https://kalana.com.br/transparencia/12263869000108/0000/servidores?m=false', 'Folha no portal Kalana ↗'], ['https://barradesaomiguel.al.gov.br/transparencia/lrf/', 'Página da LRF da Prefeitura ↗']].forEach(([u, t]) => { const a = el('a', 'chip act', t); a.href = u; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); });
+    box.append(lk);
+  });
+
   /* contadores animados */
   function countUp(node) {
     const txt = node.textContent; const m = txt.match(/^(.*?)(\d{1,3}(?:\.\d{3})*(?:,\d+)?)(.*)$/);

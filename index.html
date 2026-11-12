@@ -208,6 +208,18 @@ html body .foot{color:#7a879f}
 .dlist i{width:12px;height:12px;border-radius:4px}
 .dlist b{font-family:'Space Grotesk',sans-serif;font-weight:700;font-variant-numeric:tabular-nums}
 .chart-det{margin-top:10px}
+
+/* destaque pessoal */
+.pes-head{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px;margin-bottom:16px}
+.pes-head .pk{border-radius:16px;padding:14px 16px;background:#f5f8ff;border:1px solid #e2e8f4}
+.pes-head .pk b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:28px;letter-spacing:-.03em;line-height:1.05;color:#0b1b3a}
+.pes-head .pk span{font-size:12px;color:#55627d;line-height:1.4;display:block;margin-top:4px}
+.pes-head .pk.lim b{color:#ef4444}.pes-head .pk.prev b{color:#2563eb}.pes-head .pk.real b{color:#f59e0b}
+.pes-verdict{grid-column:1/-1;border-radius:16px;padding:14px 16px;background:#fffbeb;border:1px solid #fde68a;font-size:14px;line-height:1.55;color:#0b1b3a}
+.pes-verdict strong{color:#b45309}
+.pes-legend{display:flex;flex-direction:column;gap:10px;margin-top:10px;font-size:13px;color:#55627d;line-height:1.5}
+.pes-legend .row2{display:flex;flex-wrap:wrap;gap:14px}
+.pes-legend i{display:inline-block;width:18px;height:3px;border-radius:2px;margin-right:6px;vertical-align:middle}
 </style></head><body>
 
 <style>
@@ -363,7 +375,7 @@ html body .foot{color:#7a879f}
 
 <div class="progress" aria-hidden="true"><i></i></div>
 <header class="topbar"><a class="tb-brand" href="#topo"><span class="tb-logo" aria-hidden="true"></span>Lupa<em>da</em>Barra<span class="tb-sub">Barra de São Miguel/AL</span></a>
-<nav class="tb-nav" aria-label="Seções"><a href="#incomuns">Alertas</a><a href="#ocultos">O que não aparece</a><a href="#prefeitura">Prefeitura</a><a href="#lrf">Limites</a><a href="#contratacoes">Fornecedores</a><a href="#camara">Câmara</a><a href="#fontes">Fontes</a></nav></header>
+<nav class="tb-nav" aria-label="Seções"><a href="#incomuns">Alertas</a><a href="#pessoal">Funcionários</a><a href="#ocultos">O que não aparece</a><a href="#prefeitura">Prefeitura</a><a href="#lrf">Limites</a><a href="#contratacoes">Fornecedores</a><a href="#camara">Câmara</a><a href="#fontes">Fontes</a></nav></header>
 <button class="totop" type="button" aria-label="Voltar ao topo">↑</button>
 <div class="bsm" data-read lang="pt-BR">
   <header class="hero" id="topo">
@@ -396,6 +408,15 @@ html body .foot{color:#7a879f}
         <div><b data-source="inc_resumo" data-field="valor" data-where="indicador=sem" data-draw="i_sem">—</b>foram feitos sem concorrência</div>
       </div>
       <div class="incgrid" data-source="contratacoes" data-draw="incomuns"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="pessoal">
+    <div class="part"><div class="num">%</div><div><p class="eyebrow">Destaque · gasto com funcionários</p><h2>A folha cabe no limite da lei?</h2></div></div>
+    <div class="card pessoal-card">
+      <div class="pes-head" data-draw="pesHead"></div>
+      <div class="chart" data-draw="pesChart"></div>
+      <div class="pes-legend" data-draw="pesLegend"></div>
     </div>
   </section>
 
@@ -542,6 +563,6 @@ data(id){if(DS[id])return{status:'ok',data:DS[id]};const c=this._c[id];if(c){if(
 calc(id,o){this._c[id]=o},draw(n,fn){if(fn)this._d[n]=fn;else this._run(n)},onData(f){this._on.push(f)},
 _run(n){const fn=this._d[n];document.querySelectorAll('[data-draw="'+n+'"]').forEach(el=>{try{fn(el)}catch(e){console.error(n,e)}})},
 _all(){Object.keys(this._d).forEach(n=>this._run(n));this._on.forEach(f=>f())}};
-const IDS=['funcao','orgao','loa','modalidades','contratacoes','vereadores','camara_amostras','camara_registros','municipio','status'];
+const IDS=['pessoal','funcao','orgao','loa','modalidades','contratacoes','vereadores','camara_amostras','camara_registros','municipio','status'];
 Promise.all(IDS.map(i=>fetch('data/'+i+'.json?v='+Date.now()).then(r=>r.json()).then(j=>{DS[i]=j}).catch(()=>{}))).then(()=>{const s=document.createElement('script');s.src='app.js?v='+Date.now();s.onload=()=>{const e=document.createElement('script');e.src='enhance.js?v='+Date.now();e.onload=()=>dash._all();document.body.appendChild(e);};document.body.appendChild(s);});</script>
 </body></html>

@@ -1,0 +1,53 @@
+{
+ "meses": [
+  {
+   "mes": "2026-05",
+   "valor": null,
+   "pct_rcl": null,
+   "fonte": ""
+  },
+  {
+   "mes": "2026-06",
+   "valor": null,
+   "pct_rcl": null,
+   "fonte": ""
+  },
+  {
+   "mes": "2026-07",
+   "valor": null,
+   "pct_rcl": null,
+   "fonte": ""
+  },
+  {
+   "mes": "2026-08",
+   "valor": null,
+   "pct_rcl": null,
+   "fonte": ""
+  },
+  {
+   "mes": "2026-09",
+   "valor": null,
+   "pct_rcl": null,
+   "fonte": ""
+  },
+  {
+   "mes": "2026-10",
+   "valor": null,
+   "pct_rcl": null,
+   "fonte": ""
+  }
+ ],
+ "rgf": [
+  {
+   "periodo": "1º quadrimestre 2026",
+   "prazo": "2026-05-30",
+   "publicado": false
+  },
+  {
+   "periodo": "2º quadrimestre 2026",
+   "prazo": "2026-09-30",
+   "publicado": false
+  }
+ ],
+ "obs": "Folha mensal no portal Kalana (bloqueado para leitura externa); RGF de 2026 não localizado em fonte aberta."
+}
