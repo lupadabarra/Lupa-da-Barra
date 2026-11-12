@@ -1,4 +1,11 @@
 {
+ "ano": 2026,
+ "lei_loa": "Lei 795/2026",
+ "limites_dispensa": {
+  "obra": 130984.2,
+  "compra": 65492.11,
+  "decreto": "Decreto 12.807/2025"
+ },
  "camara": {
   "total_registros": 4445,
   "ultima_data": "2026-09-30",
@@ -4618,6 +4625,12 @@
     "pago": 3423757.43
    }
   ],
-  "folha_obs": "Soma dos empenhos de pessoal registrados em cada mês no portal Kalana (Prefeitura e fundos). \"Efetivos\" = salário de servidores concursados e comissionados; \"contratados\" = contratos temporários; \"encargos\" = contribuição patronal ao INSS e à previdência; \"outros\" = gratificações e despesas variáveis. Não inclui condenações judiciais (mostradas à parte). O mês em curso pode estar incompleto até a Prefeitura registrar a folha."
+  "folha_obs": "Soma dos empenhos de pessoal registrados em cada mês no portal Kalana (Prefeitura e fundos). \"Efetivos\" = salário de servidores concursados e comissionados; \"contratados\" = contratos temporários; \"encargos\" = contribuição patronal ao INSS e à previdência; \"outros\" = gratificações e despesas variáveis. Não inclui condenações judiciais (mostradas à parte). O mês em curso pode estar incompleto até a Prefeitura registrar a folha.",
+  "totais_ano": {
+   "empenhado": 93413023.97,
+   "liquidado": 73870913.62,
+   "pago": 70265556.26
+  },
+  "arquivo_empenhos": "data/empenhos_prefeitura_2026.json"
  }
 }

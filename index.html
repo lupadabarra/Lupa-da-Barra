@@ -661,10 +661,10 @@ body.xp-open{overflow:hidden}
       <p class="tag-line">Em palavras simples: quanto a Prefeitura e a Câmara têm para gastar, com quem gastam e o que parece fora do normal. Cada número tem a fonte. Toque em qualquer cartão, barra ou linha para ver mais.</p>
     </div>
     <div class="hstats">
-      <div class="hstat" data-xp="h_pago" data-go="#gastos-reais"><div class="hk">Prefeitura já pagou em 2026</div><div class="hv" data-draw="h_pago">—</div><div class="hn">toque para entender</div></div>
+      <div class="hstat" data-xp="h_pago" data-go="#gastos-reais"><div class="hk">Prefeitura já pagou em <span data-ano>2026</span></div><div class="hv" data-draw="h_pago">—</div><div class="hn">toque para entender</div></div>
       <div class="hstat" data-xp="h_folha" data-go="#pessoal"><div class="hk">Folha da Prefeitura no mês</div><div class="hv" data-draw="h_folha">—</div><div class="hn" data-draw="h_folha_mes">toque para entender</div></div>
       <div class="hstat alert" data-xp="h_inc" data-go="#incomuns"><div class="hk">Contratos</div><div class="hv" data-source="inc_resumo" data-field="valor" data-where="indicador=total" data-draw="h_inc">—</div><div class="hn"><span data-source="inc_resumo" data-field="valor" data-where="indicador=qtd" data-draw="h_inc_qtd">—</span> contratos para conferir</div></div>
-      <div class="hstat" data-xp="h_cam" data-go="#camara"><div class="hk">Câmara: orçamento 2026</div><div class="hv" data-source="orgao" data-field="total" data-where="orgao=Câmara Municipal" data-draw="h_cam">—</div><div class="hn">9 vereadores · toque para entender</div></div>
+      <div class="hstat" data-xp="h_cam" data-go="#camara"><div class="hk">Câmara: orçamento <span data-ano>2026</span></div><div class="hv" data-source="orgao" data-field="total" data-where="orgao=Câmara Municipal" data-draw="h_cam">—</div><div class="hn">9 vereadores · toque para entender</div></div>
     </div>
   </header>
 
@@ -672,7 +672,7 @@ body.xp-open{overflow:hidden}
     <h2 class="mg-t">O que você quer ver?</h2>
     <div class="mg">
       <a class="mg-b hot" href="#incomuns"><span class="mg-i" aria-hidden="true">!</span><b>Alertas</b><small>Gastos e contratos que pedem explicação</small></a>
-      <a class="mg-b" href="#gastos-reais"><span class="mg-i" aria-hidden="true">R$</span><b>Gastos da Prefeitura</b><small>Os 20 maiores e todos os pagamentos de 2026</small></a>
+      <a class="mg-b" href="#gastos-reais"><span class="mg-i" aria-hidden="true">R$</span><b>Gastos da Prefeitura</b><small>Os 20 maiores e todos os pagamentos de <span data-ano>2026</span></small></a>
       <a class="mg-b" href="#pessoal"><span class="mg-i" aria-hidden="true">%</span><b>Funcionários</b><small>Quanto custa a folha por mês</small></a>
       <a class="mg-b" href="#camara"><span class="mg-i" aria-hidden="true">9</span><b>Câmara de Vereadores</b><small>Vereadores, gastos e contratos da Câmara</small></a>
       <a class="mg-b" href="#contratacoes"><span class="mg-i" aria-hidden="true">✎</span><b>Contratos</b><small>Quem recebe e como foi escolhido</small></a>
@@ -723,7 +723,7 @@ body.xp-open{overflow:hidden}
   </section>
 
   <section class="sec" id="prefeitura">
-    <div class="part"><div class="num">03</div><div><p class="eyebrow">Prefeitura · Orçamento de 2026 (o plano de gastos aprovado por lei)</p><h2>Para onde vai o dinheiro</h2></div></div>
+    <div class="part"><div class="num">03</div><div><p class="eyebrow">Prefeitura · Orçamento de <span data-ano>2026</span> (o plano de gastos aprovado por lei)</p><h2>Para onde vai o dinheiro</h2></div></div>
     <div class="tiles">
       <a class="card" href="#por-orgao"><div class="k">Esporte, cultura, turismo e comércio</div><div class="v" data-source="resumo" data-field="valor" data-where="indicador=lazer_pct" data-draw="t_laz">—</div><div class="n">do orçamento total</div></a>
       <a class="card" href="#por-orgao"><div class="k">Esportes, Cultura e Eventos</div><div class="v" data-source="orgao" data-field="total" data-where="orgao=Sec. de Esportes Cultura e Eventos" data-draw="o_esp">—</div><div class="n">contra <span data-source="orgao" data-field="total" data-where="orgao=Sec. de Desenv. Social Trabalho e Habitação" data-draw="o_soc">—</span> da assistência social</div></a>
@@ -757,7 +757,7 @@ body.xp-open{overflow:hidden}
     <div class="part"><div class="num">05</div><div><p class="eyebrow">Contratos · Prefeitura e Câmara</p><h2>Quem recebe e por quê</h2></div></div>
     <p class="lead" style="margin:0"><b data-source="ctr_resumo" data-field="valor" data-where="indicador=qtd" data-draw="c_qtd">—</b> contratos e compras encontrados, somando <b data-source="ctr_resumo" data-field="valor" data-where="indicador=total" data-draw="c_total">—</b>. <b data-source="ctr_resumo" data-field="valor" data-where="indicador=sem_licit_pct" data-draw="c_sem_pct">—</b> desse dinheiro foi gasto sem concorrência entre empresas.</p>
     <div class="card" id="mes-a-mes">
-      <h3>Mês a mês: quanto foi contratado em 2026</h3>
+      <h3>Mês a mês: quanto foi contratado em <span data-ano>2026</span></h3>
       <p class="hint">Soma dos contratos pela data de assinatura ou homologação. Em vermelho, a parte com alerta. Toque numa barra para ver os contratos do mês.</p>
       <div class="chart" data-source="contratacoes" data-draw="timeline"></div>
     </div>
@@ -858,5 +858,5 @@ calc(id,o){this._c[id]=o},draw(n,fn){if(fn)this._d[n]=fn;else this._run(n)},onDa
 _run(n){const fn=this._d[n];document.querySelectorAll('[data-draw="'+n+'"]').forEach(el=>{try{fn(el)}catch(e){console.error(n,e)}})},
 _all(){Object.keys(this._d).forEach(n=>this._run(n));this._on.forEach(f=>f())}};
 const IDS=['despesas_reais','pessoal','funcao','orgao','loa','modalidades','contratacoes','vereadores','camara_amostras','camara_registros','municipio','status'];
-Promise.all(IDS.map(i=>fetch('data/'+i+'.json?v='+Date.now()).then(r=>r.json()).then(j=>{DS[i]=j}).catch(()=>{}))).then(()=>{const s=document.createElement('script');s.src='app.js?v='+Date.now();s.onload=()=>{const e=document.createElement('script');e.src='enhance.js?v='+Date.now();e.onload=()=>dash._all();document.body.appendChild(e);};document.body.appendChild(s);});</script>
+Promise.all(IDS.map(i=>fetch('data/'+i+'.json?v='+Date.now()).then(r=>r.json()).then(j=>{DS[i]=j}).catch(()=>{}))).then(()=>{window.LUPA_ANO=+((DS.despesas_reais&&DS.despesas_reais.ano)||new Date().getFullYear());document.querySelectorAll('[data-ano]').forEach(e=>{e.textContent=e.dataset.ano==='prev'?window.LUPA_ANO-1:window.LUPA_ANO});const s=document.createElement('script');s.src='app.js?v='+Date.now();s.onload=()=>{const e=document.createElement('script');e.src='enhance.js?v='+Date.now();e.onload=()=>dash._all();document.body.appendChild(e);};document.body.appendChild(s);});</script>
 </body></html>

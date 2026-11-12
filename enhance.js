@@ -1,6 +1,7 @@
 /* Lupa da Barra: recursos visuais extras (faixa de alertas, pódio, contadores, animações) */
 (function () {
   const F = window.bsmFmt;
+  const ANO = window.LUPA_ANO || new Date().getFullYear();
   const reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   const el = (t, c, x) => { const n = document.createElement(t); if (c) n.className = c; if (x != null) n.textContent = x; return n; };
   const contratos = () => { const d = dash.data('contratacoes'); return d.status === 'ok' ? d.data : []; };
@@ -101,13 +102,13 @@
   const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
   dash.draw('timeline', box => {
     box.replaceChildren();
-    const L = contratos().filter(c => /^2026-\d\d/.test(c.data) && +c.valor > 0);
-    const now = new Date(); const last = now.getFullYear() === 2026 ? now.getMonth() : 11;
+    const L = contratos().filter(c => new RegExp('^' + ANO + '-\\d\\d').test(c.data) && +c.valor > 0);
+    const now = new Date(); const last = now.getFullYear() === ANO ? now.getMonth() : 11;
     const rows = MESES.slice(0, last + 1).map((m, i) => { const mm = L.filter(c => +c.data.slice(5, 7) === i + 1); return {m, i, tot: d3.sum(mm, c => +c.valor), al: d3.sum(mm.filter(c => c.alerta), c => +c.valor), list: mm}; });
     const W = 720, H = 260, pl = 8, pr = 8, pt = 26, pb = 26;
     const x = d3.scaleBand().domain(rows.map(r => r.m)).range([pl, W - pr]).padding(.28);
     const y = d3.scaleLinear().domain([0, d3.max(rows, r => r.tot) || 1]).nice().range([H - pb, pt]);
-    const svg = d3.create('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Valor contratado por mês em 2026');
+    const svg = d3.create('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Valor contratado por mês em ' + ANO);
     const defs = svg.append('defs'); const g = defs.append('linearGradient').attr('id', 'gb').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
     g.append('stop').attr('offset', 0).attr('stop-color', '#b8c7e3'); g.append('stop').attr('offset', 1).attr('stop-color', '#d6dff0');
     y.ticks(4).forEach(t => svg.append('line').attr('x1', pl).attr('x2', W - pr).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', '#e9eef8'));
@@ -119,14 +120,14 @@
       if (r.al > 0) gg.append('rect').attr('x', x(r.m)).attr('width', x.bandwidth()).attr('y', y(r.al)).attr('height', Math.max(0, y(0) - y(r.al))).attr('rx', 6).attr('fill', '#ef4444');
       if (r.tot > 0) gg.append('text').attr('class', 'vl').attr('x', x(r.m) + x.bandwidth() / 2).attr('y', y(r.tot) - 6).attr('text-anchor', 'middle').text(r.tot >= 1e6 ? (r.tot / 1e6).toLocaleString('pt-BR', {maximumFractionDigits: 1}) + ' mi' : Math.round(r.tot / 1e3) + ' mil');
       gg.append('text').attr('class', 'axis').attr('x', x(r.m) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').append('tspan').attr('style', 'font-size:11px;fill:#7a879f').text(r.m);
-      const open = () => { det.replaceChildren(); if (!r.list.length) { det.append(el('p', 'note', 'Nenhum contrato com data neste mês.')); return; } det.append(el('div', 'k', r.m + '/2026 · ' + r.list.length + ' contrato(s) · ' + F.brl(r.tot))); det.append(contractList(r.list)); };
+      const open = () => { det.replaceChildren(); if (!r.list.length) { det.append(el('p', 'note', 'Nenhum contrato com data neste mês.')); return; } det.append(el('div', 'k', r.m + '/' + ANO + ' · ' + r.list.length + ' contrato(s) · ' + F.brl(r.tot))); det.append(contractList(r.list)); };
       gg.on('click', open).on('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); } });
     });
     box.append(svg.node());
     const lg = el('div', 'chart-legend'); const a = el('span'); const ai = el('i'); ai.style.background = '#c3d0e8'; a.append(ai, document.createTextNode('Total contratado no mês (sem alerta)'));
     const b = el('span'); const bi = el('i'); bi.style.background = '#ef4444'; b.append(bi, document.createTextNode('Parte com alerta'));
-    const semData = contratos().filter(c => !/^2026-\d\d/.test(c.data)).length;
-    lg.append(a, b); if (semData) lg.append(el('span', null, semData + ' contrato(s) sem mês de 2026 informado (atas de dez/2025 ainda valendo ou sem data) não entram no gráfico.'));
+    const semData = contratos().filter(c => !new RegExp('^' + ANO + '-\\d\\d').test(c.data)).length;
+    lg.append(a, b); if (semData) lg.append(el('span', null, semData + ' contrato(s) sem mês de ' + ANO + ' informado (de anos anteriores ainda valendo ou sem data) não entram no gráfico.'));
     box.append(lg, det);
   });
 
@@ -160,21 +161,21 @@
     const reais = P ? P.meses.filter(m => m.pct_rcl != null) : [];
     const k = (cls, n, t) => { const d = el('div', 'pk ' + cls); d.append(el('b', null, n), el('span', null, t)); box.append(d); };
     k('lim', '60%', 'é o máximo que o município (Prefeitura + Câmara) pode gastar com pessoal, sobre a receita corrente líquida. Alerta em 54% e limite prudencial em 57%.');
-    if (pv != null) k('prev', F.pct(pv), 'é o que o orçamento de 2026 prevê gastar com pessoal (R$ 40,9 milhões), dentro do limite no papel.');
-    k('real', reais.length ? F.pct(reais[reais.length - 1].pct_rcl) : 'sem dado', reais.length ? 'foi o gasto real no último mês publicado.' : 'é o que existe de gasto real publicado em 2026. A folha mês a mês não está aberta ao público.');
+    if (pv != null) k('prev', F.pct(pv), 'é o que o orçamento de ' + ANO + ' prevê gastar com pessoal (R$ 40,9 milhões), dentro do limite no papel.');
+    k('real', reais.length ? F.pct(reais[reais.length - 1].pct_rcl) : 'sem dado', reais.length ? 'foi o gasto real no último mês publicado.' : 'é o que existe de gasto real publicado em ' + ANO + '. A folha mês a mês não está aberta ao público.');
     const v = el('div', 'pes-verdict');
     if (reais.length) {
       const last = reais[reais.length - 1].pct_rcl;
       v.innerHTML = last > 60 ? '<strong>Passou do limite da lei.</strong> O gasto com pessoal está acima de 60% da receita.' : last > 57 ? '<strong>Acima do limite prudencial.</strong> A Prefeitura fica proibida de dar aumentos, criar cargos e contratar (LRF, art. 22).' : last > 54 ? '<strong>Acima do limite de alerta.</strong> O Tribunal de Contas deve alertar a Prefeitura (LRF, art. 59).' : '<strong>Dentro do limite</strong> no último mês publicado.';
     } else {
-      v.innerHTML = '<strong>Hoje não dá para dizer se a folha passou do limite</strong>, e isso já é um problema. A Prefeitura é obrigada a publicar o Relatório de Gestão Fiscal a cada 4 meses (prazos: 30/05 e 30/09), mostrando o gasto com pessoal mês a mês (LRF, arts. 54 e 55). Esses relatórios de 2026 não foram encontrados em fonte aberta, e a folha mensal só aparece no portal Kalana, que bloqueia a leitura. Deixar de publicar o relatório no prazo é infração punida com multa de 30% dos vencimentos anuais de quem deu causa (Lei 10.028/2000, art. 5º).';
+      v.innerHTML = '<strong>Hoje não dá para dizer se a folha passou do limite</strong>, e isso já é um problema. A Prefeitura é obrigada a publicar o Relatório de Gestão Fiscal a cada 4 meses (prazos: 30/05 e 30/09), mostrando o gasto com pessoal mês a mês (LRF, arts. 54 e 55). Esses relatórios do ano não foram encontrados em fonte aberta, e a folha mensal só aparece no portal Kalana, que bloqueia a leitura. Deixar de publicar o relatório no prazo é infração punida com multa de 30% dos vencimentos anuais de quem deu causa (Lei 10.028/2000, art. 5º).';
     }
     box.append(v);
   });
   dash.draw('pesChart', box => {
     box.replaceChildren();
     const P = pesData(); if (!P) return; const pv = prevPct();
-    const items = [{lab: 'Previsto 2026', pct: pv, prev: true}].concat(P.meses.map(m => ({lab: MESES[+m.mes.slice(5, 7) - 1] + '/26', pct: m.pct_rcl})));
+    const items = [{lab: 'Previsto ' + ANO, pct: pv, prev: true}].concat(P.meses.map(m => ({lab: MESES[+m.mes.slice(5, 7) - 1] + '/' + m.mes.slice(2, 4), pct: m.pct_rcl})));
     const W = 720, H = 300, pl = 40, pr = 8, pt = 16, pb = 30;
     const x = d3.scaleBand().domain(items.map(i => i.lab)).range([pl, W - pr]).padding(.3);
     const y = d3.scaleLinear().domain([0, 70]).range([H - pb, pt]);
@@ -205,9 +206,9 @@
     const r = el('div', 'row2');
     [['#ef4444', 'Máximo da lei: 60% (LRF, art. 19)'], ['#f97316', 'Prudencial: 57% (proíbe aumentos e contratações, art. 22)'], ['#f59e0b', 'Alerta: 54% (art. 59)']].forEach(([c, t]) => { const s = el('span'); const i = el('i'); i.style.background = c; s.append(i, document.createTextNode(t)); r.append(s); });
     box.append(r);
-    box.append(el('span', null, 'Barra azul: o que o orçamento de 2026 prevê. Barras pontilhadas: meses cujo gasto real com funcionários não foi publicado. Quando a Prefeitura publicar, o gráfico se preenche sozinho na atualização automática.'));
+    box.append(el('span', null, 'Barra azul: o que o orçamento de ' + ANO + ' prevê. Barras pontilhadas: meses cujo gasto real com funcionários não foi publicado. Quando a Prefeitura publicar, o gráfico se preenche sozinho na atualização automática.'));
     const ul = el('ul', 'plain');
-    [['Peça a folha de pagamento mês a mês de maio a outubro de 2026, com o total gasto e o número de servidores efetivos, comissionados e contratados.'], ['Peça os Relatórios de Gestão Fiscal do 1º e 2º quadrimestres de 2026 (Anexo 1 – Despesa com Pessoal).']].forEach(([t]) => ul.append(el('li', null, t)));
+    [['Peça a folha de pagamento mês a mês de ' + (P && P.meses && P.meses.length ? MESES[+P.meses[0].mes.slice(5, 7) - 1].toLowerCase() + '/' + P.meses[0].mes.slice(0, 4) + ' a ' + MESES[+P.meses[P.meses.length - 1].mes.slice(5, 7) - 1].toLowerCase() + '/' + P.meses[P.meses.length - 1].mes.slice(0, 4) : 'os últimos 6 meses') + ', com o total gasto e o número de servidores efetivos, comissionados e contratados.'], ['Peça os Relatórios de Gestão Fiscal dos quadrimestres de ' + ANO + ' (Anexo 1 – Despesa com Pessoal).']].forEach(([t]) => ul.append(el('li', null, t)));
     box.append(el('b', null, 'O que pedir pela Lei de Acesso à Informação:'), ul);
     const lk = el('div', 'chips'); [['https://kalana.com.br/transparencia/12263869000108/0000/servidores?m=false', 'Folha no portal Kalana ↗'], ['https://barradesaomiguel.al.gov.br/transparencia/lrf/', 'Página da LRF da Prefeitura ↗']].forEach(([u, t]) => { const a = el('a', 'chip act', t); a.href = u; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); });
     box.append(lk);
@@ -251,7 +252,7 @@
     const ul = el('ul', 'rr-list');
     L.forEach(x => { const li = el('li', +x.valor >= 10000 ? 'big' : ''); const cr = el('span', 'cr', x.credor); if (x.cnpj) cr.append(el('small', null, 'CNPJ ' + x.cnpj + ' · empenho ' + x.empenho)); else cr.append(el('small', null, 'empenho ' + x.empenho)); li.append(el('span', 'dt', brDate(x.data)), cr, el('span', 'vl', F.brl(+x.valor))); xpd(li, () => camExplain(x, C)); ul.append(li); });
     box.append(ul);
-    const t = el('div', 'rr-tot'); t.append(el('span', null, L.length + ' lançamentos mostrados'), el('b', null, F.brl(d3.sum(L, x => +x.valor)))); xpd(t, {t: 'Total dos lançamentos mostrados', v: F.brl(d3.sum(L, x => +x.valor)), o: 'Soma dos ' + L.length + ' gastos mais recentes que o portal da Câmara mostra na primeira página.', c: 'O portal da Câmara tem ' + (+C.total_registros).toLocaleString('pt-BR') + ' gastos registrados desde 2023, mas só mostra 10 de cada vez, sem permitir baixar tudo. Por isso aqui aparecem só os mais recentes de 2026.', f: 'Portal da transparência da Câmara Municipal.', link: C.fonte, linkT: 'Abrir o portal da Câmara ↗'}); box.append(t);
+    const t = el('div', 'rr-tot'); t.append(el('span', null, L.length + ' lançamentos mostrados'), el('b', null, F.brl(d3.sum(L, x => +x.valor)))); xpd(t, {t: 'Total dos lançamentos mostrados', v: F.brl(d3.sum(L, x => +x.valor)), o: 'Soma dos ' + L.length + ' gastos mais recentes que o portal da Câmara mostra na primeira página.', c: 'O portal da Câmara tem ' + (+C.total_registros).toLocaleString('pt-BR') + ' gastos registrados desde 2023, mas só mostra 10 de cada vez, sem permitir baixar tudo. Por isso aqui aparecem só os mais recentes de ' + ANO + '.', f: 'Portal da transparência da Câmara Municipal.', link: C.fonte, linkT: 'Abrir o portal da Câmara ↗'}); box.append(t);
     box.append(el('p', 'note', 'Os lançamentos não trazem a descrição do gasto (o campo "histórico" vem vazio no portal), o que dificulta saber o que foi pago. Todo dia a atualização automática acrescenta os novos lançamentos que aparecerem.'));
     const lk = el('div', 'chips'); const a = el('a', 'chip act', 'Abrir despesas da Câmara ↗'); a.href = C.fonte; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); box.append(lk);
   });
@@ -308,20 +309,20 @@
   dash.draw('reaisPref', box => {
     box.replaceChildren();
     const D = realData(); if (!D || !D.prefeitura) return; const P = D.prefeitura;
-    const head = el('div', 'rr-head'); head.append(el('h3', null, 'Prefeitura: para onde vai o dinheiro'), el('span', 'rr-sub', P.total_registros ? (+P.total_registros).toLocaleString('pt-BR') + ' gastos registrados em 2026 · dados de ' + brDate(P.consultado_em) : 'portal Kalana')); box.append(head);
+    const head = el('div', 'rr-head'); head.append(el('h3', null, 'Prefeitura: para onde vai o dinheiro'), el('span', 'rr-sub', P.total_registros ? (+P.total_registros).toLocaleString('pt-BR') + ' gastos registrados em ' + ANO + ' · dados de ' + brDate(P.consultado_em) : 'portal Kalana')); box.append(head);
     if (!P.ranking || !P.ranking.length) {
       const a = el('div', 'rr-alert amb'); a.append(el('b', null, 'Os pagamentos da Prefeitura não estão abertos'), document.createTextNode('Ainda não foi possível ler os gastos no portal da Prefeitura.')); box.append(a);
     } else {
-      if (P.totais_2026) {
-        const T = P.totais_2026, g = el('div', 'gt');
-        [['Reservado', T.empenhado, 'dinheiro separado para pagar compras, obras e serviços (empenho)'], ['Entregue', T.liquidado, 'o que a Prefeitura diz que já recebeu (liquidado)'], ['Pago', T.pago, 'o que já saiu do cofre da Prefeitura']].forEach(([k, v, n]) => { const c = el('div', 'gt-c'); c.append(el('div', 'gt-k', k + ' em 2026'), el('div', 'gt-v', F.mi(v)), el('div', 'gt-n', n));
-          const XPT = {Reservado: {o: 'Empenho é a reserva do dinheiro: antes de comprar ou contratar, a Prefeitura separa o valor no orçamento. É o primeiro passo do gasto.', c: 'Soma da coluna "valor empenhado" de todos os gastos de 2026.'}, Entregue: {o: 'Liquidação é quando a Prefeitura confere e declara que recebeu o produto, a obra ou o serviço. Só depois disso pode pagar.', c: 'Soma da coluna "valor liquidado" de todos os gastos de 2026.'}, Pago: {o: 'É o dinheiro que de fato saiu da conta da Prefeitura para o fornecedor, o servidor ou o órgão.', c: 'Soma da coluna "valor pago" de todos os gastos de 2026.'}}[k];
-          xpd(c, {t: k + ' em 2026', v: F.brl(v), o: XPT.o, c: XPT.c + ' São ' + (+P.total_registros).toLocaleString('pt-BR') + ' gastos de janeiro até ' + brDate(P.ultima_data) + ', da Prefeitura e dos fundos de Saúde, Educação e Assistência Social.', p: 'A diferença entre reservado e pago mostra quanto ainda está para ser pago. Gasto entregue e não pago pode virar dívida com o fornecedor.', f: 'Portal da transparência da Prefeitura (Kalana).', link: KALANA, linkT: 'Abrir o portal da Prefeitura ↗'});
+      if (P.totais_ano || P.totais_2026) {
+        const T = P.totais_ano || P.totais_2026, g = el('div', 'gt');
+        [['Reservado', T.empenhado, 'dinheiro separado para pagar compras, obras e serviços (empenho)'], ['Entregue', T.liquidado, 'o que a Prefeitura diz que já recebeu (liquidado)'], ['Pago', T.pago, 'o que já saiu do cofre da Prefeitura']].forEach(([k, v, n]) => { const c = el('div', 'gt-c'); c.append(el('div', 'gt-k', k + ' em ' + ANO), el('div', 'gt-v', F.mi(v)), el('div', 'gt-n', n));
+          const XPT = {Reservado: {o: 'Empenho é a reserva do dinheiro: antes de comprar ou contratar, a Prefeitura separa o valor no orçamento. É o primeiro passo do gasto.', c: 'Soma da coluna "valor empenhado" de todos os gastos de ' + ANO + '.'}, Entregue: {o: 'Liquidação é quando a Prefeitura confere e declara que recebeu o produto, a obra ou o serviço. Só depois disso pode pagar.', c: 'Soma da coluna "valor liquidado" de todos os gastos de ' + ANO + '.'}, Pago: {o: 'É o dinheiro que de fato saiu da conta da Prefeitura para o fornecedor, o servidor ou o órgão.', c: 'Soma da coluna "valor pago" de todos os gastos de ' + ANO + '.'}}[k];
+          xpd(c, {t: k + ' em ' + ANO, v: F.brl(v), o: XPT.o, c: XPT.c + ' São ' + (+P.total_registros).toLocaleString('pt-BR') + ' gastos de janeiro até ' + brDate(P.ultima_data) + ', da Prefeitura e dos fundos de Saúde, Educação e Assistência Social.', p: 'A diferença entre reservado e pago mostra quanto ainda está para ser pago. Gasto entregue e não pago pode virar dívida com o fornecedor.', f: 'Portal da transparência da Prefeitura (Kalana).', link: KALANA, linkT: 'Abrir o portal da Prefeitura ↗'});
           g.append(c); });
         box.append(g);
       }
       box.append(el('h4', 'g-h', 'Os 20 maiores gastos do ano'));
-      box.append(el('p', 'g-p', 'Cada linha é um gasto registrado pela Prefeitura em 2026, do maior para o menor. Os salários e encargos dos servidores ficam de fora daqui porque aparecem no destaque da folha, mais abaixo. Toque em "Ver detalhes" para saber se existe contrato, como a empresa foi escolhida e se o valor confere.'));
+      box.append(el('p', 'g-p', 'Cada linha é um gasto registrado pela Prefeitura em ' + ANO + ', do maior para o menor. Os salários e encargos dos servidores ficam de fora daqui porque aparecem no destaque da folha, mais abaixo. Toque em "Ver detalhes" para saber se existe contrato, como a empresa foi escolhida e se o valor confere.'));
       const nAl = P.ranking.filter(x => x.analise && x.analise.nivel === 'alerta').length, nAt = P.ranking.filter(x => x.analise && x.analise.nivel === 'atencao').length;
       const lg = el('div', 'g-leg'); [['nv-alerta', nAl + ' com alerta'], ['nv-atencao', nAt + ' pedem atenção'], ['nv-ok', (P.ranking.length - nAl - nAt) + ' sem problema encontrado']].forEach(([c, t]) => { const s = el('span', c); s.append(el('i'), document.createTextNode(t)); xpd(s, {t: 'O que significam as cores', o: ['Vermelho (alerta): encontramos algo que não confere ou que a lei exige e não foi publicado, como contrato não localizado, número de contrato trocado ou empenho feito depois do serviço.', 'Laranja (atenção): o contrato existe, mas tem um ponto que vale acompanhar, como obra com muitos aditivos, parte da obra repassada a outra empresa ou objeto muito amplo.', 'Verde (sem problema encontrado): o contrato existe, foi por concorrência ou é uma obrigação legal, e o valor confere.'], p: 'As cores são sinais para conferir, não acusações. Toque em "Ver detalhes" em cada gasto para ver o motivo.'}); lg.append(s); }); box.append(lg);
       const ul = el('ol', 'g-list'); P.ranking.forEach(x => ul.append(gastoItem(x, x.analise, x.posicao))); box.append(ul);
@@ -332,11 +333,11 @@
       const more = el('div', 'g-more'); const btn = el('button', 'g-morebtn', 'Ver todos os ' + (+P.total_registros || '').toLocaleString('pt-BR') + ' gastos'); btn.type = 'button'; more.append(btn); box.append(more);
       btn.addEventListener('click', () => {
         btn.disabled = true; btn.textContent = 'Carregando…';
-        fetch('data/empenhos_prefeitura_2026.json?v=' + Date.now()).then(r => r.json()).then(J => {
+        fetch((P.arquivo_empenhos || ('data/empenhos_prefeitura_' + ANO + '.json')) + '?v=' + Date.now()).then(r => r.json()).then(J => {
           more.replaceChildren();
           const AN = {}; (J.analises || []).forEach(a => { AN[a.empenho + '|' + a.cnpj + '|' + (+a.valor)] = a; });
           const rows = J.linhas.map(r => ({empenho: r[0], data: r[1], credor: r[2], cnpj: r[3], tipo: r[4], valor: r[5], liquidado: r[6], pago: r[7], fonte: J.fonte}));
-          more.append(el('h4', 'g-h', 'Todos os gastos de 2026'));
+          more.append(el('h4', 'g-h', 'Todos os gastos de ' + ANO));
           const tools = el('div', 'g-tools');
           const q = el('input', 'g-q'); q.type = 'search'; q.placeholder = 'Procurar empresa, pessoa ou tipo de gasto'; q.setAttribute('aria-label', 'Procurar nos gastos');
           const ord = el('select', 'g-ord'); [['valor', 'Maior valor primeiro'], ['data', 'Mais recentes primeiro']].forEach(([v, t]) => { const o = el('option', null, t); o.value = v; ord.append(o); }); ord.setAttribute('aria-label', 'Ordem');
@@ -375,9 +376,9 @@
     const hero = el('div', 'fm-hero');
     const h1 = el('div', 'fm-big'); h1.append(el('div', 'fm-k', 'Custo da folha da Prefeitura em ' + mn + ' de ' + last.mes.slice(0, 4)), el('div', 'fm-v', F.brl(last.total)), el('div', 'fm-n', 'salários, contratos temporários e encargos, num único mês'));
     const side = el('div', 'fm-side');
-    [['Por morador, no mês', F.brl(last.total / pop)], ['Média por mês em 2026', F.brl(media)], ['Total de janeiro a ' + mn, F.mi(M.reduce((s, m) => s + m.total, 0))]].forEach(([k, v]) => { const c = el('div', 'fm-s'); c.append(el('div', 'fm-sk', k), el('div', 'fm-sv', v)); side.append(c); });
+    [['Por morador, no mês', F.brl(last.total / pop)], ['Média por mês em ' + ANO, F.brl(media)], ['Total de janeiro a ' + mn, F.mi(M.reduce((s, m) => s + m.total, 0))]].forEach(([k, v]) => { const c = el('div', 'fm-s'); c.append(el('div', 'fm-sk', k), el('div', 'fm-sv', v)); side.append(c); });
     const L0 = last; xpd(h1, () => lupaFolhaMes(L0, pop));
-    [...side.children].forEach((c, i) => xpd(c, i === 0 ? {t: 'Folha por morador', v: F.brl(last.total / pop), o: 'O custo da folha do mês dividido pelo número de moradores.', c: F.brl(last.total) + ' ÷ ' + pop.toLocaleString('pt-BR') + ' moradores (IBGE, Censo 2022).', p: 'Ajuda a comparar com outras cidades do mesmo tamanho.'} : i === 1 ? {t: 'Média por mês em 2026', v: F.brl(media), o: 'Quanto a folha custou, em média, a cada mês do ano.', c: 'Soma da folha de ' + M.length + ' meses ÷ ' + M.length + '.', p: 'Meses com 13º, férias ou pagamento de encargos atrasados ficam acima da média (janeiro e maio, por exemplo).'} : {t: 'Folha de janeiro a ' + mn, v: F.brl(M.reduce((s, m) => s + m.total, 0)), o: 'Tudo o que a Prefeitura gastou com pessoal no ano até agora.', c: 'Soma da folha de cada mês, de janeiro a ' + mn + '.', f: 'Portal da transparência da Prefeitura (Kalana).'}));
+    [...side.children].forEach((c, i) => xpd(c, i === 0 ? {t: 'Folha por morador', v: F.brl(last.total / pop), o: 'O custo da folha do mês dividido pelo número de moradores.', c: F.brl(last.total) + ' ÷ ' + pop.toLocaleString('pt-BR') + ' moradores (IBGE, Censo 2022).', p: 'Ajuda a comparar com outras cidades do mesmo tamanho.'} : i === 1 ? {t: 'Média por mês em ' + ANO, v: F.brl(media), o: 'Quanto a folha custou, em média, a cada mês do ano.', c: 'Soma da folha de ' + M.length + ' meses ÷ ' + M.length + '.', p: 'Meses com 13º, férias ou pagamento de encargos atrasados ficam acima da média (janeiro e maio, por exemplo).'} : {t: 'Folha de janeiro a ' + mn, v: F.brl(M.reduce((s, m) => s + m.total, 0)), o: 'Tudo o que a Prefeitura gastou com pessoal no ano até agora.', c: 'Soma da folha de cada mês, de janeiro a ' + mn + '.', f: 'Portal da transparência da Prefeitura (Kalana).'}));
     hero.append(h1, side); box.append(hero);
     const parts = [['efetivos', 'Servidores efetivos e comissionados', '#2563eb'], ['contratados', 'Contratos temporários', '#f59e0b'], ['encargos', 'Encargos (INSS e previdência)', '#94a3b8'], ['outros', 'Gratificações e outros', '#14b8a6']];
     const PEXP = {efetivos: 'Salário de quem entrou por concurso (efetivo) e de quem ocupa cargo de confiança indicado pelo prefeito (comissionado). No portal aparece como "vencimentos e vantagens fixas".', contratados: 'Salário de quem foi contratado por tempo determinado, sem concurso. A Constituição só permite isso para necessidade passageira e excepcional (art. 37, IX).', encargos: 'Contribuição que a Prefeitura, como patrão, paga ao INSS ou ao regime de previdência sobre os salários. É obrigatória.', outros: 'Gratificações, horas extras, adicionais e outras despesas variáveis com pessoal.'};
@@ -478,31 +479,31 @@
   const txt = n => (n && n.textContent || '').trim();
   const KALANA = 'https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false';
   const FONTE_CTR = 'Extratos do Diário Oficial dos Municípios de Alagoas, Portal Nacional de Contratações Públicas (por meio de agregadores) e imprensa. Cada contrato tem o link do documento na lista de contratos.';
-  const FONTE_LOA = 'Lei Orçamentária Anual (LOA) 2026 do município, aprovada pela Câmara.';
+  const FONTE_LOA = 'Lei Orçamentária Anual (LOA) ' + ANO + ' do município, aprovada pela Câmara.';
   const EXPL = {
     lastUpd: n => ({t: 'Última atualização', v: txt(n), o: 'Data e hora em que o Lupa da Barra buscou os dados pela última vez.', c: 'Todo dia, de manhã cedo, uma rotina automática consulta os portais da Prefeitura e da Câmara, o Diário Oficial e o Tesouro Nacional e atualiza o site.', f: 'Portais oficiais listados na seção "Fontes e palavras".', go: '#fontes', goT: 'Ver as fontes'}),
-    h_pago: n => { const P = PREF(); const T = P && P.totais_2026; return {t: 'Prefeitura já pagou em 2026', v: txt(n), o: 'Todo o dinheiro que já saiu do cofre da Prefeitura em 2026 para pagar fornecedores, obras, serviços, salários e encargos.', c: T ? 'Somamos a coluna "valor pago" de ' + (+P.total_registros).toLocaleString('pt-BR') + ' gastos registrados de janeiro até ' + brDate(P.ultima_data) + '. Além disso, ' + F.mi(T.empenhado) + ' já foram reservados (empenhados) e ' + F.mi(T.liquidado) + ' foram dados como entregues.' : '', p: 'É o gasto de verdade, diferente do orçamento (que é só a previsão). Equivale a ' + (T ? F.brl(T.pago / POPN()) : '—') + ' por morador.', f: 'Portal da transparência da Prefeitura (Kalana), planilha de despesas de 2026.', link: KALANA, linkT: 'Abrir o portal da Prefeitura ↗', go: '#gastos-reais', goT: 'Ver os maiores gastos'}; },
+    h_pago: n => { const P = PREF(); const T = P && (P.totais_ano || P.totais_2026); return {t: 'Prefeitura já pagou em ' + ANO, v: txt(n), o: 'Todo o dinheiro que já saiu do cofre da Prefeitura em ' + ANO + ' para pagar fornecedores, obras, serviços, salários e encargos.', c: T ? 'Somamos a coluna "valor pago" de ' + (+P.total_registros).toLocaleString('pt-BR') + ' gastos registrados de janeiro até ' + brDate(P.ultima_data) + '. Além disso, ' + F.mi(T.empenhado) + ' já foram reservados (empenhados) e ' + F.mi(T.liquidado) + ' foram dados como entregues.' : '', p: 'É o gasto de verdade, diferente do orçamento (que é só a previsão). Equivale a ' + (T ? F.brl(T.pago / POPN()) : '—') + ' por morador.', f: 'Portal da transparência da Prefeitura (Kalana), planilha de despesas de ' + ANO + '.', link: KALANA, linkT: 'Abrir o portal da Prefeitura ↗', go: '#gastos-reais', goT: 'Ver os maiores gastos'}; },
     h_folha: n => { const P = PREF(); const M = P && P.folha_mensal; const L = M && M[M.length - 1]; return {t: 'Folha da Prefeitura no mês', v: txt(n), o: 'Quanto a Prefeitura gastou num único mês com quem trabalha para ela: servidores efetivos e comissionados, contratados temporários e os encargos (INSS e previdência).', c: L ? 'Somamos os gastos de pessoal registrados em ' + MESN[+L.mes.slice(5, 7) - 1] + ': ' + F.brl(L.efetivos) + ' com efetivos e comissionados, ' + F.brl(L.contratados) + ' com temporários, ' + F.brl(L.encargos) + ' de encargos e ' + F.brl(L.outros) + ' de gratificações e outros.' : '', p: 'É o maior gasto fixo da Prefeitura. A lei limita quanto pode ser gasto com pessoal.', f: 'Portal da transparência da Prefeitura (Kalana).', link: KALANA, linkT: 'Abrir o portal da Prefeitura ↗', go: '#pessoal', goT: 'Ver a folha mês a mês'}; },
     h_inc: n => ({t: 'Contratos com alerta', v: txt(n), o: 'Soma dos contratos da Prefeitura e da Câmara que marcamos com um sinal de alerta: sem concorrência para serviço comum, valor alto para uma cidade de 8 mil moradores, valor não publicado, fornecedor pessoa física ou valores que não conferem.', c: 'Somamos o valor de cada contrato marcado com alerta na lista de contratos. Contratos sem valor publicado entram com zero.', p: 'Não é prova de irregularidade: são os casos que a Prefeitura e a Câmara precisam explicar.', f: FONTE_CTR, go: '#incomuns', goT: 'Ver os alertas'}),
     h_inc_qtd: n => ({t: 'Quantidade de contratos com alerta', v: txt(n), o: 'Número de contratos marcados com algum sinal de alerta.', c: 'Contamos os contratos da lista que têm um alerta.', f: FONTE_CTR, go: '#incomuns', goT: 'Ver os alertas'}),
-    h_cam: n => ({t: 'Câmara: orçamento 2026', v: txt(n), o: 'Quanto a Câmara de Vereadores pode gastar em 2026, segundo o orçamento. O dinheiro vem da Prefeitura, em parcelas mensais (o chamado duodécimo).', c: 'Valor fixado para a Câmara Municipal na lei do orçamento.', p: 'A Constituição limita esse repasse (art. 29-A) e manda a Câmara gastar no máximo 70% dele com folha.', f: FONTE_LOA, go: '#camara', goT: 'Ver a Câmara'}),
-    h_total: n => ({t: 'Orçamento da Prefeitura em 2026', v: txt(n), o: 'Quanto a Prefeitura pode gastar no ano, segundo a lei do orçamento. É uma previsão, não o gasto real.', c: 'Soma de todas as áreas de governo (saúde, educação, urbanismo etc.) na lei do orçamento.', f: FONTE_LOA, go: '#prefeitura', goT: 'Ver para onde vai'}),
+    h_cam: n => ({t: 'Câmara: orçamento ' + ANO, v: txt(n), o: 'Quanto a Câmara de Vereadores pode gastar em ' + ANO + ', segundo o orçamento. O dinheiro vem da Prefeitura, em parcelas mensais (o chamado duodécimo).', c: 'Valor fixado para a Câmara Municipal na lei do orçamento.', p: 'A Constituição limita esse repasse (art. 29-A) e manda a Câmara gastar no máximo 70% dele com folha.', f: FONTE_LOA, go: '#camara', goT: 'Ver a Câmara'}),
+    h_total: n => ({t: 'Orçamento da Prefeitura em ' + ANO, v: txt(n), o: 'Quanto a Prefeitura pode gastar no ano, segundo a lei do orçamento. É uma previsão, não o gasto real.', c: 'Soma de todas as áreas de governo (saúde, educação, urbanismo etc.) na lei do orçamento.', f: FONTE_LOA, go: '#prefeitura', goT: 'Ver para onde vai'}),
     h_pc: n => ({t: 'Orçamento por morador', v: txt(n), o: 'O orçamento dividido pelo número de moradores.', c: 'Orçamento total ÷ ' + POPN().toLocaleString('pt-BR') + ' moradores (IBGE, Censo 2022).', f: FONTE_LOA + ' População: IBGE.'}),
     h_sem: n => ({t: 'Contratado sem concorrência', v: txt(n), o: 'Valor dos contratos feitos sem disputa entre empresas (dispensa ou inexigibilidade de licitação).', c: 'Soma dos contratos com modalidade "Dispensa" ou "Inexigibilidade".', p: 'A regra é licitar. Contratar direto só vale nos casos que a Lei 14.133/2021 lista, com justificativa.', f: FONTE_CTR, go: '#contratacoes', goT: 'Ver os contratos'}),
     i_total: n => EXPL.h_inc(n),
     i_pct: n => ({t: 'Parte do dinheiro com alerta', v: txt(n), o: 'Quanto do valor de todos os contratos levantados está nos contratos com alerta.', c: 'Valor dos contratos com alerta ÷ valor de todos os contratos levantados × 100.', f: FONTE_CTR}),
     i_sem: n => ({t: 'Alertas sem concorrência', v: txt(n), o: 'Entre os contratos com alerta, quantos foram feitos sem disputa entre empresas.', c: 'Contamos os contratos com alerta cuja modalidade é dispensa ou inexigibilidade.', f: FONTE_CTR}),
-    c_qtd: n => ({t: 'Contratos encontrados', v: txt(n), o: 'Quantos contratos, atas, aditivos e editais de 2026 (ou ainda valendo) encontramos para a Prefeitura e a Câmara.', c: 'Contagem da lista de contratos. Registros vencidos ou repetidos são retirados.', f: FONTE_CTR, go: '#contratacoes', goT: 'Ver a lista'}),
+    c_qtd: n => ({t: 'Contratos encontrados', v: txt(n), o: 'Quantos contratos, atas, aditivos e editais de ' + ANO + ' (ou de anos anteriores ainda valendo) encontramos para a Prefeitura e a Câmara.', c: 'Contagem da lista de contratos. Registros vencidos ou repetidos são retirados.', f: FONTE_CTR, go: '#contratacoes', goT: 'Ver a lista'}),
     c_total: n => ({t: 'Valor dos contratos encontrados', v: txt(n), o: 'Soma dos valores de todos os contratos levantados.', c: 'Soma da lista de contratos. Quando parte de um credenciamento já virou contrato, só o saldo é contado, para não contar o mesmo dinheiro duas vezes.', p: 'Contrato não é pagamento: é o máximo que pode ser gasto. O que foi pago de fato está em "Gastos da Prefeitura".', f: FONTE_CTR}),
     c_sem: n => EXPL.h_sem(n),
     c_sem_pct: n => ({t: 'Parte sem concorrência', v: txt(n), o: 'Quanto do dinheiro contratado foi sem disputa entre empresas.', c: 'Valor dos contratos por dispensa ou inexigibilidade ÷ valor total dos contratos × 100.', f: FONTE_CTR}),
     f_top: n => ({t: 'Fornecedor que mais recebe', v: txt(n), o: 'A empresa com o maior valor somado de contratos identificados.', c: 'Somamos os contratos de cada fornecedor e ordenamos do maior para o menor.', f: FONTE_CTR, go: '#contratacoes', goT: 'Ver o ranking'}),
     f_top_pct: n => ({t: 'Parte do fornecedor que mais recebe', v: txt(n), o: 'Quanto do valor contratado com fornecedores identificados ficou com o primeiro colocado.', c: 'Valor do primeiro ÷ valor de todos os fornecedores identificados × 100.', f: FONTE_CTR}),
     f_top3_pct: n => ({t: 'Parte dos três que mais recebem', v: txt(n), o: 'Quanto do valor contratado ficou com os três maiores fornecedores juntos.', c: 'Soma dos três primeiros ÷ total dos fornecedores identificados × 100.', p: 'Quando poucos fornecedores ficam com quase tudo, vale perguntar se houve concorrência de verdade.', f: FONTE_CTR}),
-    t_laz: n => ({t: 'Esporte, cultura, turismo e comércio', v: txt(n), o: 'Parte do orçamento de 2026 reservada para esporte e lazer, cultura e comércio e serviços (onde entram turismo e eventos).', c: 'Soma dessas três áreas ÷ orçamento total × 100.', f: FONTE_LOA}),
-    o_esp: n => ({t: 'Secretaria de Esportes, Cultura e Eventos', v: txt(n), o: 'Quanto o orçamento de 2026 reserva para essa secretaria.', c: 'Valor fixado para a secretaria na lei do orçamento.', f: FONTE_LOA}),
-    o_soc: n => ({t: 'Assistência social', v: txt(n), o: 'Quanto o orçamento de 2026 reserva para a Secretaria de Desenvolvimento Social, Trabalho e Habitação.', c: 'Valor fixado para a secretaria na lei do orçamento.', p: 'Comparar as duas ajuda a ver as prioridades da Prefeitura.', f: FONTE_LOA}),
-    f_urb: n => ({t: 'Urbanismo', v: txt(n), o: 'Quanto o orçamento de 2026 reserva para urbanismo (ruas, praças, iluminação, obras urbanas).', c: 'Valor fixado para a área na lei do orçamento.', f: FONTE_LOA})
+    t_laz: n => ({t: 'Esporte, cultura, turismo e comércio', v: txt(n), o: 'Parte do orçamento de ' + ANO + ' reservada para esporte e lazer, cultura e comércio e serviços (onde entram turismo e eventos).', c: 'Soma dessas três áreas ÷ orçamento total × 100.', f: FONTE_LOA}),
+    o_esp: n => ({t: 'Secretaria de Esportes, Cultura e Eventos', v: txt(n), o: 'Quanto o orçamento de ' + ANO + ' reserva para essa secretaria.', c: 'Valor fixado para a secretaria na lei do orçamento.', f: FONTE_LOA}),
+    o_soc: n => ({t: 'Assistência social', v: txt(n), o: 'Quanto o orçamento de ' + ANO + ' reserva para a Secretaria de Desenvolvimento Social, Trabalho e Habitação.', c: 'Valor fixado para a secretaria na lei do orçamento.', p: 'Comparar as duas ajuda a ver as prioridades da Prefeitura.', f: FONTE_LOA}),
+    f_urb: n => ({t: 'Urbanismo', v: txt(n), o: 'Quanto o orçamento de ' + ANO + ' reserva para urbanismo (ruas, praças, iluminação, obras urbanas).', c: 'Valor fixado para a área na lei do orçamento.', f: FONTE_LOA})
   };
   const XP_DRAWS = Object.keys(EXPL);
   function markScalars() {
@@ -527,13 +528,13 @@
   window.lupaXp = xpd;
 
   /* números novos do topo */
-  dash.draw('h_pago', n => { const P = PREF(); n.textContent = P && P.totais_2026 ? F.mi(P.totais_2026.pago) : '—'; });
+  dash.draw('h_pago', n => { const P = PREF(); const T = P && (P.totais_ano || P.totais_2026); n.textContent = T ? F.mi(T.pago) : '—'; });
   dash.draw('h_folha', n => { const P = PREF(); const M = P && P.folha_mensal; n.textContent = M && M.length ? F.mi(M[M.length - 1].total) : '—'; });
   dash.draw('h_folha_mes', n => { const P = PREF(); const M = P && P.folha_mensal; if (M && M.length) { const L = M[M.length - 1]; n.textContent = MESN[+L.mes.slice(5, 7) - 1] + ' de ' + L.mes.slice(0, 4) + ' · toque para entender'; } });
 
   /* ================= seções que abrem e fecham ================= */
   const ORDER = ['incomuns', 'gastos-reais', 'pessoal', 'camara', 'contratacoes', 'prefeitura', 'lrf', 'ocultos', 'fontes'];
-  const SUM = {incomuns: 'Contratos que merecem explicação, do maior para o menor', 'gastos-reais': 'Os 20 maiores gastos de 2026, com detalhes, e a lista completa', pessoal: 'Quanto a folha custa por mês e se cabe no limite da lei', camara: 'Os 9 vereadores, os gastos e os contratos da Câmara', contratacoes: 'Quem recebe, quanto e se houve concorrência', prefeitura: 'Como o orçamento de 2026 está dividido', lrf: 'Se a Prefeitura respeita os limites que a lei impõe', ocultos: 'O que a Prefeitura deveria publicar e não publica', fontes: 'De onde vêm os dados e o que as palavras significam'};
+  const SUM = {incomuns: 'Contratos que merecem explicação, do maior para o menor', 'gastos-reais': 'Os 20 maiores gastos de ' + ANO + ', com detalhes, e a lista completa', pessoal: 'Quanto a folha custa por mês e se cabe no limite da lei', camara: 'Os 9 vereadores, os gastos e os contratos da Câmara', contratacoes: 'Quem recebe, quanto e se houve concorrência', prefeitura: 'Como o orçamento de ' + ANO + ' está dividido', lrf: 'Se a Prefeitura respeita os limites que a lei impõe', ocultos: 'O que a Prefeitura deveria publicar e não publica', fontes: 'De onde vêm os dados e o que as palavras significam'};
   function sectionize() {
     if (window.__lupaSec) return; window.__lupaSec = true;
     const host = document.getElementById('incomuns') && document.getElementById('incomuns').parentElement;

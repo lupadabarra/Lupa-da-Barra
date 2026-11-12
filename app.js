@@ -5,10 +5,12 @@ window.bsmFmt = {
   pct: v => v.toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1}) + '%'
 };
 const F = window.bsmFmt;
+const ANO = window.LUPA_ANO || new Date().getFullYear();
+const LIMD = (window.DS_LIMITES = (typeof DS !== 'undefined' && DS.despesas_reais && DS.despesas_reais.limites_dispensa) || {obra: 130984.20, compra: 65492.11, decreto: 'Decreto 12.807/2025'});
 
 /* ---------- cálculos ---------- */
 dash.calc('resumo', {
-  title: 'Indicadores do orçamento 2026',
+  title: 'Indicadores do orçamento ' + ANO,
   description: 'Total fixado e participação de áreas selecionadas no total.',
   inputs: ['funcao'],
   fn: (funcao) => {
@@ -39,8 +41,8 @@ dash.calc('orgao_share', {
 });
 
 dash.calc('lrf', {
-  title: 'Indicadores da Lei de Responsabilidade Fiscal (previsto 2026)',
-  description: 'Percentuais previstos na LOA 2026 comparados aos limites legais. Receita corrente usada como aproximação da Receita Corrente Líquida.',
+  title: 'Indicadores da Lei de Responsabilidade Fiscal (previsto ' + ANO + ')',
+  description: 'Percentuais previstos na LOA ' + ANO + ' comparados aos limites legais. Receita corrente usada como aproximação da Receita Corrente Líquida.',
   inputs: ['loa'],
   fn: (loa) => {
     const v = (k) => { const r = loa.find(x => x.item === k); return r ? +r.valor : 0; };
@@ -59,7 +61,7 @@ dash.calc('lrf', {
        conta: 'Função Saúde ÷ (impostos + transferências correntes). Aproximação: inclui recursos federais do SUS, que não contam para o mínimo.', numerador: v('saude'), denominador: base},
       {id: 'camara', indicador: 'Dinheiro repassado à Câmara', pct: p(v('camara'), base), limite: 7, sentido: 'max',
        regra: 'Municípios com até 100 mil habitantes: a Câmara pode receber no máximo 7% da receita tributária e de transferências do ano anterior (Constituição, art. 29-A).',
-       conta: 'Orçamento da Câmara ÷ (impostos + transferências correntes previstos para 2026)', numerador: v('camara'), denominador: base},
+       conta: 'Orçamento da Câmara ÷ (impostos + transferências correntes previstos para ' + ANO + ')', numerador: v('camara'), denominador: base},
       {id: 'regra_ouro', indicador: 'Empréstimos', pct: p(v('operacoes_credito'), v('despesas_capital')), limite: 100, sentido: 'max',
        regra: 'Empréstimos (operações de crédito) não podem superar as despesas de capital (Constituição, art. 167, III).',
        conta: 'Operações de crédito previstas ÷ despesas de capital', numerador: v('operacoes_credito'), denominador: v('despesas_capital')},
@@ -68,8 +70,8 @@ dash.calc('lrf', {
        conta: 'Reserva de contingência ÷ receitas correntes', numerador: v('reserva'), denominador: rc},
       {id: 'suplementacao', indicador: 'Quanto o prefeito pode mudar sem a Câmara', pct: v('suplementacao_pct'), limite: null, sentido: 'info',
        regra: 'A LOA autoriza o Prefeito a remanejar até este percentual das dotações por decreto, sem voltar à Câmara. Quanto maior, menos o orçamento aprovado amarra o gasto real.',
-       conta: 'Percentual previsto no art. 4º da Lei 795/2026', numerador: null, denominador: null},
-      {id: 'execucao', indicador: 'Prestação de contas de 2026', pct: null, limite: null, sentido: 'semdado',
+       conta: 'Percentual previsto no art. 4º da ' + ((typeof DS !== 'undefined' && DS.despesas_reais && DS.despesas_reais.lei_loa) || 'Lei 795/2026'), numerador: null, denominador: null},
+      {id: 'execucao', indicador: 'Prestação de contas de ' + ANO, pct: null, limite: null, sentido: 'semdado',
        regra: 'A LRF obriga a publicar o RREO a cada 2 meses e o RGF a cada 4 meses (arts. 52 a 55). São eles que mostram se os limites foram cumpridos na prática.',
        conta: 'A página de LRF do site da Prefeitura não exibiu relatórios na consulta feita para este painel.', numerador: null, denominador: null}
     ].map(r => {
@@ -148,7 +150,7 @@ dash.calc('inc_resumo', {
 
 dash.calc('lrf_resumo', {
   title: 'Limites da LRF cumpridos (previsto)',
-  description: 'Quantos dos limites legais testados ficam dentro da regra no orçamento de 2026.',
+  description: 'Quantos dos limites legais testados ficam dentro da regra no orçamento de ' + ANO + '.',
   inputs: ['lrf'],
   fn: (lrf) => {
     const t = (lrf || []).filter(r => r.sentido === 'max' || r.sentido === 'min');
@@ -228,7 +230,7 @@ function contractDetail(c) {
 /* ---------- análise para o fiscal ---------- */
 const POP = () => { const m = dash.data('municipio'); return m.status === 'ok' && m.data[0] ? +m.data[0].populacao : 7944; };
 const ORC = () => { const v = get('resumo', 'total'); return v || 0; };
-const LIM_DISP_OBRA = 130984.20, LIM_DISP_COMPRA = 65492.11;
+const LIM_DISP_OBRA = +LIMD.obra, LIM_DISP_COMPRA = +LIMD.compra;
 const GEN = {
   sem: {p: 'O contrato foi feito sem disputa entre empresas. A regra é licitar; contratar direto só é permitido em casos que a lei lista, e a Prefeitura precisa provar que o caso se encaixa.', l: 'Lei 14.133/2021, arts. 72, 74 e 75.', d: ['Processo completo da contratação direta, com justificativa e parecer jurídico', 'Pesquisa de preços que justificou o valor', 'Razão da escolha deste fornecedor']},
   oculto: {p: 'O extrato não informa o valor. Sem valor publicado, ninguém consegue saber quanto dinheiro público está comprometido.', l: 'Lei 14.133/2021, art. 94 (publicação no PNCP) e LAI, art. 8º, § 1º, IV.', d: ['Valor do contrato ou do aditivo', 'Empenhos e pagamentos feitos']},
@@ -257,7 +259,7 @@ function fiscalBox(c) {
   const v = +c.valor, nums = [];
   if (v > 0) {
     nums.push('Equivale a ' + F.brl(v / POP()) + ' por morador (' + POP().toLocaleString('pt-BR') + ' habitantes, IBGE 2022).');
-    if (ORC()) nums.push('Representa ' + F.pct(v / ORC() * 100) + ' de todo o orçamento da Prefeitura em 2026.');
+    if (ORC()) nums.push('Representa ' + F.pct(v / ORC() * 100) + ' de todo o orçamento da Prefeitura em ' + ANO + '.');
     if (isSem(c)) { const obra = /obra|engenharia|reforma/i.test(c.objeto); const lim = obra ? LIM_DISP_OBRA : LIM_DISP_COMPRA; const x = v / lim; nums.push('O limite para comprar sem disputa só por causa do valor é ' + F.brl(lim) + (x > 1 ? '. Este contrato é ' + x.toLocaleString('pt-BR', {maximumFractionDigits: 1}) + ' vezes esse limite, por isso só se sustenta se houver uma justificativa especial (exclusividade ou notória especialização).' : '.')); }
   } else nums.push('Sem valor publicado, não é possível calcular o impacto. Este é, por si só, o primeiro ponto a cobrar.');
   const ul = E('ul', 'fl'); nums.forEach(t => ul.append(E('li', null, t))); sec('4. Números para ter noção', ul);
@@ -451,7 +453,7 @@ function budgetBars(el, id, keyCol) {
         if (id === 'orgao') {
           const cats = ORG_CAT[r.k] || [];
           const list = contratos().filter(c => cats.includes(c.categoria));
-          box.append(E('div', 'k', list.length ? 'Contratações de 2026 ligadas a esta área:' : 'Nenhuma contratação levantada para esta secretaria.'));
+          box.append(E('div', 'k', list.length ? 'Contratações de ' + ANO + ' ligadas a esta área:' : 'Nenhuma contratação levantada para esta secretaria.'));
           if (list.length) box.append(contractList(list));
         }
         return box;
@@ -580,7 +582,7 @@ dash.draw('ocultos', el => {
 });
 const EXTRA = [
   ['Folha de servidores, diárias e horas extras', 'só no portal Kalana, sem acesso aberto a ferramentas externas.', 'https://www.kalana.com.br/transparencia/12263869000108/0000/diarias'],
-  ['Relatórios fiscais RREO e RGF de 2026', 'a página de LRF do site da Prefeitura não exibiu relatórios na consulta.', 'https://barradesaomiguel.al.gov.br/transparencia/lrf/'],
+  ['Relatórios fiscais RREO e RGF de ' + ANO, 'a página de LRF do site da Prefeitura não exibiu relatórios na consulta.', 'https://barradesaomiguel.al.gov.br/transparencia/lrf/'],
   ['Resumo da folha e padrões salariais', 'as tabelas do site da Prefeitura aparecem sem nenhuma linha.', 'https://www.barradesaomiguel.al.gov.br/transparencia/servidores/outrasinformacoes/resumos/'],
   ['Pagamentos por credor', 'quanto cada fornecedor efetivamente recebeu só aparece no Kalana.', 'https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false']
 ];
@@ -621,17 +623,17 @@ dash.draw('topServ', el => {
 /* ---------- acima do teto ---------- */
 dash.calc('tetos', {
   title: 'Gastos comparados aos tetos legais',
-  description: 'Quanto de cada limite legal já foi usado: dispensas de licitação (Decreto 12.807/2025), soma de dispensas da mesma natureza no ano (fracionamento), despesa com pessoal e repasse à Câmara (previstos na LOA 2026).',
+  description: 'Quanto de cada limite legal já foi usado: dispensas de licitação (' + LIMD.decreto + '), soma de dispensas da mesma natureza no ano (fracionamento), despesa com pessoal e repasse à Câmara (previstos na LOA ' + ANO + ').',
   inputs: ['contratacoes', 'lrf'],
   fn: (contratacoes, lrf) => {
-    const LIM_OBRA = 130984.20, LIM_COMPRA = 65492.11;
+    const LIM_OBRA = +LIMD.obra, LIM_COMPRA = +LIMD.compra;
     const out = [];
-    const disp = contratacoes.filter(c => c.modalidade === 'Dispensa' && +c.valor > 0 && String(c.data).startsWith('2026'));
+    const disp = contratacoes.filter(c => c.modalidade === 'Dispensa' && +c.valor > 0 && String(c.data).startsWith(String(ANO)));
     disp.forEach(c => {
       const obra = /obra|engenharia|reforma/i.test(c.objeto);
       const teto = obra ? LIM_OBRA : LIM_COMPRA;
       out.push({id: 'disp-' + c.id, item: 'Sem concorrência: ' + c.objeto, area: c.categoria, valor: +c.valor, teto, uso: Math.round(+c.valor / teto * 1000) / 10, tipo: 'Contrato sem concorrência',
-        regra: 'Contrato sem concorrência só é permitido até R$ ' + teto.toLocaleString('pt-BR', {minimumFractionDigits: 2}) + ' em 2026 (Lei 14.133, art. 75, e Decreto 12.807/2025).'});
+        regra: 'Contrato sem concorrência só é permitido até R$ ' + teto.toLocaleString('pt-BR', {minimumFractionDigits: 2}) + ' em ' + ANO + ' (Lei 14.133, art. 75, e ' + LIMD.decreto + ').'});
     });
     d3.rollups(disp, v => ({n: v.length, s: d3.sum(v, c => +c.valor)}), c => c.categoria).filter(([, x]) => x.n > 1).forEach(([cat, x]) => { const soma = x.s;
       out.push({id: 'frac-' + cat, item: 'Compras sem concorrência somadas no ano: ' + cat, area: cat, valor: soma, teto: LIM_COMPRA, uso: Math.round(soma / LIM_COMPRA * 1000) / 10, tipo: 'Compras divididas (fracionamento)',
