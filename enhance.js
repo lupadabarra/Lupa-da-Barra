@@ -63,7 +63,7 @@
     let cur = 0;
     const cnt = el('div', 'cnt');
     const btns = F_.map(([t], i) => { const b = el('button', i ? '' : 'on', t); b.type = 'button'; b.addEventListener('click', () => { cur = i; btns.forEach((x, j) => x.classList.toggle('on', j === i)); apply(); }); return b; });
-    const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const norm = s => String(s || '').toLowerCase().replace(/[()]/g, '').normalize('NFD').replace(/[̀-ͯ]/g, '');
     function apply() {
       const q = norm(inp.value).trim(); const byId = new Map(contratos().map(c => [c.id, c]));
       let shown = 0, tot = 0;
