@@ -500,7 +500,7 @@ dash.draw('incomuns', el => {
     const chips = E('div', 'chips');
     incTags(c).forEach(([t, cl]) => chips.append(E('span', 'chip ' + cl, t)));
     const meter = E('div', 'meter'); const bar = E('i'); bar.style.width = Math.max(2, +c.valor / max * 100) + '%'; meter.append(bar);
-    card.append(E('div', 'rank', '#' + (i + 1) + ' · ' + c.categoria), E('div', 'iv', money(c)), meter, E('div', 'io', c.objeto), E('div', 'ir', c.alerta), chips, E('div', 'im', modl(c.modalidade) + ' · ' + c.fornecedor + ' · Ver detalhes ▸'));
+    card.append(E('div', 'rank', '#' + (i + 1) + ' · ' + c.categoria), E('div', 'iv', money(c)), meter, E('div', 'io', c.objeto), E('div', 'ir', c.alerta), chips, E('div', 'im', modl(c.modalidade) + ' · ' + c.fornecedor), E('span', 'cta', 'Ver análise completa'));
     expandable(card, () => contractDetail(c), (d) => card.append(d));
     el.append(card);
   });
@@ -573,7 +573,7 @@ dash.draw('ocultos', el => {
     const card = E('div', 'lrf ' + (r.qtd > 0 ? 'ruim' : 'ok'));
     card.id = 'oc-' + r.id;
     const v = E('div', 'v', String(r.qtd)); v.dataset.source = 'ocultos'; v.dataset.field = 'qtd'; v.dataset.where = 'id=' + r.id;
-    card.append(E('div', 'k', o.t), v, E('div', 'n', o.d), E('div', 'st', r.qtd > 0 ? 'Ver quais ▸' : 'Nenhum caso'));
+    card.append(E('div', 'k', o.t), v, E('div', 'n', o.d), E('div', 'st', r.qtd > 0 ? 'Ver quais' : 'Nenhum caso'));
     expandable(card, () => { const w = E('div', 'fis'); w.append(E('div', 'fh', '⚑ O que está errado'), E('p', null, o.x), E('div', 'ft', 'O que a lei exige'), E('p', null, o.l), E('div', 'ft', 'Casos encontrados (toque em cada um para a análise completa)'), contractList(contratos().filter(o.f))); return w; }, (x) => card.append(x));
     el.append(card);
   });
