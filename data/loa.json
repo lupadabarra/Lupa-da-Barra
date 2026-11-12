@@ -1,0 +1,102 @@
+[
+ {
+  "item": "receitas_correntes",
+  "descricao": "Receitas correntes",
+  "valor": 105766517
+ },
+ {
+  "item": "impostos",
+  "descricao": "Impostos, taxas e contribuições de melhoria",
+  "valor": 23769905
+ },
+ {
+  "item": "contribuicoes",
+  "descricao": "Contribuições",
+  "valor": 3659090
+ },
+ {
+  "item": "patrimonial",
+  "descricao": "Receita patrimonial",
+  "valor": 685132
+ },
+ {
+  "item": "transferencias_correntes",
+  "descricao": "Transferências correntes",
+  "valor": 71282060
+ },
+ {
+  "item": "outras_correntes",
+  "descricao": "Outras receitas correntes",
+  "valor": 6370330
+ },
+ {
+  "item": "receitas_capital",
+  "descricao": "Receitas de capital (transferências de capital)",
+  "valor": 40070996
+ },
+ {
+  "item": "receita_total",
+  "descricao": "Receita total estimada",
+  "valor": 145837513
+ },
+ {
+  "item": "pessoal",
+  "descricao": "Pessoal e encargos sociais",
+  "valor": 40910568
+ },
+ {
+  "item": "juros",
+  "descricao": "Juros e encargos da dívida",
+  "valor": 71683
+ },
+ {
+  "item": "outras_despesas_correntes",
+  "descricao": "Outras despesas correntes",
+  "valor": 53936135
+ },
+ {
+  "item": "reserva",
+  "descricao": "Reserva de contingência",
+  "valor": 831036
+ },
+ {
+  "item": "investimentos",
+  "descricao": "Investimentos",
+  "valor": 48981579
+ },
+ {
+  "item": "amortizacao",
+  "descricao": "Amortização da dívida",
+  "valor": 1106512
+ },
+ {
+  "item": "despesas_capital",
+  "descricao": "Despesas de capital",
+  "valor": 50088091
+ },
+ {
+  "item": "operacoes_credito",
+  "descricao": "Operações de crédito previstas",
+  "valor": 0
+ },
+ {
+  "item": "educacao",
+  "descricao": "Função Educação",
+  "valor": 34655137
+ },
+ {
+  "item": "saude",
+  "descricao": "Função Saúde",
+  "valor": 24540552
+ },
+ {
+  "item": "camara",
+  "descricao": "Câmara Municipal",
+  "valor": 3619946
+ },
+ {
+  "item": "suplementacao_pct",
+  "descricao": "Limite para remanejar dotações sem nova lei (%)",
+  "valor": 30
+ }
+]

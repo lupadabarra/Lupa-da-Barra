@@ -1,0 +1,26 @@
+[
+ {
+  "id": "despesas",
+  "rotulo": "Pagamentos (empenhos) da Câmara",
+  "qtd": 4445,
+  "url": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+ },
+ {
+  "id": "folha",
+  "rotulo": "Registros de folha de pagamento",
+  "qtd": 2810,
+  "url": "https://www.camaradebarradesaomiguel.al.gov.br/recursos-humanos/folha-de-pagamento"
+ },
+ {
+  "id": "verba",
+  "rotulo": "Repasses de verba de gabinete aos vereadores",
+  "qtd": 464,
+  "url": "https://www.camaradebarradesaomiguel.al.gov.br/recursos-humanos/verba-de-gabinete"
+ },
+ {
+  "id": "diarias",
+  "rotulo": "Diárias pagas",
+  "qtd": 257,
+  "url": "https://www.camaradebarradesaomiguel.al.gov.br/recursos-humanos/diarias"
+ }
+]

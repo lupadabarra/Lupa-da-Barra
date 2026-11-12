@@ -1,0 +1,92 @@
+[
+ {
+  "orgao": "Sec. de Educação",
+  "fiscal": "34655137",
+  "seguridade": "0",
+  "total": "34655137"
+ },
+ {
+  "orgao": "Sec. de Infraestrutura e Acessibilidade",
+  "fiscal": "27684177",
+  "seguridade": "0",
+  "total": "27684177"
+ },
+ {
+  "orgao": "Sec. de Saúde",
+  "fiscal": "370183",
+  "seguridade": "24540552",
+  "total": "24910735"
+ },
+ {
+  "orgao": "Sec. de Esportes Cultura e Eventos",
+  "fiscal": "12492784",
+  "seguridade": "0",
+  "total": "12492784"
+ },
+ {
+  "orgao": "Sec. de Administração Finanças e Planejamento",
+  "fiscal": "10222225",
+  "seguridade": "0",
+  "total": "10222225"
+ },
+ {
+  "orgao": "Sec. de Desenv. Social Trabalho e Habitação",
+  "fiscal": "1668618",
+  "seguridade": "7948135",
+  "total": "9616753"
+ },
+ {
+  "orgao": "Sec. de Turismo e Desenv. Econômico",
+  "fiscal": "9303833",
+  "seguridade": "0",
+  "total": "9303833"
+ },
+ {
+  "orgao": "Sec. de Urbanismo Transportes e Serv. Públicos",
+  "fiscal": "6978280",
+  "seguridade": "0",
+  "total": "6978280"
+ },
+ {
+  "orgao": "Câmara Municipal",
+  "fiscal": "3619946",
+  "seguridade": "0",
+  "total": "3619946"
+ },
+ {
+  "orgao": "Sec. de Segurança Pública e Institucional",
+  "fiscal": "2749496",
+  "seguridade": "0",
+  "total": "2749496"
+ },
+ {
+  "orgao": "Superintendência de Trânsito",
+  "fiscal": "1036719",
+  "seguridade": "0",
+  "total": "1036719"
+ },
+ {
+  "orgao": "Sec. do Meio Ambiente Agricultura e Rec. Hídricos",
+  "fiscal": "931757",
+  "seguridade": "0",
+  "total": "931757"
+ },
+ {
+  "orgao": "Gabinete do Prefeito",
+  "fiscal": "887055",
+  "seguridade": "0",
+  "total": "887055"
+ },
+ {
+  "orgao": "Procuradoria Geral",
+  "fiscal": "499385",
+  "seguridade": "0",
+  "total": "499385"
+ },
+ {
+  "orgao": "Controladoria Geral",
+  "fiscal": "249231",
+  "seguridade": "0",
+  "total": "249231"
+ }
+]

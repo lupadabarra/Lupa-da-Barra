@@ -1,0 +1,110 @@
+[
+ {
+  "funcao": "Educação",
+  "fiscal": "34655137",
+  "seguridade": "0",
+  "total": "34655137"
+ },
+ {
+  "funcao": "Urbanismo",
+  "fiscal": "31820206",
+  "seguridade": "0",
+  "total": "31820206"
+ },
+ {
+  "funcao": "Saúde",
+  "fiscal": "0",
+  "seguridade": "24540552",
+  "total": "24540552"
+ },
+ {
+  "funcao": "Administração",
+  "fiscal": "12533766",
+  "seguridade": "0",
+  "total": "12533766"
+ },
+ {
+  "funcao": "Assistência Social",
+  "fiscal": "63550",
+  "seguridade": "7901039",
+  "total": "7964589"
+ },
+ {
+  "funcao": "Comércio e Serviços",
+  "fiscal": "6464359",
+  "seguridade": "0",
+  "total": "6464359"
+ },
+ {
+  "funcao": "Desporto e Lazer",
+  "fiscal": "6283272",
+  "seguridade": "0",
+  "total": "6283272"
+ },
+ {
+  "funcao": "Cultura",
+  "fiscal": "6209512",
+  "seguridade": "0",
+  "total": "6209512"
+ },
+ {
+  "funcao": "Legislativo",
+  "fiscal": "3619946",
+  "seguridade": "0",
+  "total": "3619946"
+ },
+ {
+  "funcao": "Energia",
+  "fiscal": "2848076",
+  "seguridade": "0",
+  "total": "2848076"
+ },
+ {
+  "funcao": "Segurança Pública",
+  "fiscal": "2804946",
+  "seguridade": "0",
+  "total": "2804946"
+ },
+ {
+  "funcao": "Habitação",
+  "fiscal": "1605068",
+  "seguridade": "0",
+  "total": "1605068"
+ },
+ {
+  "funcao": "Saneamento",
+  "fiscal": "1500000",
+  "seguridade": "0",
+  "total": "1500000"
+ },
+ {
+  "funcao": "Encargos Especiais",
+  "fiscal": "1178195",
+  "seguridade": "0",
+  "total": "1178195"
+ },
+ {
+  "funcao": "Reserva de Contingência",
+  "fiscal": "831036",
+  "seguridade": "0",
+  "total": "831036"
+ },
+ {
+  "funcao": "Gestão Ambiental",
+  "fiscal": "632181",
+  "seguridade": "0",
+  "total": "632181"
+ },
+ {
+  "funcao": "Agricultura",
+  "fiscal": "299576",
+  "seguridade": "0",
+  "total": "299576"
+ },
+ {
+  "funcao": "Trabalho",
+  "fiscal": "0",
+  "seguridade": "47096",
+  "total": "47096"
+ }
+]

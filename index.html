@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Lupa da Barra — para onde vai o dinheiro de Barra de São Miguel/AL</title>
+<meta name="description" content="Dossiê aberto das despesas da Prefeitura e da Câmara de Barra de São Miguel, Alagoas: fornecedores, contratos sem concorrência, gastos incomuns, vereadores e limites da lei. Atualizado a cada 4 horas.">
+<meta property="og:title" content="Lupa da Barra"><meta property="og:description" content="Cada real tem dono, destino e explicação. As despesas da Prefeitura e da Câmara de Barra de São Miguel/AL, sem filtro.">
+<meta name="theme-color" content="#16161a"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='27' cy='27' r='18' fill='none' stroke='%23c4302b' stroke-width='7'/%3E%3Cpath d='M40 40l16 16' stroke='%23c4302b' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;1,9..144,400&family=Inter:wght@400;600&display=swap">
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<style>:root{--color-fg:#16161a;--color-fg-muted:#5f5f6b;--color-bg:#f5f4f0;--color-panel:#ffffff;--color-border-line:#e4e2dc;--color-ok:#1f7a4a;--color-warn:#b26b00;--color-bad:#c4302b;
+--cds-chart-grid:#ecebe6;--cds-chart-reference:#16161a;--cds-gap-xs:4px;--cds-gap-sm:8px;--cds-gap-md:12px;--cds-gap-lg:16px;--cds-gap-xl:24px;--cds-pad-sm:6px;--cds-pad-md:10px;--cds-pad-lg:16px;--cds-pad-xl:24px;
+--cds-font-weight-medium:600;--cds-radius:10px;--cds-font-size-caption:13px;--cds-font-size-body:16px;--cds-font-size-heading:18px;--cds-font-size-title:28px;--cds-surface-popover:#fff;--cds-border:#d9d7d0;--cds-shadow-popover:0 8px 24px rgba(0,0,0,.12);--cds-text-secondary:#5f5f6b;
+--font-anthropic-sans:'Inter',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--font-anthropic-serif:'Fraunces',Georgia,'Times New Roman',serif}
+@media (prefers-color-scheme:dark){:root{--color-fg:#f2f1ec;--color-fg-muted:#a3a29c;--color-bg:#121214;--color-panel:#1b1b1f;--color-border-line:#2c2c31;--cds-chart-grid:#2a2a2f;--cds-chart-reference:#f2f1ec;--cds-surface-popover:#222227;--cds-border:#34343a;--cds-text-secondary:#a3a29c;--color-ok:#3fb27a;--color-warn:#e09a2b;--color-bad:#ef5a52}}
+*{box-sizing:border-box}html{-webkit-text-size-adjust:100%}body{margin:0;background:var(--color-bg);color:var(--color-fg);font-family:var(--font-anthropic-sans);padding:16px 14px 48px}
+.foot{max-width:1180px;margin:40px auto 0;font-size:12px;color:var(--color-fg-muted);text-align:center}</style></head><body>
+
+<style>
+.bsm{--accent:var(--color-bad);--bad-tint:color-mix(in srgb,var(--color-bad) 8%,var(--color-panel));--warn-tint:color-mix(in srgb,var(--color-warn) 9%,var(--color-panel));--ok-tint:color-mix(in srgb,var(--color-ok) 8%,var(--color-panel));--shadow:0 1px 2px color-mix(in srgb,var(--color-fg) 6%,transparent),0 12px 32px -18px color-mix(in srgb,var(--color-fg) 28%,transparent);--r:16px;font-family:var(--font-anthropic-sans);color:var(--color-fg);display:flex;flex-direction:column;gap:calc(var(--cds-gap-xl)*1.6);max-width:1180px;margin:0 auto}
+.bsm a{color:inherit}
+.bsm h2{font-family:var(--font-anthropic-serif);font-weight:400;font-size:calc(var(--cds-font-size-title)*1.1);line-height:1.12;letter-spacing:-.01em;margin:0}
+.bsm h3{font-size:var(--cds-font-size-heading);font-weight:var(--cds-font-weight-medium);margin:0 0 var(--cds-gap-sm);letter-spacing:-.005em}
+.bsm .eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--color-fg-muted);font-weight:var(--cds-font-weight-medium);margin:0}
+.bsm .lead{font-size:var(--cds-font-size-body);line-height:1.55;margin:var(--cds-gap-sm) 0 0;max-width:70ch;color:var(--color-fg-muted)}
+.bsm .note{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);margin:var(--cds-gap-sm) 0 0;line-height:1.5}
+.bsm .hint{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);margin:0 0 var(--cds-gap-sm)}
+/* abertura */
+.bsm .hero{position:relative;overflow:hidden;background:var(--color-fg);color:var(--color-bg);border-radius:calc(var(--r)*1.5);padding:calc(var(--cds-pad-xl)*1.6) calc(var(--cds-pad-xl)*1.4);display:flex;flex-direction:column;gap:calc(var(--cds-gap-xl)*1.1)}
+.bsm .hero::after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 45%,transparent),transparent 70%);opacity:.55;pointer-events:none}
+.bsm .hero{background:radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--accent) 22%,transparent),transparent 55%),radial-gradient(90% 80% at 100% 100%,color-mix(in srgb,var(--color-warn) 18%,transparent),transparent 60%),var(--color-fg)}
+.bsm .hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(color-mix(in srgb,var(--color-bg) 6%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--color-bg) 6%,transparent) 1px,transparent 1px);background-size:40px 40px;mask-image:linear-gradient(180deg,#000,transparent 75%);-webkit-mask-image:linear-gradient(180deg,#000,transparent 75%);pointer-events:none}
+.bsm .hero>*{position:relative;z-index:1}
+.bsm .brandbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:var(--cds-gap-md)}
+.bsm .brand{display:flex;align-items:center;gap:12px}
+.bsm .logo{position:relative;width:34px;height:34px;border-radius:50%;border:3px solid var(--color-bg);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 45%,transparent);flex:none}
+.bsm .logo::after{content:"";position:absolute;width:14px;height:4px;background:var(--color-bg);border-radius:2px;right:-12px;bottom:-5px;transform:rotate(45deg)}
+.bsm .logo::before{content:"R$";position:absolute;inset:0;display:grid;place-items:center;font-size:10px;font-weight:700;letter-spacing:-.04em}
+.bsm .bname{font-family:var(--font-anthropic-serif);font-size:24px;letter-spacing:-.02em;line-height:1}
+.bsm .bname em{font-style:italic;opacity:.6;margin:0 .22em;font-size:.8em}
+.bsm .glow{color:color-mix(in srgb,var(--accent) 65%,var(--color-bg));font-style:italic}
+.bsm .hstat{background:color-mix(in srgb,var(--color-bg) 5%,transparent);border:1px solid color-mix(in srgb,var(--color-bg) 14%,transparent);border-radius:14px;padding:var(--cds-pad-md) var(--cds-pad-lg);backdrop-filter:blur(6px);transition:background-color .15s,transform .15s}
+.bsm .hstat:hover,.bsm .hstat:focus-visible{background:color-mix(in srgb,var(--color-bg) 11%,transparent)}
+@media (prefers-reduced-motion: no-preference){.bsm .live i{animation:bsmpulse 2s ease-in-out infinite}@keyframes bsmpulse{50%{box-shadow:0 0 0 8px color-mix(in srgb,var(--color-ok) 0%,transparent)}}.bsm .hstat:hover{transform:translateY(-2px)}}
+.bsm .hero .eyebrow{color:inherit;opacity:.65}
+.bsm .hero h1{font-family:var(--font-anthropic-serif);font-weight:400;font-size:clamp(32px,6vw,58px);line-height:1.02;letter-spacing:-.02em;margin:var(--cds-gap-sm) 0 0;max-width:16ch}
+.bsm .hero .tag-line{opacity:.78;margin:var(--cds-gap-md) 0 0;max-width:60ch;line-height:1.55}
+.bsm .live{display:inline-flex;align-items:center;gap:8px;font-size:var(--cds-font-size-caption);padding:6px 12px;border-radius:999px;border:1px solid color-mix(in srgb,var(--color-bg) 25%,transparent);width:max-content;max-width:100%}
+.bsm .live i{width:8px;height:8px;border-radius:50%;background:var(--color-ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--color-ok) 30%,transparent)}
+.bsm .hstats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:var(--cds-gap-lg)}
+.bsm .hstat{display:block;text-decoration:none;color:inherit;border-top:1px solid color-mix(in srgb,var(--color-bg) 22%,transparent);padding-top:var(--cds-gap-md)}
+.bsm .hstat .hk{font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.6}
+.bsm .hstat .hv{font-family:var(--font-anthropic-serif);font-size:clamp(26px,3.4vw,36px);font-variant-numeric:tabular-nums;margin-top:6px;line-height:1.05}
+.bsm .hstat.alert .hv{color:color-mix(in srgb,var(--accent) 60%,var(--color-bg))}
+.bsm .hstat .hn{font-size:var(--cds-font-size-caption);opacity:.6;margin-top:4px}
+.bsm nav.tabs{display:flex;flex-wrap:wrap;gap:6px}
+.bsm nav.tabs a{font-size:var(--cds-font-size-caption);padding:6px 14px;border-radius:999px;text-decoration:none;background:color-mix(in srgb,var(--color-bg) 8%,transparent);border:1px solid color-mix(in srgb,var(--color-bg) 16%,transparent)}
+.bsm nav.tabs a:hover,.bsm nav.tabs a:focus-visible{background:color-mix(in srgb,var(--color-bg) 18%,transparent)}
+.bsm nav.tabs a.hot{background:var(--accent);border-color:var(--accent);color:#fff}
+/* cabeçalho de parte */
+.bsm .part{display:grid;grid-template-columns:auto 1fr;gap:var(--cds-gap-lg);align-items:end;padding-bottom:var(--cds-gap-md);border-bottom:1px solid var(--color-border-line)}
+.bsm .part .num{font-family:var(--font-anthropic-serif);font-size:clamp(40px,6vw,64px);line-height:.9;color:var(--color-fg-muted);opacity:.35;font-variant-numeric:tabular-nums}
+.bsm .part.red .num{color:var(--accent);opacity:.8}
+.bsm .sec{display:flex;flex-direction:column;gap:var(--cds-gap-lg)}
+/* cartões */
+.bsm .card{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--r);padding:calc(var(--cds-pad-lg)*1.25);box-shadow:var(--shadow)}
+.bsm .grid2{align-items:start;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr));gap:var(--cds-gap-lg)}
+.bsm .tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:var(--cds-gap-md)}
+.bsm a.card{display:block;text-decoration:none;color:inherit;transition:transform .15s,border-color .15s}
+.bsm a.card:hover{border-color:var(--color-fg-muted)}
+.bsm .k{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption)}
+.bsm .v{font-family:var(--font-anthropic-serif);font-weight:400;font-size:clamp(24px,3vw,32px);font-variant-numeric:tabular-nums;margin-top:6px;line-height:1.05}
+.bsm .n{color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);margin-top:6px;line-height:1.45}
+.bsm .go{font-size:var(--cds-font-size-caption);margin-top:var(--cds-gap-sm);font-weight:var(--cds-font-weight-medium)}
+/* alertas */
+.bsm .spot{background:var(--bad-tint);border:1px solid color-mix(in srgb,var(--accent) 28%,var(--color-border-line));border-radius:calc(var(--r)*1.25);padding:calc(var(--cds-pad-xl)*1.2)}
+.bsm .spot.amber{background:var(--warn-tint);border-color:color-mix(in srgb,var(--color-warn) 35%,var(--color-border-line))}
+.bsm .sumline{display:flex;flex-wrap:wrap;gap:calc(var(--cds-gap-xl)*1.2);margin:var(--cds-gap-lg) 0}
+.bsm .sumline div{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.bsm .sumline b{display:block;font-family:var(--font-anthropic-serif);font-weight:400;font-size:clamp(26px,3.4vw,36px);color:var(--color-fg);font-variant-numeric:tabular-nums}
+.bsm .incgrid{align-items:start;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,290px),1fr));gap:var(--cds-gap-md)}
+.bsm .inc{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--r);padding:calc(var(--cds-pad-lg)*1.1);display:flex;flex-direction:column;gap:var(--cds-gap-sm);cursor:pointer;position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.bsm .inc::before{content:"";position:absolute;left:0;top:0;right:0;height:3px;background:var(--color-warn)}
+.bsm .inc.sev3::before{background:var(--accent)}
+.bsm .inc:hover{border-color:var(--color-fg-muted)}
+.bsm .inc:focus-visible{outline:2px solid var(--color-fg-muted)}
+.bsm .inc.feat{grid-column:1/-1}
+.bsm .inc.feat .iv{font-size:clamp(34px,5vw,52px)}
+.bsm .inc .rank{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-fg-muted);font-variant-numeric:tabular-nums}
+.bsm .inc .iv{font-family:var(--font-anthropic-serif);font-size:clamp(24px,3vw,30px);font-variant-numeric:tabular-nums;line-height:1.05}
+.bsm .inc .io{font-weight:var(--cds-font-weight-medium);line-height:1.35}
+.bsm .inc .ir{font-size:var(--cds-font-size-caption);line-height:1.5;color:var(--color-fg-muted)}
+.bsm .inc .im{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-top:auto;padding-top:var(--cds-gap-xs)}
+.bsm .inc .meter{height:4px;border-radius:2px;background:var(--cds-chart-grid);overflow:hidden}
+.bsm .inc .meter i{display:block;height:100%;background:var(--accent)}
+.bsm .chips{display:flex;flex-wrap:wrap;gap:4px}
+.bsm .chip{font-size:11px;padding:2px 9px;border-radius:999px;font-weight:var(--cds-font-weight-medium);background:var(--warn-tint);border:1px solid color-mix(in srgb,var(--color-warn) 40%,transparent)}
+.bsm .chip.c-bad{background:var(--bad-tint);border-color:color-mix(in srgb,var(--accent) 45%,transparent)}
+/* barras */
+.bsm .bars{position:relative;min-height:120px;display:flex;flex-direction:column;gap:var(--cds-gap-sm)}
+.bsm .row{display:flex;flex-direction:column;gap:4px;cursor:pointer;border-radius:8px;padding:5px 8px;margin:0 -8px}
+.bsm .row:hover,.bsm .row:focus-visible,.bsm .row[aria-expanded=true]{background:var(--color-bg);outline:none}
+.bsm .row .lbl{display:flex;justify-content:space-between;gap:var(--cds-gap-sm);font-size:var(--cds-font-size-caption)}
+.bsm .row .amt{font-variant-numeric:tabular-nums;color:var(--color-fg-muted);white-space:nowrap}
+.bsm .chev{display:inline-block;width:1em;color:var(--color-fg-muted)}
+.bsm .track{height:8px;background:var(--cds-chart-grid);border-radius:4px;overflow:hidden;display:flex}
+.bsm .seg{height:100%}
+.bsm .legend{display:flex;gap:var(--cds-gap-md);font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);margin-bottom:var(--cds-gap-sm)}
+.bsm .sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:middle}
+.bsm .tip{position:absolute;pointer-events:none;background:var(--cds-surface-popover);border:1px solid var(--cds-border);box-shadow:var(--cds-shadow-popover);border-radius:10px;padding:var(--cds-pad-sm) var(--cds-pad-md);font-size:var(--cds-font-size-caption);z-index:5;min-width:180px}
+.bsm .tip .t{font-weight:var(--cds-font-weight-medium);margin-bottom:2px}
+.bsm .tip div{color:var(--cds-text-secondary)}
+/* detalhe */
+.bsm .det{background:var(--color-bg);border:1px solid var(--color-border-line);border-radius:12px;padding:var(--cds-pad-md) var(--cds-pad-lg);font-size:var(--cds-font-size-caption);display:flex;flex-direction:column;gap:var(--cds-gap-sm);cursor:auto;margin-top:var(--cds-gap-xs)}
+.bsm .det .dt{font-weight:var(--cds-font-weight-medium);font-size:var(--cds-font-size-body)}
+.bsm .kv{display:grid;grid-template-columns:minmax(90px,max-content) 1fr;gap:4px var(--cds-gap-md);margin:0}
+.bsm .kv dt{color:var(--color-fg-muted)}
+.bsm .kv dd{margin:0;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.bsm .sublist{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
+.bsm .fis{border:1px solid color-mix(in srgb,var(--accent) 35%,var(--color-border-line));background:var(--bad-tint);border-radius:12px;padding:var(--cds-pad-md) var(--cds-pad-lg);display:flex;flex-direction:column;gap:var(--cds-gap-sm);font-size:var(--cds-font-size-caption);line-height:1.55;cursor:auto;margin-top:var(--cds-gap-xs)}
+.bsm .fis .fh{font-weight:var(--cds-font-weight-medium);font-size:var(--cds-font-size-body);color:var(--accent)}
+.bsm .fis .ft{font-weight:var(--cds-font-weight-medium);color:var(--color-fg);margin-top:2px}
+.bsm .fis p{margin:2px 0 0}
+.bsm .fis .fl{margin:2px 0 0;padding-left:1.3em;display:flex;flex-direction:column;gap:3px}
+.bsm .fis .fn{color:var(--color-fg-muted);font-style:italic;border-top:1px solid var(--color-border-line);padding-top:var(--cds-gap-sm)}
+/* tabelas */
+.bsm .tw{overflow-x:auto;margin:0 calc(var(--cds-pad-lg)*-1.25);padding:0 calc(var(--cds-pad-lg)*1.25)}
+.bsm table{border-collapse:collapse;width:100%;font-size:var(--cds-font-size-caption);font-variant-numeric:tabular-nums}
+.bsm th,.bsm td{padding:10px 8px;border-bottom:1px solid var(--color-border-line);text-align:right;white-space:nowrap}
+.bsm th:first-child,.bsm td:first-child{text-align:left;white-space:normal}
+.bsm th{color:var(--color-fg-muted);font-weight:var(--cds-font-weight-medium);text-transform:uppercase;letter-spacing:.06em;font-size:10.5px}
+.bsm tbody tr.clk{cursor:pointer}
+.bsm tbody tr.clk:hover,.bsm tbody tr.clk:focus-visible,.bsm tbody tr.clk[aria-expanded=true]{background:var(--color-bg);outline:none}
+.bsm tbody tr.flag td:first-child{box-shadow:inset 3px 0 0 var(--accent)}
+.bsm tbody tr.detrow td{text-align:left;white-space:normal;background:var(--color-bg)}
+.bsm .tag{display:inline-block;font-size:11px;padding:1px 9px;border-radius:999px;border:1px solid var(--color-border-line);color:var(--color-fg-muted);white-space:nowrap}
+.bsm .inx{border-color:color-mix(in srgb,var(--color-warn) 50%,transparent);background:var(--warn-tint);color:var(--color-fg)}
+.bsm ul.plain{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:var(--cds-gap-sm);line-height:1.5}
+/* indicadores */
+.bsm .lrfgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:var(--cds-gap-md)}
+.bsm .lrf{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--r);padding:var(--cds-pad-lg);cursor:pointer;display:flex;flex-direction:column;gap:5px;box-shadow:var(--shadow)}
+.bsm .lrf:focus-visible{outline:2px solid var(--color-fg-muted)}
+.bsm .lrf.ok{background:var(--ok-tint)}
+.bsm .lrf.atencao{background:var(--warn-tint)}
+.bsm .lrf.ruim{background:var(--bad-tint)}
+.bsm .lrf .st{font-size:var(--cds-font-size-caption);font-weight:var(--cds-font-weight-medium);display:flex;align-items:center;gap:6px}
+.bsm .lrf .st::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--color-fg-muted)}
+.bsm .lrf.ok .st{color:var(--color-ok)}.bsm .lrf.ok .st::before{background:var(--color-ok)}
+.bsm .lrf.atencao .st{color:var(--color-warn)}.bsm .lrf.atencao .st::before{background:var(--color-warn)}
+.bsm .lrf.ruim .st{color:var(--accent)}.bsm .lrf.ruim .st::before{background:var(--accent)}
+.bsm .lrf.semdado .st,.bsm .lrf.info .st{color:var(--color-fg-muted)}
+.bsm .gauge{position:relative;height:6px;background:var(--cds-chart-grid);border-radius:3px;margin:6px 0}
+.bsm .gauge .fillb{position:absolute;left:0;top:0;bottom:0;border-radius:3px}
+.bsm .gauge .mark{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--cds-chart-reference)}
+/* vereadores */
+.bsm .vgrid{align-items:start;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,250px),1fr));gap:var(--cds-gap-md)}
+.bsm .ver{background:var(--color-panel);border:1px solid var(--color-border-line);border-radius:var(--r);padding:var(--cds-pad-lg);cursor:pointer;display:flex;flex-direction:column;gap:6px;box-shadow:var(--shadow)}
+.bsm .ver:hover{border-color:var(--color-fg-muted)}
+.bsm .ver:focus-visible{outline:2px solid var(--color-fg-muted)}
+.bsm .ver .top{display:flex;gap:var(--cds-gap-md);align-items:center}
+.bsm .ver .av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-anthropic-serif);font-size:18px;background:var(--color-fg);color:var(--color-bg);flex:none}
+.bsm .ver .nm{font-weight:var(--cds-font-weight-medium);line-height:1.25}
+.bsm .ver .rl{font-size:var(--cds-font-size-caption);color:var(--color-fg-muted)}
+.bsm .ver .role{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);font-weight:var(--cds-font-weight-medium)}
+.bsm .regs{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:var(--cds-gap-md)}
+[data-dash-source-state=refreshing]{opacity:.5}
+@media (prefers-reduced-motion: no-preference){.bsm .inc,.bsm .lrf,.bsm .row,.bsm .ver{transition:background-color .15s,border-color .15s}}
+</style>
+
+<div class="bsm" data-read lang="pt-BR">
+  <header class="hero" id="topo">
+    <div>
+      <div class="brandbar">
+        <div class="brand"><span class="logo" aria-hidden="true"></span><span class="bname">Lupa<em>da</em>Barra</span></div>
+        <span class="live"><i></i><span>Ao vivo · atualiza a cada 4 h · última: <b data-source="status" data-field="atualizado_em" data-row="0" data-draw="lastUpd">—</b></span></span>
+      </div>
+      <p class="eyebrow" style="margin-top:calc(var(--cds-gap-xl)*1.4)">O dinheiro da Prefeitura e da Câmara de Barra de São Miguel/AL, sem filtro</p>
+      <h1>Cada real tem <span class="glow">dono</span>, destino e explicação.</h1>
+      <p class="tag-line">Em palavras simples: quanto a Prefeitura e a Câmara têm para gastar, com quem gastam e o que parece fora do normal. Cada número tem a fonte. Toque em qualquer cartão, barra ou linha para ver mais.</p>
+    </div>
+    <div class="hstats">
+      <a class="hstat" href="#prefeitura"><div class="hk">Orçamento 2026</div><div class="hv" data-source="resumo" data-field="valor" data-where="indicador=total" data-draw="h_total">—</div><div class="hn">da Prefeitura · <span data-draw="h_pc">—</span> por morador</div></a>
+      <a class="hstat alert" href="#incomuns"><div class="hk">Gastos incomuns</div><div class="hv" data-source="inc_resumo" data-field="valor" data-where="indicador=total" data-draw="h_inc">—</div><div class="hn"><span data-source="inc_resumo" data-field="valor" data-where="indicador=qtd" data-draw="h_inc_qtd">—</span> contratos que chamam atenção</div></a>
+      <a class="hstat" href="#rank-modalidade"><div class="hk">Sem concorrência</div><div class="hv" data-source="ctr_resumo" data-field="valor" data-where="indicador=sem_licit" data-draw="h_sem">—</div><div class="hn">pagos sem disputa entre empresas</div></a>
+      <a class="hstat" href="#camara"><div class="hk">Câmara Municipal</div><div class="hv" data-source="orgao" data-field="total" data-where="orgao=Câmara Municipal" data-draw="h_cam">—</div><div class="hn">orçamento 2026 · 9 vereadores</div></a>
+    </div>
+    <nav class="tabs" id="menu"><a class="hot" href="#incomuns">Gastos incomuns</a><a href="#ocultos">O que não aparece</a><a href="#prefeitura">Prefeitura</a><a href="#rank-fornecedores">Fornecedores</a><a href="#tetos">Tetos legais</a><a href="#camara">Câmara e vereadores</a><a href="#fontes">Fontes</a></nav>
+  </header>
+
+  <section class="sec" id="incomuns">
+    <div class="part red"><div class="num">01</div><div><p class="eyebrow">Alertas</p><h2>Gastos incomuns</h2></div></div>
+    <div class="spot">
+      <p class="lead" style="margin:0">Contratos que chamam atenção: feitos sem concorrência entre empresas, com valores altos demais para uma cidade de 8 mil moradores, pagos a pessoas físicas em vez de empresas, ou sem o valor publicado. Não é prova de crime — é o que merece ser explicado à população.</p>
+      <div class="sumline">
+        <div><b data-source="inc_resumo" data-field="valor" data-where="indicador=pct" data-draw="i_pct">—</b>do valor de todas as contratações levantadas</div>
+        <div><b data-source="inc_resumo" data-field="valor" data-where="indicador=sem" data-draw="i_sem">—</b>foram feitos sem concorrência</div>
+      </div>
+      <div class="incgrid" data-source="contratacoes" data-draw="incomuns"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="ocultos">
+    <div class="part"><div class="num">02</div><div><p class="eyebrow">Transparência</p><h2>O que não aparece</h2></div></div>
+    <div class="spot amber">
+      <p class="lead" style="margin:0 0 var(--cds-gap-md)">O que a lei manda mostrar ao público e não está à vista, ou aparece com números que não batem.</p>
+      <div class="lrfgrid" data-source="ocultos" data-draw="ocultos"></div>
+      <ul class="plain" style="margin-top:var(--cds-gap-lg);font-size:var(--cds-font-size-caption)" data-draw="ocultosExtra"></ul>
+    </div>
+  </section>
+
+  <section class="sec" id="prefeitura">
+    <div class="part"><div class="num">03</div><div><p class="eyebrow">Prefeitura · Orçamento de 2026 (o plano de gastos aprovado por lei)</p><h2>Para onde vai o dinheiro</h2></div></div>
+    <div class="tiles">
+      <a class="card" href="#por-orgao"><div class="k">Esporte, cultura, turismo e comércio</div><div class="v" data-source="resumo" data-field="valor" data-where="indicador=lazer_pct" data-draw="t_laz">—</div><div class="n">do orçamento total</div></a>
+      <a class="card" href="#por-orgao"><div class="k">Esportes, Cultura e Eventos</div><div class="v" data-source="orgao" data-field="total" data-where="orgao=Sec. de Esportes Cultura e Eventos" data-draw="o_esp">—</div><div class="n">contra <span data-source="orgao" data-field="total" data-where="orgao=Sec. de Desenv. Social Trabalho e Habitação" data-draw="o_soc">—</span> da assistência social</div></a>
+      <a class="card" href="#por-funcao"><div class="k">Urbanismo</div><div class="v" data-source="funcao" data-field="total" data-where="funcao=Urbanismo" data-draw="f_urb">—</div><div class="n">quase o mesmo que Educação</div></a>
+    </div>
+    <div class="grid2">
+      <div class="card" id="por-funcao">
+        <h3>Por área de governo</h3>
+        <div class="legend" data-source="funcao"><span><i class="sw" data-draw="sw0"></i>Recursos gerais</span><span><i class="sw" data-draw="sw1"></i>Saúde e assistência social</span></div>
+        <div class="bars" data-source="funcao" data-draw="barsFuncao"></div>
+      </div>
+      <div class="card" id="por-orgao">
+        <h3>Por secretaria</h3>
+        <div class="legend" data-source="orgao"><span><i class="sw" data-draw="sw0b"></i>Recursos gerais</span><span><i class="sw" data-draw="sw1b"></i>Saúde e assistência social</span></div>
+        <div class="bars" data-source="orgao" data-draw="barsOrgao"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="lrf">
+    <div class="part"><div class="num">04</div><div><p class="eyebrow">Limites da lei</p><h2>A Prefeitura respeita os limites de gasto?</h2></div></div>
+    <div class="lrfgrid" data-source="lrf" data-draw="lrfCards"></div>
+    <p class="note">Estes números são do que foi planejado para o ano, não do que já foi gasto. O resultado de verdade aparece na prestação de contas que a Prefeitura é obrigada a publicar a cada 2 e a cada 4 meses.</p>
+    <div class="card" id="tetos">
+      <h3>Algum gasto passou do limite?</h3>
+      <div data-source="tetos" data-draw="tetos"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="contratacoes">
+    <div class="part"><div class="num">05</div><div><p class="eyebrow">Contratos · Prefeitura e Câmara</p><h2>Quem recebe e por quê</h2></div></div>
+    <p class="lead" style="margin:0"><b data-source="ctr_resumo" data-field="valor" data-where="indicador=qtd" data-draw="c_qtd">—</b> contratos e compras encontrados, somando <b data-source="ctr_resumo" data-field="valor" data-where="indicador=total" data-draw="c_total">—</b>. <b data-source="ctr_resumo" data-field="valor" data-where="indicador=sem_licit_pct" data-draw="c_sem_pct">—</b> desse dinheiro foi gasto sem concorrência entre empresas.</p>
+    <div class="card" id="rank-fornecedores">
+      <h3>Quem mais recebe: ranking de fornecedores</h3>
+      <p class="lead" style="margin:0 0 var(--cds-gap-md)">Lidera <b data-draw="f_top">—</b>, com <b data-source="rank_fornecedor" data-field="pct" data-row="0" data-draw="f_top_pct">—</b> de tudo o que foi contratado com fornecedores identificados. Os três primeiros somam <b data-draw="f_top3_pct">—</b>.</p>
+      <div class="tw">
+        <table data-source="rank_fornecedor" data-row-key="fornecedor">
+          <thead><tr><th>#</th><th data-field="fornecedor">Fornecedor</th><th data-field="orgaos">Contrata com</th><th data-field="contratos">Contr.</th><th data-field="valor">Valor</th><th data-field="pct">% do total</th></tr></thead>
+          <tbody data-draw="tabForn"></tbody>
+        </table>
+      </div>
+      <p class="note">⚑ = tem contrato com ponto de atenção. Só entram fornecedores com nome publicado; a maioria dos extratos não traz o vencedor.</p>
+    </div>
+    <div class="grid2">
+      <div class="card" id="rank-categorias">
+        <h3>Por tipo de serviço</h3>
+        <div class="bars" data-source="rank_categoria" data-draw="barsCat"></div>
+      </div>
+      <div class="card" id="rank-modalidade">
+        <h3>Com ou sem concorrência</h3>
+        <div class="bars" data-source="rank_modalidade" data-draw="barsMod"></div>
+        <p class="note">No PNCP, de mar/2024 a jul/2026:</p>
+        <div class="bars" style="min-height:0" data-source="modalidades" data-draw="barsPncp"></div>
+      </div>
+    </div>
+    <div class="card" id="rank-contratacoes">
+      <h3>Todos os contratos encontrados</h3>
+      <p class="hint">Marca vermelha = contrato que chama atenção.</p>
+      <div class="tw">
+        <table data-source="contratacoes" data-row-key="id">
+          <thead><tr><th data-field="objeto">Objeto</th><th data-field="orgao">Órgão</th><th data-field="modalidade">Modalidade</th><th data-field="valor">Valor</th><th data-field="situacao">Situação</th></tr></thead>
+          <tbody data-draw="tabCtr"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="camara">
+    <div class="part"><div class="num">06</div><div><p class="eyebrow">Câmara Municipal de Barra de São Miguel/AL</p><h2>Os 9 vereadores e os gastos da Câmara</h2></div></div>
+    <div class="regs" data-source="camara_registros" data-draw="camRegs"></div>
+    <div class="vgrid" data-source="vereadores" data-draw="vereadores"></div>
+    <div class="grid2">
+      <div class="card" id="camara-gastos">
+        <h3>Contratações da Câmara</h3>
+        <div data-source="contratacoes" data-draw="camGastos"></div>
+      </div>
+      <div class="card" id="camara-tetos">
+        <h3>Limites da Câmara</h3>
+        <div data-source="lrf" data-draw="camTetos"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="fontes">
+    <div class="part"><div class="num">07</div><div><p class="eyebrow">Método</p><h2>Fontes e atualização</h2></div></div>
+    <div class="grid2">
+      <div class="card">
+        <h3>Fontes oficiais</h3>
+        <ul class="plain">
+          <li><a href="https://barradesaomiguel.al.gov.br/transparencia/" target="_blank" rel="noopener">Portal da Transparência da Prefeitura ↗</a></li>
+          <li><a href="https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false" target="_blank" rel="noopener">Despesas e credores da Prefeitura (Kalana) ↗</a></li>
+          <li><a href="https://www.camaradebarradesaomiguel.al.gov.br/" target="_blank" rel="noopener">Portal da Transparência da Câmara ↗</a></li>
+          <li><a href="https://www-storage.voxtecnologia.com.br/?f=9878&amp;i=publicado_115232_2026-02-02_f1e002484767a38742f539c636c0abce.pdf&amp;m=sigpub.publicacao" target="_blank" rel="noopener">LOA 2026 no Diário Oficial dos Municípios ↗</a></li>
+          <li><a href="https://transparencia.al.gov.br/repasse/repasses-aos-municipios/12263869000108/" target="_blank" rel="noopener">Repasses do Estado ao município (CGE-AL) ↗</a></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Entenda as palavras</h3>
+        <dl class="kv" style="font-size:var(--cds-font-size-caption);line-height:1.5">
+          <dt>Licitação</dt><dd>Disputa entre empresas para ver quem faz o serviço pelo melhor preço. É a regra.</dd>
+          <dt>Sem concorrência</dt><dd>Contrato feito direto, sem disputa (a lei chama de dispensa ou inexigibilidade). Só é permitido em casos específicos.</dd>
+          <dt>Aditivo</dt><dd>Renovação ou aumento de um contrato que já existe.</dd>
+          <dt>Orçamento</dt><dd>O plano de quanto a Prefeitura pode gastar no ano, aprovado pela Câmara.</dd>
+          <dt>Verba de gabinete</dt><dd>Dinheiro que o vereador recebe para despesas do mandato, além do salário.</dd>
+          <dt>Diária</dt><dd>Valor pago a servidor ou vereador para cobrir viagem a trabalho.</dd>
+          <dt>Diário Oficial</dt><dd>Jornal do governo onde contratos e nomeações precisam ser publicados.</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <h3>Como funciona</h3>
+        <p class="note" style="margin-top:0">A cada 4 horas, uma rotina automática consulta o Diário Oficial dos Municípios de Alagoas, o Portal Nacional de Contratações Públicas e os portais da Prefeitura e da Câmara, e acrescenta o que for novo. Cada número tem fonte. Alertas são sinais objetivos para checagem, não acusações. Só entram dados de Barra de São Miguel, Alagoas.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+
+
+<p class="foot">Lupa da Barra · dados públicos de fontes oficiais (Diário Oficial dos Municípios de Alagoas, PNCP, portais da Prefeitura e da Câmara) · sinais para checagem, não acusações.</p>
+<script>const DS={};window.dash={colors:['#2a6fdb','#e8a33d','#3aa76d'],_c:{},_d:{},_on:[],
+data(id){if(DS[id])return{status:'ok',data:DS[id]};const c=this._c[id];if(c){if(!('v' in c)){const a=c.inputs.map(i=>this.data(i).data);c.v=c.fn(...a);}return{status:'ok',data:c.v};}return{status:'missing',data:[]};},
+calc(id,o){this._c[id]=o},draw(n,fn){if(fn)this._d[n]=fn;else this._run(n)},onData(f){this._on.push(f)},
+_run(n){const fn=this._d[n];document.querySelectorAll('[data-draw="'+n+'"]').forEach(el=>{try{fn(el)}catch(e){console.error(n,e)}})},
+_all(){Object.keys(this._d).forEach(n=>this._run(n));this._on.forEach(f=>f())}};
+const IDS=['funcao','orgao','loa','modalidades','contratacoes','vereadores','camara_amostras','camara_registros','municipio','status'];
+Promise.all(IDS.map(i=>fetch('data/'+i+'.json?v='+Date.now()).then(r=>r.json()).then(j=>{DS[i]=j}).catch(()=>{}))).then(()=>{const s=document.createElement('script');s.src='app.js?v='+Date.now();s.onload=()=>dash._all();document.body.appendChild(s);});</script>
+</body></html>
