@@ -241,7 +241,7 @@
     L.forEach(x => { const li = el('li', +x.valor >= 10000 ? 'big' : ''); const cr = el('span', 'cr', x.credor); if (x.cnpj) cr.append(el('small', null, 'CNPJ ' + x.cnpj + ' · empenho ' + x.empenho)); else cr.append(el('small', null, 'empenho ' + x.empenho)); li.append(el('span', 'dt', brDate(x.data)), cr, el('span', 'vl', F.brl(+x.valor))); ul.append(li); });
     box.append(ul);
     const t = el('div', 'rr-tot'); t.append(el('span', null, L.length + ' lançamentos mostrados'), el('b', null, F.brl(d3.sum(L, x => +x.valor)))); box.append(t);
-    box.append(el('p', 'note', 'Os lançamentos não trazem a descrição do gasto (o campo "histórico" vem vazio no portal), o que dificulta saber o que foi pago. A cada 4 horas a atualização automática acrescenta os novos lançamentos que aparecerem.'));
+    box.append(el('p', 'note', 'Os lançamentos não trazem a descrição do gasto (o campo "histórico" vem vazio no portal), o que dificulta saber o que foi pago. Todo dia a atualização automática acrescenta os novos lançamentos que aparecerem.'));
     const lk = el('div', 'chips'); const a = el('a', 'chip act', 'Abrir despesas da Câmara ↗'); a.href = C.fonte; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); box.append(lk);
   });
   dash.draw('reaisPref', box => {
