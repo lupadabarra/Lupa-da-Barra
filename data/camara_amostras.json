@@ -1,37 +1,5 @@
 [
  {
-  "tipo": "Verba de gabinete",
-  "quem": "Carlos Magno de Albuquerque Maranhão Neto",
-  "competencia": "11/2025",
-  "valor": 1750.0,
-  "data": "2025-11-30",
-  "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/recursos-humanos/verba-de-gabinete"
- },
- {
-  "tipo": "Verba de gabinete",
-  "quem": "Júlio de Andrade Belo Neto",
-  "competencia": "02/2025",
-  "valor": 127.33,
-  "data": "2025-02-28",
-  "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/recursos-humanos/verba-de-gabinete?&page=2"
- },
- {
-  "tipo": "Verba de gabinete",
-  "quem": "Júlio de Andrade Belo Neto",
-  "competencia": "06/2023",
-  "valor": 1588.4,
-  "data": "2023-06-30",
-  "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/recursos-humanos/verba-de-gabinete"
- },
- {
-  "tipo": "Verba de gabinete",
-  "quem": "Diney Apratto Torres Pugliesi",
-  "competencia": "10/2023",
-  "valor": 233.7,
-  "data": "2023-10-31",
-  "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/recursos-humanos/verba-de-gabinete?&page=3"
- },
- {
   "tipo": "Despesa (empenho 2026093000002)",
   "quem": "União dos Vereadores do Estado de Alagoas — UVEAL",
   "competencia": "09/2026",

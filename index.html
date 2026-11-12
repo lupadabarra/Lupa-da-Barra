@@ -3,7 +3,7 @@
 <title>Lupa da Barra — para onde vai o dinheiro de Barra de São Miguel/AL</title>
 <meta name="description" content="Dossiê aberto das despesas da Prefeitura e da Câmara de Barra de São Miguel, Alagoas: fornecedores, contratos sem concorrência, gastos incomuns, vereadores e limites da lei. Atualizado a cada 4 horas.">
 <meta property="og:title" content="Lupa da Barra"><meta property="og:description" content="Cada real tem dono, destino e explicação. As despesas da Prefeitura e da Câmara de Barra de São Miguel/AL, sem filtro.">
-<meta name="theme-color" content="#fff8ec"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='27' cy='27' r='18' fill='none' stroke='%23c4302b' stroke-width='7'/%3E%3Cpath d='M40 40l16 16' stroke='%23c4302b' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#ff1f8e"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='27' cy='27' r='18' fill='none' stroke='%23c4302b' stroke-width='7'/%3E%3Cpath d='M40 40l16 16' stroke='%23c4302b' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <style>:root{--color-fg:#16161a;--color-fg-muted:#5f5f6b;--color-bg:#f5f4f0;--color-panel:#ffffff;--color-border-line:#e4e2dc;--color-ok:#1f7a4a;--color-warn:#b26b00;--color-bad:#c4302b;
@@ -250,6 +250,96 @@ html body .totop{background:var(--coral);color:#fff}
 html body .foot{color:#8a87a0}
 html body .bsm .hstat>*{position:relative;z-index:1}
 html body .bsm .hstat:nth-child(1)::after{z-index:0}
+
+/* ================= V5 — pop vibrante (neo-brutalista) ================= */
+:root{--ink:#0d0b1a;--pink:#ff1f8e;--violet:#7a2cff;--cyan:#00e0ff;--yellow:#ffe500;--orange:#ff6a00;--green:#00e676;--color-fg:#0d0b1a;--color-fg-muted:#4a4560;--color-bg:#ffffff;--color-bad:#ff1f5a;--color-warn:#ff8a00;--color-ok:#00b85c;--coral:#ff1f8e}
+html body{background:#fff;background-image:radial-gradient(520px 360px at 100% 0%,rgba(255,229,0,.55),transparent 70%),radial-gradient(520px 420px at 0% 18%,rgba(0,224,255,.35),transparent 70%),radial-gradient(600px 460px at 100% 60%,rgba(255,31,142,.22),transparent 70%),radial-gradient(520px 420px at 0% 95%,rgba(122,44,255,.22),transparent 70%)}
+html body::before{background-image:radial-gradient(rgba(13,11,26,.16) 1.2px,transparent 1.4px);background-size:20px 20px}
+html body .topbar{background:#fff;border:2.5px solid var(--ink);box-shadow:4px 4px 0 var(--ink)}
+html body .tb-logo{border-color:var(--pink)}html body .tb-logo::after{background:var(--pink)}
+html body .tb-nav a{color:var(--ink);font-weight:600}
+html body .tb-nav a.on{background:var(--ink);color:var(--yellow)}
+html body .progress{height:5px}html body .progress i{background:linear-gradient(90deg,var(--pink),var(--orange),var(--yellow),var(--green),var(--cyan),var(--violet))}
+/* abertura em painel vibrante animado */
+html body .bsm .hero{color:#fff!important;padding:clamp(26px,5vw,56px)!important;border-radius:34px!important;border:3px solid var(--ink)!important;box-shadow:10px 10px 0 var(--ink)!important;
+background:linear-gradient(120deg,#ff1f8e,#7a2cff,#00a3ff,#ff1f8e)!important;background-size:300% 300%!important;animation:heroflow 14s ease infinite}
+@keyframes heroflow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@media (prefers-reduced-motion:reduce){html body .bsm .hero{animation:none}}
+html body .bsm .hero h1{color:#fff;text-shadow:4px 4px 0 rgba(13,11,26,.35)}
+html body .bsm .hero h1 .glow{background:none;color:var(--yellow);-webkit-text-fill-color:var(--yellow);text-shadow:4px 4px 0 var(--ink)}
+html body .bsm .hero .eyebrow{color:var(--yellow)}
+html body .bsm .hero .tag-line{color:rgba(255,255,255,.92)}
+html body .bsm .live{background:rgba(13,11,26,.35);border:2px solid rgba(255,255,255,.6);color:#fff}
+html body .bsm .live i{background:var(--green);box-shadow:0 0 0 4px rgba(0,230,118,.35)}
+html body .bsm .hstat{border:3px solid var(--ink)!important;box-shadow:6px 6px 0 var(--ink)!important;border-radius:24px;color:var(--ink)!important}
+html body .bsm .hstat .hk,html body .bsm .hstat .hn{color:var(--ink)!important;opacity:.85}
+html body .bsm .hstat .hv{color:var(--ink)!important}
+html body .bsm .hstat:nth-child(1){background:var(--yellow)}
+html body .bsm .hstat:nth-child(1)::after{background:rgba(255,255,255,.45)}
+html body .bsm .hstat.alert{background:#fff}
+html body .bsm .hstat.alert .hv{color:var(--pink)!important}
+html body .bsm .hstat:nth-child(3){background:var(--cyan)}
+html body .bsm .hstat:nth-child(4){background:var(--green)}
+html body .bsm .hstat:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink)!important;filter:none}
+/* faixa */
+html body .ticker{background:#fff;border:2.5px solid var(--ink);box-shadow:5px 5px 0 var(--ink)}
+html body .tk-label{background:var(--yellow);color:var(--ink);border:2px solid var(--ink)}html body .tk-label i{background:var(--pink)}
+html body .tk-item{color:var(--ink);font-weight:500}html body .tk-item b{color:var(--pink)}
+/* seções */
+html body .bsm .part .num{border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);color:var(--ink)!important;font-size:14px!important;padding:8px 14px}
+html body #incomuns .part .num{background:var(--pink);color:#fff!important}
+html body #ocultos .part .num{background:var(--orange);color:#fff!important}
+html body #prefeitura .part .num{background:var(--cyan)}
+html body #lrf .part .num{background:var(--yellow)}
+html body #contratacoes .part .num{background:var(--green)}
+html body #camara .part .num{background:var(--violet);color:#fff!important}
+html body #fontes .part .num{background:var(--ink);color:var(--yellow)!important}
+html body .bsm .part h2{color:var(--ink)}
+/* cartões neo-brutalistas */
+html body .bsm .card,html body .bsm .lrf,html body .bsm .ver,html body .bsm .inc,html body .pod,html body .ochead .big{background:#fff;border:2.5px solid var(--ink);box-shadow:6px 6px 0 var(--ink);border-radius:22px}
+html body .bsm .card:hover,html body .bsm .inc:hover,html body .bsm .ver:hover,html body .bsm .lrf:hover,html body .pod:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 var(--ink);border-color:var(--ink)}
+html body .bsm .inc::before{width:100%;height:8px;right:0;bottom:auto;background:var(--yellow)}
+html body .bsm .inc.sev3::before{background:var(--pink)}
+html body .bsm .inc{padding-top:26px}
+html body .bsm .inc.feat{background:linear-gradient(135deg,#ffe3f1,#fff 55%)}
+html body .bsm .inc .iv{color:var(--ink)}
+html body .bsm .inc .meter{height:8px;border:2px solid var(--ink);border-radius:6px;background:#fff}
+html body .bsm .inc .meter i{background:linear-gradient(90deg,var(--pink),var(--orange))}
+html body .bsm .lrf.ok{background:#d9ffe9}html body .bsm .lrf.atencao{background:#fff6c2}html body .bsm .lrf.ruim{background:#ffe0ec}
+html body .bsm .lrf .st{color:var(--ink)!important}
+html body .bsm .chip{background:#fff;border:2px solid var(--ink);color:var(--ink);font-weight:600}
+html body .bsm .chip.c-bad{background:var(--pink);color:#fff;border-color:var(--ink)}
+html body .bsm .det{background:#fffbe0;border:2px solid var(--ink);border-radius:14px}
+html body .bsm .fis{background:#fff;border:2.5px solid var(--ink);box-shadow:4px 4px 0 var(--pink)}
+html body .bsm .fis .fh{color:var(--pink)}
+html body .bsm .fis pre.pedido{background:#fffbe0;border:2px dashed var(--ink)}
+html body .bsm .chip.act{background:var(--yellow)}
+html body .bsm .chip.wa{background:var(--green);color:var(--ink)}
+html body .pod.p1{background:var(--yellow)}
+html body .pod.p2{background:var(--cyan)}
+html body .pod.p3{background:#ffd0e6}
+html body .pod .pn{-webkit-text-stroke:2px var(--ink);color:transparent}
+html body .pod .pbar{border:2px solid var(--ink);background:#fff;height:10px}
+html body .pod .pbar i{background:var(--ink)}
+html body .bsm .track{border:2px solid var(--ink);background:#fff;height:12px;border-radius:7px}
+html body .bsm .seg{border-radius:0}
+html body .bsm .gauge{border:2px solid var(--ink);background:#fff;height:10px}
+html body .bsm table th{color:var(--ink)}
+html body .bsm tbody tr.flag td:first-child{box-shadow:inset 5px 0 0 var(--pink)}
+html body .bsm tbody tr.clk:hover,html body .bsm tbody tr.clk[aria-expanded=true]{background:#fff6c2}
+html body .bsm .row:hover,html body .bsm .row[aria-expanded=true]{background:#fff6c2}
+html body .filt input{border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink);background:#fff}
+html body .filt button{border:2px solid var(--ink);background:#fff;color:var(--ink);font-weight:600}
+html body .filt button.on{background:var(--pink);color:#fff;border-color:var(--ink)}
+html body .bsm .ver .av{background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink)}
+html body .bsm .ver .role{color:var(--violet)}
+html body .bsm .tiles > a.card:nth-child(1){background:#ffe0ec}
+html body .bsm .tiles > a.card:nth-child(2){background:#e0f9ff}
+html body .bsm .tiles > a.card:nth-child(3){background:#fff6c2}
+html body .bsm .regs > a.card:nth-child(4n+1){background:#ffe0ec}html body .bsm .regs > a.card:nth-child(4n+2){background:#e0f9ff}html body .bsm .regs > a.card:nth-child(4n+3){background:#fff6c2}html body .bsm .regs > a.card:nth-child(4n+4){background:#d9ffe9}
+html body .totop{background:var(--yellow);color:var(--ink);border:2.5px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+html body .bsm .sumline b{color:var(--pink)}
+@media (max-width:760px){html body .bsm .hstat:nth-child(1) .hv{font-size:44px}html body .bsm .hero{box-shadow:6px 6px 0 var(--ink)!important}}
 </style></head><body>
 
 <style>
@@ -445,7 +535,6 @@ html body .bsm .hstat:nth-child(1)::after{z-index:0}
     <div class="part"><div class="num">02</div><div><p class="eyebrow">Transparência</p><h2>O que não aparece</h2></div></div>
     <div class="spot amber">
       <p class="lead" style="margin:0 0 var(--cds-gap-md)">O que a lei manda mostrar ao público e não está à vista, ou aparece com números que não batem.</p>
-      <div class="ochead" data-draw="ocHead"></div>
       <div class="lrfgrid" data-source="ocultos" data-draw="ocultos"></div>
       <ul class="plain" style="margin-top:var(--cds-gap-lg);font-size:var(--cds-font-size-caption)" data-draw="ocultosExtra"></ul>
     </div>
@@ -505,8 +594,6 @@ html body .bsm .hstat:nth-child(1)::after{z-index:0}
       <div class="card" id="rank-modalidade">
         <h3>Com ou sem concorrência</h3>
         <div class="bars" data-source="rank_modalidade" data-draw="barsMod"></div>
-        <p class="note">No PNCP, de mar/2024 a jul/2026:</p>
-        <div class="bars" style="min-height:0" data-source="modalidades" data-draw="barsPncp"></div>
       </div>
     </div>
     <div class="card" id="rank-contratacoes">
@@ -568,7 +655,7 @@ html body .bsm .hstat:nth-child(1)::after{z-index:0}
       </div>
       <div class="card">
         <h3>Como funciona</h3>
-        <p class="note" style="margin-top:0">A cada 4 horas, uma rotina automática consulta o Diário Oficial dos Municípios de Alagoas, o Portal Nacional de Contratações Públicas e os portais da Prefeitura e da Câmara, e acrescenta o que for novo. Cada número tem fonte. Alertas são sinais objetivos para checagem, não acusações. Só entram dados de Barra de São Miguel, Alagoas.</p>
+        <p class="note" style="margin-top:0">A cada 4 horas, uma rotina automática consulta o Diário Oficial dos Municípios de Alagoas, o Portal Nacional de Contratações Públicas e os portais da Prefeitura e da Câmara, e acrescenta o que for novo. Só entram contratos de 2026 ou que ainda estão valendo; o que já venceu sai do portal. Cada número tem fonte. Alertas são sinais objetivos para checagem, não acusações. Só entram dados de Barra de São Miguel, Alagoas.</p>
       </div>
     </div>
   </section>

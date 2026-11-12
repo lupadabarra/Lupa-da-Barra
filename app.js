@@ -63,9 +63,6 @@ dash.calc('lrf', {
       {id: 'regra_ouro', indicador: 'Empréstimos', pct: p(v('operacoes_credito'), v('despesas_capital')), limite: 100, sentido: 'max',
        regra: 'Empréstimos (operações de crédito) não podem superar as despesas de capital (Constituição, art. 167, III).',
        conta: 'Operações de crédito previstas ÷ despesas de capital', numerador: v('operacoes_credito'), denominador: v('despesas_capital')},
-      {id: 'transferencias', indicador: 'Dinheiro que vem de fora (União e Estado)', pct: p(v('transferencias_correntes') + v('receitas_capital'), v('receita_total')), limite: null, sentido: 'info',
-       regra: 'Não é limite legal. Mostra quanto do orçamento depende de repasses da União e do Estado.',
-       conta: '(Transferências correntes + transferências de capital) ÷ receita total', numerador: v('transferencias_correntes') + v('receitas_capital'), denominador: v('receita_total')},
       {id: 'reserva', indicador: 'Reserva para emergências', pct: p(v('reserva'), rc), limite: null, sentido: 'info',
        regra: 'Não há percentual fixo na LRF; o valor é definido pela LDO. Serve para cobrir riscos e despesas imprevistas.',
        conta: 'Reserva de contingência ÷ receitas correntes', numerador: v('reserva'), denominador: rc},
@@ -108,7 +105,7 @@ dash.calc('rank_fornecedor', {
   description: 'Soma dos valores por fornecedor com nome publicado.',
   inputs: ['contratacoes'],
   fn: (contratacoes) => {
-    const ok = contratacoes.filter(c => c.fornecedor && !/^(Não identificado|Em licitação|Em credenciamento|Postos credenciados|Proprietário não|Vários|Netword)|,/.test(c.fornecedor));
+    const ok = contratacoes.filter(c => c.fornecedor && !/^(Não identificado|Em licitação|Em credenciamento|Postos credenciados|Proprietário não|Obra ainda sem|Vários|Netword)|,/.test(c.fornecedor));
     const total = d3.sum(ok, c => +c.valor);
     return d3.rollups(ok, v => ({contratos: v.length, valor: d3.sum(v, c => +c.valor), cnpj: v.map(c => c.cnpj).filter(Boolean)[0] || '', orgaos: Array.from(new Set(v.map(c => c.orgao || 'Prefeitura'))).join(' e '), sinais: v.filter(c => c.alerta).length}), c => c.fornecedor)
       .map(([fornecedor, x]) => ({fornecedor, cnpj: x.cnpj, contratos: x.contratos, valor: x.valor, pct: total ? Math.round(x.valor / total * 1000) / 10 : 0, orgaos: x.orgaos, sinais: x.sinais}))
@@ -164,12 +161,13 @@ dash.calc('ocultos', {
   description: 'Contratações cujo extrato publicado não traz o valor, fornecedores nomeados sem CNPJ, valores que não batem entre documentos e contratações sem vencedor publicado.',
   inputs: ['contratacoes'],
   fn: (contratacoes) => {
-    const named = (c) => c.fornecedor && !/^(Não identificado|Em licitação|Em credenciamento|Postos credenciados|Proprietário não|Vários|Netword)|,/.test(c.fornecedor);
+    const named = (c) => c.fornecedor && !/^(Não identificado|Em licitação|Em credenciamento|Postos credenciados|Proprietário não|Obra ainda sem|Vários|Netword)|,/.test(c.fornecedor);
     return [
       {id: 'sem_valor', qtd: contratacoes.filter(c => !(+c.valor > 0)).length},
       {id: 'sem_cnpj', qtd: contratacoes.filter(c => named(c) && !c.cnpj).length},
       {id: 'divergente', qtd: contratacoes.filter(c => /não bate|não confere|grafado/i.test(c.alerta || '')).length},
-      {id: 'sem_vencedor', qtd: contratacoes.filter(c => /^Não identificado/.test(c.fornecedor || '')).length}
+      {id: 'sem_vencedor', qtd: contratacoes.filter(c => /^Não identificado/.test(c.fornecedor || '')).length},
+      {id: 'sem_objeto', qtd: contratacoes.filter(c => /não descrit/i.test((c.objeto || '') + (c.alerta || ''))).length}
     ];
   }
 });
@@ -189,7 +187,7 @@ const kv = (pairs) => {
 const link = (href, text) => { const a = E('a', null, text); a.href = href; if (/^https?:/.test(href)) { a.target = '_blank'; a.rel = 'noopener'; } return a; };
 const contratos = () => { const d = dash.data('contratacoes'); return d.status === 'ok' ? d.data : []; };
 const money = (c) => +c.valor > 0 ? F.brl(+c.valor) : 'Valor não publicado';
-const MODL = {'Inexigibilidade': 'Sem concorrência (inexigibilidade)', 'Dispensa': 'Sem concorrência (dispensa)', 'Pregão eletrônico': 'Com concorrência (pregão)', 'Concorrência': 'Com concorrência', 'Credenciamento': 'Credenciamento (vários fornecedores)', 'Aditivo': 'Renovação de contrato (aditivo)'};
+const MODL = {'Inexigibilidade': 'Sem concorrência (inexigibilidade)', 'Dispensa': 'Sem concorrência (dispensa)', 'Pregão eletrônico': 'Com concorrência (pregão)', 'Concorrência': 'Com concorrência', 'Credenciamento': 'Credenciamento (vários fornecedores)', 'Aditivo': 'Renovação de contrato (aditivo)', 'Repasse federal': 'Dinheiro federal (repasse)'};
 const modl = (m) => MODL[m] || m;
 const isSem = (c) => c.modalidade === 'Inexigibilidade' || c.modalidade === 'Dispensa';
 
@@ -558,11 +556,12 @@ dash.onData(() => {
 });
 
 /* ---------- o que não aparece ---------- */
-const NAMED = (c) => c.fornecedor && !/^(Não identificado|Em licitação|Em credenciamento|Postos credenciados|Proprietário não|Vários|Netword)|,/.test(c.fornecedor);
+const NAMED = (c) => c.fornecedor && !/^(Não identificado|Em licitação|Em credenciamento|Postos credenciados|Proprietário não|Obra ainda sem|Vários|Netword)|,/.test(c.fornecedor);
 const OC = {
   sem_valor: {t: 'Contratos sem valor publicado', d: 'O extrato no Diário Oficial não informa quanto será pago.', f: (c) => !(+c.valor > 0), x: 'Estes contratos ou renovações foram publicados sem dizer quanto custam. Assim o cidadão não sabe quanto dinheiro foi comprometido, não consegue comparar com o mercado e não tem como conferir os pagamentos.', l: 'Lei 14.133/2021, art. 94: a publicação no PNCP, com os dados do contrato, é condição para o contrato valer. LAI, art. 8º, § 1º, IV: contratos devem estar disponíveis por inteiro.'},
   sem_cnpj: {t: 'Fornecedor sem CNPJ no extrato', d: 'A empresa aparece só pelo nome; não dá para checar quem é na Receita.', f: (c) => NAMED(c) && !c.cnpj, x: 'O contratado aparece só pelo nome. Sem CNPJ não dá para ver na Receita quem são os sócios, desde quando a empresa existe, qual é a atividade dela, nem se tem ligação com agentes públicos.', l: 'Lei 14.133/2021, arts. 94 e 174: o PNCP deve identificar o contratado. Art. 14: há impedimentos que só podem ser checados sabendo quem é a empresa.'},
   divergente: {t: 'Valores que não batem', d: 'O mesmo processo traz valores diferentes em documentos diferentes.', f: (c) => /não bate|não confere|grafado/i.test(c.alerta || ''), x: 'Documentos do mesmo processo mostram valores diferentes, ou o valor em números não confere com o valor por extenso. Pode ser erro de digitação, mas também pode abrir espaço para pagar mais do que o contratado. Só a comparação dos documentos originais resolve.', l: 'LAI, art. 6º, II: a informação pública deve ser íntegra e autêntica. Lei 14.133/2021, art. 94: os dados publicados devem corresponder ao contrato.'},
+  sem_objeto: {t: 'Contratos sem dizer o que foi comprado', d: 'A publicação traz o valor, mas não diz o que está sendo comprado.', f: (c) => /não descrit/i.test((c.objeto || '') + (c.alerta || '')), x: 'A Prefeitura publicou o resultado e o valor, mas não disse o que comprou. É impossível conferir preço, quantidade ou entrega de algo que nem foi descrito.', l: 'Lei 14.133/2021, art. 94: a publicação deve trazer o objeto do contrato. LAI, art. 8º, § 1º, IV: licitações e contratos devem estar disponíveis por inteiro.'},
   sem_vencedor: {t: 'Contratações sem vencedor publicado', d: 'O vencedor não aparece nas fontes abertas consultadas.', f: (c) => /^Não identificado/.test(c.fornecedor || ''), x: 'Nas fontes abertas não aparece quem venceu ou quem foi contratado. Sem o nome do vencedor não há como saber quem está recebendo o dinheiro público.', l: 'Lei 14.133/2021, art. 94 e LRF, art. 48-A: cada pagamento deve ser divulgado com o nome de quem recebeu.'}
 };
 dash.draw('ocultos', el => {
@@ -638,7 +637,7 @@ dash.calc('tetos', {
       out.push({id: 'frac-' + cat, item: 'Compras sem concorrência somadas no ano: ' + cat, area: cat, valor: soma, teto: LIM_COMPRA, uso: Math.round(soma / LIM_COMPRA * 1000) / 10, tipo: 'Compras divididas (fracionamento)',
         regra: 'Dispensas de mesma natureza no mesmo ano são somadas; dividir compras para caber no limite é proibido (Lei 14.133, art. 75, § 1º).'});
     });
-    (lrf || []).filter(r => r.id === 'pessoal' || r.id === 'camara').forEach(r => {
+    (lrf || []).filter(r => false).forEach(r => {
       out.push({id: 'lrf-' + r.id, item: r.id === 'pessoal' ? 'Despesa com pessoal (Prefeitura + Câmara)' : 'Repasse à Câmara', area: r.id === 'pessoal' ? 'Folha' : 'Câmara Municipal', valor: r.numerador, teto: r.denominador * r.limite / 100, uso: Math.round(r.pct / r.limite * 1000) / 10, tipo: 'Limite constitucional/LRF', regra: r.regra});
     });
     return out.map(r => Object.assign(r, {status: r.uso > 100 ? 'acima' : r.uso >= 90 ? 'perto' : 'dentro'})).sort((a, b) => b.uso - a.uso);
@@ -755,7 +754,7 @@ dash.draw('camTetos', el => {
   const cam = d.status === 'ok' && d.data ? d.data.find(r => r.id === 'camara') : null;
   const g = E('div', 'lrfgrid');
   const card = (cls, t, v, n, st) => { const c = E('div', 'lrf ' + cls); c.style.cursor = 'auto'; c.append(E('div', 'k', t)); if (v != null) c.append(E('div', 'v', v)); c.append(E('div', 'n', n), E('div', 'st', st)); g.append(c); };
-  if (cam) card(cam.status, 'Repasse à Câmara (máx. 7%)', F.pct(cam.pct), 'Orçamento da Câmara sobre impostos e transferências previstos (Constituição, art. 29-A).', cam.status === 'ok' ? 'Dentro do limite (previsto)' : 'Acima do limite');
+  if (false && cam) card(cam.status, 'Repasse à Câmara (máx. 7%)', F.pct(cam.pct), 'Orçamento da Câmara sobre impostos e transferências previstos (Constituição, art. 29-A).', cam.status === 'ok' ? 'Dentro do limite (previsto)' : 'Acima do limite');
   card('semdado', 'Folha da Câmara (máx. 70% do repasse)', null, 'A Câmara não pode gastar mais de 70% do que recebe com folha, incluindo subsídios (art. 29-A, § 1º).', 'Aguardando extração da folha');
   card('semdado', 'Subsídio do vereador (máx. 20% do deputado estadual)', null, 'Em municípios com até 10 mil habitantes (art. 29, VI, a).', 'Aguardando extração da folha');
   card('semdado', 'Gasto total com vereadores (máx. 5% da receita)', null, 'Soma dos subsídios dos vereadores frente à receita do município (art. 29, VII).', 'Aguardando extração da folha');
