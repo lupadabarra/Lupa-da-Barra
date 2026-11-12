@@ -161,68 +161,43 @@
   }
  },
  {
-  "objeto": "Fornecimento e instalação de vidros na sede da Secretaria de Saúde",
-  "fornecedor": "Não identificado",
-  "cnpj": "",
+  "objeto": "Fornecimento e instalação de vidros na sede da Secretaria Municipal de Saúde — Contrato 86/2026 (Dispensa 10/2026)",
+  "fornecedor": "Nova Geração Serviços Ltda",
+  "cnpj": "66.776.879/0001-76",
   "categoria": "Saúde",
-  "modalidade": "Inexigibilidade",
-  "valor": 1078350,
-  "tipo_valor": "Homologado",
-  "situacao": "Homologada",
-  "data": "2026-06-22",
-  "alerta": "Vidros são serviço comum; inexigibilidade exige fornecedor exclusivo ou serviço singular",
-  "fonte": "https://www.licinexus.com.br/licitacoes/orgao/municipio-de-barra-de-sao-miguel/",
-  "id": "C08",
-  "orgao": "Prefeitura",
-  "analise": {
-   "oque": "Instalação de vidros contratada sem licitação (inexigibilidade) por R$ 1.078.350. O fornecedor não aparece nas fontes abertas.",
-   "problema": "Vidro e instalação de vidro são serviços comuns, oferecidos por muitas vidraçarias. A inexigibilidade só vale quando não existe competição possível, o que dificilmente é o caso aqui. É um dos sinais mais fortes do painel.",
-   "lei": "Lei 14.133/2021, art. 74 (inexigibilidade só quando a competição é inviável) e art. 6º, XIII (serviço comum deve ser contratado por pregão). Art. 337-E do Código Penal (dispensar ou não exigir licitação fora dos casos da lei é crime).",
-   "conferir": [
-    "Processo completo da inexigibilidade e a justificativa de por que não houve disputa",
-    "Onde os vidros foram instalados (quais prédios) e as medições em metros quadrados",
-    "Preço por metro quadrado comparado ao de vidraçarias da região",
-    "Nome e CNPJ da empresa contratada"
-   ]
-  }
- },
- {
-  "objeto": "Ferramentas, equipamentos e materiais da SMUTSP",
-  "fornecedor": "Não identificado",
-  "cnpj": "",
-  "categoria": "Materiais e equipamentos",
-  "modalidade": "Pregão eletrônico",
-  "valor": 972000,
-  "tipo_valor": "Estimado",
-  "situacao": "Licitação concluída",
-  "data": "2026-07-21",
+  "modalidade": "Dispensa",
+  "valor": 7156.77,
+  "tipo_valor": "Contratado",
+  "situacao": "Contratado em 27/07/2026 por até 90 dias (encerrado em out/2026)",
+  "data": "2026-07-27",
   "alerta": "",
-  "fonte": "https://achaedital.com.br/licitacoes/al/barra-de-sao-miguel",
-  "id": "C09",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/F8034CF2",
+  "id": "C08",
   "orgao": "Prefeitura"
  },
  {
-  "objeto": "Pregão 20/2025, lote 1 — objeto não descrito no extrato",
-  "fornecedor": "Juliana Botelho Silva Vercosa",
-  "cnpj": "",
-  "categoria": "Turismo e eventos",
+  "objeto": "Buffet, coffee break e similares para os eventos e secretarias da Prefeitura — Pregão Eletrônico 20/2025, lote 1 (Ata 001/2026)",
+  "fornecedor": "Juliana Botelho Silva de Vercosa Bufê",
+  "cnpj": "44.057.112/0001-54",
+  "categoria": "Alimentação",
   "modalidade": "Pregão eletrônico",
   "valor": 896990,
   "tipo_valor": "Homologado",
-  "situacao": "Homologado 08/01/2026",
+  "situacao": "Publicado em 2025 · ata de 2026 valendo até jan/2027; R$ 732.959 já reservados em 2026",
   "data": "2026-01-08",
-  "alerta": "Quase R$ 900 mil para fornecedora identificada só pelo nome, sem CNPJ, e o extrato publicado não diz o que foi comprado",
-  "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_115217_2026-01-12_6030bfe4a4613f5f3a1368b4416db9a6.pdf&m=sigpub.publicacao",
+  "alerta": "Valor alto para um município de 7.944 habitantes: quase R$ 900 mil em buffet e coffee break; firma em nome de pessoa física",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/865F55E6",
   "id": "C10",
   "orgao": "Prefeitura",
   "analise": {
-   "oque": "Juliana Botelho Silva Vercosa aparece como vencedora de pregão por R$ 896.990. O extrato não informa o CNPJ nem o que foi comprado.",
-   "problema": "Quase R$ 900 mil pagos a alguém identificado só pelo nome, sem dizer o objeto, impede qualquer conferência: não se sabe o que foi comprado, em que quantidade nem a que preço.",
-   "lei": "Lei 14.133/2021, art. 94 e art. 174 (o PNCP deve ter o contrato com objeto, valor e identificação do contratado). LAI, Lei 12.527/2011, art. 8º, § 1º, IV (licitações e contratos devem estar publicados por inteiro).",
+   "oque": "O Pregão Eletrônico 20/2025 (aviso de 28/11/2025) registrou preços de buffet, coffee break e similares. O lote 1 ficou com Juliana Botelho Silva de Vercosa Bufê (CNPJ 44.057.112/0001-54), por R$ 896.990,00, homologado em 08/01/2026. Até novembro de 2026 a Prefeitura já reservou R$ 732.959 para essa fornecedora.",
+   "problema": "São cerca de R$ 113 por morador só em lanches e buffet num ano. A ata é um \"cardápio de preços\": a Prefeitura pede quando quer, por isso é preciso saber em quais eventos e reuniões a comida foi servida, para quantas pessoas e se a quantidade bate com o que foi pago. A empresa é individual, em nome de uma pessoa.",
+   "lei": "Lei 14.133/2021, art. 82 a 86 (ata de registro de preços: só se compra o necessário, pelos preços registrados) e art. 117 (fiscal deve registrar cada entrega). LAI 12.527/2011, art. 8º (divulgar pedidos e pagamentos).",
    "conferir": [
-    "Ata ou contrato completo, com objeto, itens e preços",
-    "CNPJ ou CPF da contratada e a situação cadastral",
-    "Empenhos e notas fiscais pagos a ela em 2026"
+    "Ata 001/2026 com os itens e preços unitários (por pessoa, por kit)",
+    "Lista de pedidos feitos à empresa em 2026: evento, data, número de pessoas",
+    "Notas fiscais e atestos de recebimento",
+    "Fotos ou listas de presença dos eventos atendidos"
    ]
   }
  },
@@ -394,21 +369,6 @@
   "orgao": "Prefeitura"
  },
  {
-  "objeto": "Equipamentos industriais — casa das marisqueiras",
-  "fornecedor": "Não identificado",
-  "cnpj": "",
-  "categoria": "Materiais e equipamentos",
-  "modalidade": "Dispensa",
-  "valor": 42000,
-  "tipo_valor": "Estimado",
-  "situacao": "Licitação concluída",
-  "data": "2026-07-22",
-  "alerta": "",
-  "fonte": "https://achaedital.com.br/licitacoes/al/barra-de-sao-miguel",
-  "id": "C20",
-  "orgao": "Prefeitura"
- },
- {
   "objeto": "Equipamentos de informática e audiovisual — Gabinete do Prefeito",
   "fornecedor": "Não identificado",
   "cnpj": "",
@@ -479,17 +439,17 @@
   "orgao": "Prefeitura"
  },
  {
-  "objeto": "Locação emergencial de veículos para a Festa do Trabalhador 2026",
-  "fornecedor": "Não identificado",
-  "cnpj": "",
+  "objeto": "Locação emergencial de ônibus urbano com motorista para a Festa do Trabalhador 2026 — Contrato 0054/2026 (dispensa)",
+  "fornecedor": "Cooperativa de Prestação de Serviços de Transporte do Estado de Alagoas — Novacoop",
+  "cnpj": "31.447.763/0001-09",
   "categoria": "Locação de veículos",
   "modalidade": "Dispensa",
   "valor": 2920,
   "tipo_valor": "Homologado",
-  "situacao": "Homologada",
+  "situacao": "Contratado em 28/04/2026 por 90 dias (encerrado em jul/2026)",
   "data": "2026-06-01",
   "alerta": "",
-  "fonte": "https://www.licinexus.com.br/licitacoes/orgao/municipio-de-barra-de-sao-miguel/",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/1769BCB4",
   "id": "C25",
   "orgao": "Prefeitura"
  },
@@ -607,7 +567,7 @@
   "modalidade": "Aditivo",
   "valor": 0,
   "tipo_valor": "Não publicado",
-  "situacao": "Prorrogada até 24/12/2026",
+  "situacao": "Publicado em 2025 · valendo até 24/12/2026",
   "data": "2025-12-23",
   "alerta": "Ata prorrogada por mais 12 meses e o extrato não informa o valor",
   "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_115234_2026-02-04_27251179f921c13804d9f81937af0bb5.pdf&m=sigpub.publicacao",
@@ -657,7 +617,7 @@
   "modalidade": "Pregão eletrônico",
   "valor": 329596.04,
   "tipo_valor": "Ata registrada",
-  "situacao": "Ata válida até dez/2026",
+  "situacao": "Publicado em 2025 · valendo até dez/2026",
   "data": "2025-12-15",
   "alerta": "Maior ata de material de escritório; a mesma empresa também ganhou lotes na Câmara",
   "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_107490_2025-12-23_d48b2081597712e5e14bc4409c978042.pdf&m=sigpub.publicacao",
@@ -682,7 +642,7 @@
   "modalidade": "Pregão eletrônico",
   "valor": 194687.4,
   "tipo_valor": "Ata registrada",
-  "situacao": "Ata válida até dez/2026",
+  "situacao": "Publicado em 2025 · valendo até dez/2026",
   "data": "2025-12-15",
   "alerta": "",
   "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_107490_2025-12-23_d48b2081597712e5e14bc4409c978042.pdf&m=sigpub.publicacao",
@@ -697,7 +657,7 @@
   "modalidade": "Pregão eletrônico",
   "valor": 148230,
   "tipo_valor": "Ata registrada",
-  "situacao": "Ata válida até dez/2026",
+  "situacao": "Publicado em 2025 · valendo até dez/2026",
   "data": "2025-12-15",
   "alerta": "",
   "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_107490_2025-12-23_d48b2081597712e5e14bc4409c978042.pdf&m=sigpub.publicacao",
@@ -712,7 +672,7 @@
   "modalidade": "Pregão eletrônico",
   "valor": 90370.9,
   "tipo_valor": "Ata registrada",
-  "situacao": "Ata válida até dez/2026",
+  "situacao": "Publicado em 2025 · valendo até dez/2026",
   "data": "2025-12-17",
   "alerta": "",
   "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_107490_2025-12-23_d48b2081597712e5e14bc4409c978042.pdf&m=sigpub.publicacao",
@@ -727,7 +687,7 @@
   "modalidade": "Pregão eletrônico",
   "valor": 2942,
   "tipo_valor": "Ata registrada",
-  "situacao": "Ata válida até dez/2026",
+  "situacao": "Publicado em 2025 · valendo até dez/2026",
   "data": "2025-12-15",
   "alerta": "Valor não bate: a homologação indica R$ 36.125,02, mas a ata registra R$ 2.942,00",
   "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_107490_2025-12-23_d48b2081597712e5e14bc4409c978042.pdf&m=sigpub.publicacao",
@@ -752,7 +712,7 @@
   "modalidade": "Pregão eletrônico",
   "valor": 114673.37,
   "tipo_valor": "Ata registrada",
-  "situacao": "Ata válida até dez/2026",
+  "situacao": "Publicado em 2025 · valendo até dez/2026",
   "data": "2025-12-15",
   "alerta": "",
   "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_107490_2025-12-23_d48b2081597712e5e14bc4409c978042.pdf&m=sigpub.publicacao",
@@ -818,55 +778,33 @@
  },
  {
   "id": "C44",
-  "objeto": "Pregão Eletrônico 23/2025 — homologação (objeto não descrito na publicação)",
-  "fornecedor": "Cooperativa de Prestação de Serviços de Transporte do Estado de Alagoas",
+  "objeto": "Locação de veículos pesados para o município — Ata de Registro de Preços 26/2026 (Pregão Eletrônico 23/2025), R$ 389.905,02 por mês",
+  "fornecedor": "Cooperativa de Prestação de Serviços de Transporte do Estado de Alagoas — Novacoop",
   "cnpj": "31.447.763/0001-09",
   "categoria": "Transporte",
   "modalidade": "Pregão eletrônico",
   "valor": 4678860.24,
-  "tipo_valor": "Homologado",
-  "situacao": "Homologado",
+  "tipo_valor": "Ata registrada",
+  "situacao": "Ata assinada em 16/03/2026; vale 1 ano a partir da publicação no PNCP (até mar/2027)",
   "data": "2026-03-11",
-  "alerta": "Homologação de R$ 4,68 mi publicada sem descrição do objeto",
-  "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_115259_2026-03-11_b30a3383b90b490d579a3b56d9e561ec.pdf&m=sigpub.publicacao",
-  "orgao": "Prefeitura",
-  "analise": {
-   "oque": "Homologação de R$ 4.678.860,24 a favor da Cooperativa de Prestação de Serviços de Transporte do Estado de Alagoas (CNPJ 31.447.763/0001-09). A publicação no Diário Oficial não descreve o que foi contratado.",
-   "problema": "É o segundo maior valor do painel, cerca de R$ 589 por morador, e o cidadão não consegue saber o que está sendo comprado. Pelo nome deve ser transporte (possivelmente escolar), mas sem objeto não há como conferir rotas, quilometragem, veículos ou preço por quilômetro. Cooperativas só podem ser contratadas quando cumprem regras próprias.",
-   "lei": "Lei 14.133/2021, art. 94 (a publicação deve trazer o objeto) e art. 16 (cooperativas só podem participar se cumprirem a Lei 12.690/2012 e outras condições). LAI, art. 8º, § 1º, IV.",
-   "conferir": [
-    "Edital e termo de referência do Pregão 23/2025: objeto, rotas e quilometragem",
-    "Contrato assinado com a cooperativa e o preço por quilômetro ou por rota",
-    "Lista dos veículos (placa, ano, vistoria) e dos motoristas (habilitação)",
-    "Controle mensal de quilômetros rodados e os pagamentos feitos",
-    "Estatuto e lista de cooperados, para ver se é cooperativa de verdade ou uma empresa disfarçada"
-   ]
-  }
+  "alerta": "",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/69BCB14B",
+  "orgao": "Prefeitura"
  },
  {
   "id": "C45",
-  "objeto": "Pregão Eletrônico 16/2025 — homologação, 5 vencedores (objeto não descrito na publicação)",
+  "objeto": "Suplementos alimentares para o município — Pregão Eletrônico 16/2025, homologado com 5 vencedores (Ata 16/2026 e outras)",
   "fornecedor": "Suevit, Cenutri (2 empresas), Innovakir, E J F de Melo",
   "cnpj": "",
   "categoria": "Saúde",
   "modalidade": "Pregão eletrônico",
   "valor": 395362.6,
   "tipo_valor": "Homologado",
-  "situacao": "Homologado",
+  "situacao": "Publicado em 2025 · atas de 2026 valendo até mar/2027",
   "data": "2026-03-10",
-  "alerta": "Homologação publicada sem descrição do objeto",
-  "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_115258_2026-03-10_e9a777e034e4f6f7f570b6cbe39b4999.pdf&m=sigpub.publicacao",
-  "orgao": "Prefeitura",
-  "analise": {
-   "oque": "Homologação do Pregão 16/2025, de R$ 395.362,60, dividida entre cinco vencedores (Suevit, duas empresas Cenutri, Innovakir e E J F de Melo). A publicação não descreve o que foi comprado.",
-   "problema": "Pelos nomes, parece ser compra de suplementos ou produtos nutricionais para a Saúde, mas sem objeto descrito não é possível conferir quantidades, preços nem para quem se destinam. Há ainda duas empresas com o mesmo nome (Cenutri) entre os vencedores, o que merece checagem.",
-   "lei": "Lei 14.133/2021, art. 94 (publicação com objeto) e art. 14 (impedimentos). Lei 12.846/2013, art. 5º, IV (é ilícito combinar propostas).",
-   "conferir": [
-    "Edital e ata do Pregão 16/2025, com itens, quantidades e preços",
-    "CNPJ das duas empresas Cenutri: são do mesmo grupo ou têm os mesmos sócios?",
-    "Para quem os produtos foram entregues (pacientes, unidades de saúde) e o controle de estoque"
-   ]
-  }
+  "alerta": "",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/9A72A8F5",
+  "orgao": "Prefeitura"
  },
  {
   "id": "C46",
@@ -921,17 +859,17 @@
  },
  {
   "id": "C48",
-  "objeto": "Registro de preços — ferramentas, equipamentos, materiais e bombas hidráulicas (Atas 50, 53 a 56 e 58 a 62/2026, 10 atas)",
+  "objeto": "Registro de preços — ferramentas, equipamentos, materiais e bombas hidráulicas para a SMUTSP e outras secretarias (Pregão Eletrônico 13/2026; Atas 50 a 62/2026, 12 atas, sem a 57 que está à parte)",
   "fornecedor": "Elevate, Jicmaq, Refinar, Cezários, Infantaria, Limplurb, Omatic, Irriglaplant",
   "cnpj": "",
   "categoria": "Materiais e equipamentos",
   "modalidade": "Pregão eletrônico",
-  "valor": 375123.19,
+  "valor": 524678.19,
   "tipo_valor": "Registrado em ata",
   "situacao": "Atas assinadas",
   "data": "2026-08-24",
   "alerta": "Ata 62/2026: valor por extenso não confere com o numérico",
-  "fonte": "https://www-storage.voxtecnologia.com.br/?f=9878&i=publicado_115375_2026-08-24_fbc6d5deae9f3445ab8f8bbcfc640faf.pdf&m=sigpub.publicacao",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/DC38DAC0",
   "orgao": "Prefeitura",
   "analise": {
    "oque": "Dez atas de registro de preços para ferramentas, equipamentos e bombas hidráulicas, somando R$ 375.123,19. Na Ata 62/2026, o valor por extenso não é o mesmo que o valor em números.",
@@ -1112,12 +1050,12 @@
   "tipo_valor": "Homologado",
   "situacao": "Homologado em 05/11/2026",
   "data": "2026-11-05",
-  "alerta": "Objeto não descrito na homologação",
+  "alerta": "Objeto não descrito: procuramos o aviso de licitação, as atas, os contratos e os aditivos do Pregão Eletrônico 11/2026 no Diário Oficial de 2025–2026 (por número e pelo nome das 13 empresas) e no PNCP (consultado em 12/11/2026, parte do sistema fora do ar) e não encontramos o objeto",
   "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/856A6120",
   "id": "C58",
   "orgao": "Prefeitura",
   "analise": {
-   "oque": "A Prefeitura homologou o Pregão Eletrônico 11/2026 para 13 empresas, somando R$ 906.658,05. As maiores fatias: M Felipe Galvão (R$ 243.980,00), Waldir G da Silva Industrial (R$ 162.800,00), Refinar Empresarial (R$ 141.984,87), Cezários Móveis (R$ 94.425,50) e H2O Bebedouros (R$ 76.500,00). A publicação não diz o que está sendo comprado.",
+   "oque": "A Prefeitura homologou o Pregão Eletrônico 11/2026 para 13 empresas, somando R$ 906.658,05. As maiores fatias: M Felipe Galvão (R$ 243.980,00), Waldir G da Silva Industrial (R$ 162.800,00), Refinar Empresarial (R$ 141.984,87), Cezários Móveis (R$ 94.425,50) e H2O Bebedouros (R$ 76.500,00). A publicação não diz o que está sendo comprado. Procuramos o aviso do pregão, atas, contratos e aditivos no Diário Oficial dos Municípios de 2025 e 2026 e no PNCP, sem encontrar o que foi comprado.",
    "problema": "Quase R$ 1 milhão foi aprovado sem que o cidadão saiba o que a Prefeitura vai receber. Sem o objeto, não dá para comparar preços, conferir entregas nem saber qual secretaria usa os itens.",
    "lei": "Lei 14.133/2021, art. 71 (homologação deve ser publicada) e art. 94 (publicação no PNCP com o objeto); LAI 12.527/2011, art. 8º, §1º, IV (informar licitações com objeto e resultado); Constituição, art. 37 (publicidade).",
    "conferir": [
@@ -1210,32 +1148,6 @@
   }
  },
  {
-  "objeto": "Construção de arena de esporte na Av. Estiva da Barra (Alto da Barra) — 1º aditivo de prazo ao Contrato 005/2026",
-  "fornecedor": "Construtora Conceito A Ltda",
-  "cnpj": "07.621.799/0001-82",
-  "categoria": "Obras e habitação",
-  "modalidade": "Aditivo",
-  "valor": 0,
-  "tipo_valor": "Não publicado",
-  "situacao": "Prazo prorrogado por 90 dias; vale até 02/01/2027",
-  "data": "2026-10-05",
-  "alerta": "Valor da obra não publicado no aditivo",
-  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/5FE6DD83",
-  "id": "C63",
-  "orgao": "Prefeitura",
-  "analise": {
-   "oque": "A obra da arena de esporte da Av. Estiva da Barra, com Construtora Conceito A Ltda (CNPJ 07.621.799/0001-82), ganhou mais 90 dias de prazo, até 02/01/2027. O extrato não informa o valor do contrato nem quanto já foi feito.",
-   "problema": "Prorrogar prazo de obra é comum, mas precisa de motivo. Sem o valor e sem o andamento, o cidadão não consegue saber se a obra atrasou, quanto já foi pago e se o dinheiro bate com o que foi construído.",
-   "lei": "Lei 14.133/2021, art. 111 (prorrogação de prazo de obra deve ser justificada) e art. 94 (publicar no PNCP); LAI 12.527/2011, art. 8º, §1º, V (dados de acompanhamento de obras).",
-   "conferir": [
-    "Contrato 005/2026 completo, com valor e cronograma",
-    "Justificativa técnica do aditivo de prazo",
-    "Boletins de medição e pagamentos feitos até agora",
-    "Fotos e relatório do fiscal da obra"
-   ]
-  }
- },
- {
   "objeto": "Registro de preços para alugar veículos pesados e máquinas, com e sem operador, para todas as secretarias — Pregão Eletrônico 22/2026",
   "fornecedor": "Em licitação",
   "cnpj": "",
@@ -1245,19 +1157,431 @@
   "tipo_valor": "Não publicado",
   "situacao": "Licitação aberta — sessão pública em 01/12/2026",
   "data": "2026-11-12",
-  "alerta": "Valor estimado não publicado no aviso",
+  "alerta": "Valor estimado não publicado no aviso; já existe ata em vigor de R$ 4,68 milhões para locação de veículos pesados (Novacoop, até mar/2027)",
   "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/361D5641",
   "id": "C64",
   "orgao": "Prefeitura",
   "analise": {
    "oque": "Aviso do Pregão Eletrônico 22/2026, publicado em 12/11/2026, para registrar preços de aluguel de veículos pesados e máquinas (com e sem operador) para todas as secretarias. A sessão será em 01/12/2026. O aviso não informa o valor estimado.",
-   "problema": "Aluguel de máquinas é um dos gastos que mais crescem em prefeituras e é difícil de fiscalizar, porque é pago por hora ou diária. Sem o valor estimado e as quantidades, o cidadão não sabe o tamanho da compra.",
+   "problema": "Aluguel de máquinas é um dos gastos que mais crescem em prefeituras e é difícil de fiscalizar, porque é pago por hora ou diária. Sem o valor estimado e as quantidades, o cidadão não sabe o tamanho da compra. Além disso, a Prefeitura já tem uma ata em vigor, de R$ 4.678.860,24 (R$ 389.905,02 por mês), com a Novacoop para locação de veículos pesados, válida até março de 2027. Abrir outra licitação para algo parecido pode duplicar o gasto.",
    "lei": "Lei 14.133/2021, art. 18 (planejamento com estimativa de quantidades e valor) e art. 54 (publicar o edital); LAI 12.527/2011, art. 8º, §1º, IV (divulgar editais).",
    "conferir": [
     "Edital completo do Pregão Eletrônico 22/2026 com valor estimado",
     "Lista de máquinas e veículos, com quantidade de horas ou diárias previstas",
     "Pesquisa de preços usada para estimar o valor",
-    "Ata da sessão de 01/12/2026 com os vencedores"
+    "Ata da sessão de 01/12/2026 com os vencedores",
+    "Justificativa de por que a ata de veículos pesados da Novacoop (Ata 26/2026) não atende"
+   ]
+  }
+ },
+ {
+  "objeto": "Manutenção preventiva e corretiva de veículos e máquinas pesadas — Contrato 84/2026",
+  "fornecedor": "GS Service Serviços Automotivos Ltda",
+  "cnpj": "28.273.378/0001-88",
+  "categoria": "Frota e veículos",
+  "modalidade": "Não informada",
+  "valor": 3674875,
+  "tipo_valor": "Contratado",
+  "situacao": "Contratado em 20/07/2026; vale 12 meses (até jul/2027); R$ 1,68 mi já reservados",
+  "data": "2026-07-20",
+  "alerta": "Valores não conferem: o mesmo contrato saiu com R$ 3.658.000,00 e com R$ 3.674.875,00; valor alto para um município de 7.944 habitantes",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/3318CD8E",
+  "id": "C65",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "O Contrato 84/2026 com GS Service Serviços Automotivos Ltda (CNPJ 28.273.378/0001-88), para manutenção de veículos e máquinas pesadas, foi publicado duas vezes no Diário Oficial: em 21/07/2026 com valor de R$ 3.658.000,00 e em 03/08/2026 com R$ 3.674.875,00, mesmo número, mesma data de assinatura (20/07/2026) e mesmo processo (0512.0008/2026). Em 2026 a empresa já tem R$ 1.677.703 reservados e R$ 950.703 pagos.",
+   "problema": "Dois valores diferentes para o mesmo contrato impedem saber qual vale. Além disso, R$ 3,7 milhões por ano em conserto de veículos é muito para uma cidade de 8 mil moradores (cerca de R$ 463 por morador), ainda mais porque a Prefeitura também aluga veículos pesados de outras empresas. O extrato não diz se houve licitação.",
+   "lei": "Lei 14.133/2021, art. 94 (publicação correta do contrato) e art. 117 (fiscal deve registrar cada serviço). LAI 12.527/2011, art. 6º, II (informação íntegra e verdadeira).",
+   "conferir": [
+    "Esclarecimento oficial sobre qual é o valor do Contrato 84/2026",
+    "Edital e resultado da licitação que originou o contrato",
+    "Lista dos veículos e máquinas da Prefeitura atendidos, com as ordens de serviço e peças trocadas",
+    "Notas fiscais e pagamentos de 2026"
+   ]
+  }
+ },
+ {
+  "objeto": "Produção e assessoria de eventos — Contrato 95/2026, da Ata 38/2025 (Pregão Eletrônico 007/2025), ata prorrogada por mais 12 meses em julho de 2026",
+  "fornecedor": "J H B Gomes Produções Ltda",
+  "cnpj": "18.899.026/0001-89",
+  "categoria": "Turismo e eventos",
+  "modalidade": "Pregão eletrônico",
+  "valor": 2348258.85,
+  "tipo_valor": "Contratado",
+  "situacao": "Publicado em 2025 (ata) · contrato de 31/07/2026 valendo até jul/2027; R$ 1,54 mi já reservados em 2026",
+  "data": "2026-07-31",
+  "alerta": "Valor alto para um município de 7.944 habitantes: R$ 2,35 milhões em produção de eventos",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/D6AA1AC8",
+  "id": "C66",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "Contrato 95/2026 com J H B Gomes Produções Ltda (CNPJ 18.899.026/0001-89), de 31/07/2026, para produção e assessoria de eventos, por R$ 2.348.258,85, usando a Ata 38/2025 (Pregão Eletrônico 007/2025), que foi prorrogada em julho de 2026. Em 2026 a empresa já tem R$ 1.541.397 reservados e R$ 1.443.502 pagos.",
+   "problema": "São cerca de R$ 296 por morador num ano só com produção de eventos, sem contar os cachês dos artistas (pagos à parte, como os R$ 1 milhão do Carnaval e os R$ 300 mil da Emancipação) e o aluguel de palco e estruturas (outro contrato de R$ 1,43 milhão). Produção de eventos é um serviço amplo: sem a lista de eventos e do que foi entregue em cada um, não dá para conferir.",
+   "lei": "Lei 14.133/2021, art. 84 (a ata só pode ser prorrogada se o preço continuar vantajoso) e art. 117 e 140 (fiscalização e pagamento só do que foi entregue). LAI 12.527/2011, art. 8º.",
+   "conferir": [
+    "Contrato 95/2026 e a Ata 38/2025 com a lista de serviços e preços",
+    "Lista dos eventos atendidos em 2026, com o que foi fornecido em cada um",
+    "Notas fiscais e relatórios do fiscal do contrato",
+    "Pesquisa de preços que justificou a prorrogação da ata"
+   ]
+  }
+ },
+ {
+  "objeto": "Shows do Carnaval 2026 sem licitação: Igor Kannário (Central da Fama Produções, Contrato 31/2026), Theuzinho (CBSD Serviços de Eventos, Inexigibilidade 20/2026) e Mikael Santos (FM Produções e Eventos, Inexigibilidade 012/2026), R$ 250 mil cada",
+  "fornecedor": "Central da Fama Produções Ltda; CBSD Serviços de Eventos e Locações Ltda; FM Produções e Eventos Ltda",
+  "cnpj": "58.208.799/0001-96; 40.517.164/0001-05; 45.226.544/0001-04",
+  "categoria": "Turismo e eventos",
+  "modalidade": "Inexigibilidade",
+  "valor": 750000,
+  "tipo_valor": "Contratado",
+  "situacao": "Contratados entre 28/01 e 10/02/2026; já pagos (R$ 750 mil)",
+  "data": "2026-02-10",
+  "alerta": "Valor alto para um município de 7.944 habitantes: três shows de R$ 250 mil cada no Carnaval, sem licitação",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/CA722625",
+  "id": "C67",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "Para o Carnaval 2026 a Prefeitura contratou, sem licitação, três atrações por exatamente R$ 250.000,00 cada: Igor Kannário (via Central da Fama Produções, CNPJ 58.208.799/0001-96), Theuzinho (via CBSD Serviços de Eventos e Locações, CNPJ 40.517.164/0001-05) e Mikael Santos (via FM Produções e Eventos, CNPJ 45.226.544/0001-04). Os três foram pagos integralmente. Em abril houve mais um pagamento de R$ 250.000,00 a OK Promo Ltda (Contrato 052/2026, provavelmente para a Festa do Trabalhador; o extrato não foi encontrado).",
+   "problema": "R$ 750 mil em três shows equivalem a cerca de R$ 94 por morador. A lei permite contratar artista sem licitação, mas o preço precisa ser compatível com o que o artista cobra de outros contratantes. Três cachês idênticos de R$ 250 mil, de artistas com públicos diferentes, pedem a comprovação do preço.",
+   "lei": "Lei 14.133/2021, art. 74, II e § 2º (artista sem licitação só pelo empresário exclusivo, com contrato permanente) e art. 72, VII (justificativa de preço com notas fiscais de outros shows do mesmo artista).",
+   "conferir": [
+    "Contratos de exclusividade de cada artista com a empresa contratada",
+    "Notas fiscais de outros shows dos mesmos artistas na mesma época (para comparar o cachê)",
+    "O que estava incluído nos R$ 250 mil (cachê, banda, transporte, hospedagem)",
+    "Extrato do Contrato 052/2026 com a OK Promo Ltda"
+   ]
+  }
+ },
+ {
+  "objeto": "Locação de veículos e máquinas para limpeza urbana e secretarias — Contrato 13/2021, 5º aditivo prorrogando \"excepcionalmente\" por mais 12 meses",
+  "fornecedor": "R. Pedro dos Santos Transporte",
+  "cnpj": "28.136.716/0001-30",
+  "categoria": "Locação de veículos",
+  "modalidade": "Aditivo",
+  "valor": 2420400,
+  "tipo_valor": "Valor do contrato (apostilamento de 2026)",
+  "situacao": "Publicado em 2021 · valendo até 18/03/2027; R$ 758 mil já reservados em 2026",
+  "data": "2026-03-17",
+  "alerta": "Contrato de 2021 renovado pela 5ª vez, \"excepcionalmente\"; valor alto para um município de 7.944 habitantes",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/49C09471",
+  "id": "C68",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "O Contrato 13/2021 com R. Pedro dos Santos Transporte (CNPJ 28.136.716/0001-30), de locação de veículos e máquinas para a limpeza urbana, recebeu o 5º aditivo em 17/03/2026, prorrogando \"excepcionalmente\" por mais 12 meses, até março de 2027. Os apostilamentos de 2026 citam o valor de R$ 2.420.400,00. Em 2026 a empresa já tem R$ 758.030 reservados.",
+   "problema": "Contratos de serviço contínuo feitos pela lei antiga (8.666/1993) podem durar no máximo 5 anos, com mais 12 meses só em caso excepcional e justificado. Este contrato chega a 6 anos sem nova licitação. Ficar tanto tempo com a mesma empresa impede que outras ofereçam preço menor.",
+   "lei": "Lei 8.666/1993, art. 57, II e § 4º (máximo de 60 meses, mais 12 só em caráter excepcional, com justificativa e autorização da autoridade superior). Lei 14.133/2021, art. 190 e 191 (contratos antigos seguem a lei antiga até o fim).",
+   "conferir": [
+    "Justificativa da prorrogação \"excepcional\" de março de 2026",
+    "Os 5 aditivos do contrato, com o valor atualizado",
+    "Planejamento da nova licitação para substituir o contrato",
+    "Lista de veículos e máquinas alugados, com horas ou diárias pagas por mês"
+   ]
+  }
+ },
+ {
+  "objeto": "Manutenção e adequação de prédios, ruas e praças — Contrato 110/2025 (Concorrência Eletrônica 03/2025), prorrogado por 365 dias em setembro de 2026",
+  "fornecedor": "Construtora Conceito A Ltda",
+  "cnpj": "07.621.799/0001-82",
+  "categoria": "Obras e habitação",
+  "modalidade": "Concorrência",
+  "valor": 4378000,
+  "tipo_valor": "Contratado",
+  "situacao": "Publicado em 2025 · prorrogado até ago/2027; R$ 3 mi reservados em fevereiro de 2026",
+  "data": "2025-08-13",
+  "alerta": "Valor alto para um município de 7.944 habitantes; objeto muito amplo (prédios, ruas e praças); a mesma empresa concentra R$ 9,1 milhões reservados em 2026",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/CA957C3D",
+  "id": "C69",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "Contrato 110/2025 com a Construtora Conceito A Ltda (CNPJ 07.621.799/0001-82), de R$ 4.378.000,00, para manutenção de prédios, ruas e praças, vindo da Concorrência Eletrônica 03/2025 e prorrogado por mais 365 dias em setembro de 2026. Teve pelo menos 10 apostilamentos em 2026 para incluir dinheiro de secretarias diferentes (Saúde, Educação, Assistência Social, Infraestrutura). Em 2026 a empresa soma R$ 9,1 milhões reservados em vários contratos.",
+   "problema": "Um contrato tão amplo funciona como um \"guarda-chuva\": cabe quase qualquer serviço. Sem a lista do que foi feito, em qual rua, praça ou prédio, não dá para saber se o serviço existiu e se o preço foi justo. A concentração de tantas obras numa só empresa também merece atenção.",
+   "lei": "Lei 14.133/2021, art. 117 (fiscal registra cada serviço) e art. 140 (só se paga o que foi medido). LAI 12.527/2011, art. 8º, § 1º, V (dados de obras).",
+   "conferir": [
+    "Planilha de serviços e preços do Contrato 110/2025",
+    "Boletins de medição de 2026 com local de cada serviço",
+    "Relatórios e fotos do fiscal",
+    "Lista de todos os contratos da Conceito A com o município e quanto foi pago em cada um"
+   ]
+  }
+ },
+ {
+  "objeto": "Construção de duas arenas de esporte: Av. Estiva da Barra, Alto da Barra (Contrato 05/2026, R$ 428.684,75) e Rua dos Cactos, Loteamento Barramar (Contrato 04/2026, R$ 396.057,66)",
+  "fornecedor": "Construtora Conceito A Ltda",
+  "cnpj": "07.621.799/0001-82",
+  "categoria": "Obras e habitação",
+  "modalidade": "Concorrência",
+  "valor": 824742.41,
+  "tipo_valor": "Contratado",
+  "situacao": "Contratos de jan/2026 (Concorrências 06 e 07/2025); prazos prorrogados até jan/2027; nada pago até nov/2026",
+  "data": "2026-01-15",
+  "alerta": "",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/3BA11953",
+  "id": "C70",
+  "orgao": "Prefeitura"
+ },
+ {
+  "objeto": "Construção da nova Unidade Básica de Saúde — UBS 3 (Concorrência 03/2026)",
+  "fornecedor": "Construtora Conceito A Ltda",
+  "cnpj": "07.621.799/0001-82",
+  "categoria": "Saúde",
+  "modalidade": "Concorrência",
+  "valor": 1890000,
+  "tipo_valor": "Homologado",
+  "situacao": "Homologada em 23/06/2026; dois empenhos de R$ 433.063,28 em 08/10/2026; extrato do contrato não localizado no Diário Oficial",
+  "data": "2026-06-23",
+  "alerta": "",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/9A690FCC",
+  "id": "C71",
+  "orgao": "Prefeitura"
+ },
+ {
+  "objeto": "Construção de um complexo esportivo — Contrato 68/2026 (Concorrência 01/2026)",
+  "fornecedor": "Oliveira e Silva Empreendimento Ltda ME",
+  "cnpj": "27.309.180/0001-44",
+  "categoria": "Obras e habitação",
+  "modalidade": "Concorrência",
+  "valor": 1962800,
+  "tipo_valor": "Contratado",
+  "situacao": "Contratado em maio/2026; 450 dias a partir da ordem de serviço; R$ 1,91 mi reservados, nada pago",
+  "data": "2026-05-26",
+  "alerta": "",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/1A446F56",
+  "id": "C72",
+  "orgao": "Prefeitura"
+ },
+ {
+  "objeto": "Centro de Convenções, 1ª e 3ª etapas — Contrato 13/2022 (Concorrência 02/2022), com 10 aditivos; o 10º autorizou passar parte da obra para a Construtora Conceito A por R$ 1.684.221,24",
+  "fornecedor": "Critério Engenharia EIRELI (subcontratada: Construtora Conceito A Ltda)",
+  "cnpj": "05.786.268/0001-14",
+  "categoria": "Obras e habitação",
+  "modalidade": "Aditivo",
+  "valor": 2634766.38,
+  "tipo_valor": "Valor original do contrato",
+  "situacao": "Publicado em 2022 · valendo até 05/06/2027",
+  "data": "2026-08-17",
+  "alerta": "Obra de 2022 com 10 aditivos; parte repassada a outra empresa que não disputou a licitação",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/F80499C0",
+  "id": "C73",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "O Contrato 13/2022 com Critério Engenharia EIRELI (CNPJ 05.786.268/0001-14), para a 1ª e 3ª etapas do Centro de Convenções (R$ 2.634.766,38 originais), já tem 10 aditivos. O 9º prorrogou o prazo até 05/06/2027 por \"atrasos de providências da contratante\" e o 10º, de 17/08/2026, autorizou subcontratar a Construtora Conceito A por R$ 1.684.221,24, valor que já foi reservado em outubro de 2026. A 4ª etapa da mesma obra (Josemberg Vieira da Silva ME) teve o contrato cancelado em novembro de 2026.",
+   "problema": "Uma obra que começou em 2022 e segue até 2027, com 10 mudanças no contrato, perde o controle de custo e prazo. Repassar parte dela a uma empresa que não disputou a licitação exige justificativa forte e limite previsto no contrato.",
+   "lei": "Lei 8.666/1993, art. 65 (limites de aditivos) e art. 72 (subcontratação só até o limite do contrato). Lei 14.133/2021, art. 122.",
+   "conferir": [
+    "Os 10 aditivos com o valor total atualizado da obra",
+    "Cláusula que permite a subcontratação e o percentual máximo",
+    "Medições e pagamentos de cada etapa",
+    "Cronograma atualizado e situação da 4ª etapa após o cancelamento"
+   ]
+  }
+ },
+ {
+  "objeto": "Orla Saquarema (Lagoa do Porto) — Contrato 114/2025, publicado também como 131/2025",
+  "fornecedor": "Miramar Construtora Ltda",
+  "cnpj": "11.035.491/0001-22",
+  "categoria": "Obras e habitação",
+  "modalidade": "Concorrência",
+  "valor": 1242100.02,
+  "tipo_valor": "Contratado",
+  "situacao": "Publicado em 2025 · valendo até 12/03/2027; notificada em 09/11/2026 por serviço mal feito e atraso",
+  "data": "2025-09-25",
+  "alerta": "Números de contrato não conferem (114/2025 e 131/2025 para o mesmo processo e valor); aditivo com CNPJ de outra empresa",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/6B677BE9",
+  "id": "C74",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "A obra da Orla Saquarema com Miramar Construtora Ltda (CNPJ 11.035.491/0001-22), de R$ 1.242.100,02, foi publicada como Contrato 114/2025 (25/09/2025) e de novo como Contrato 131/2025 (17/10/2025), com o mesmo processo e valor. Um extrato do aditivo de prazo saiu com o CNPJ de outra construtora. Em 09/11/2026 a Prefeitura notificou a empresa por muro fora do projeto, calçadas atrasadas e drenagem obstruída. Já foram pagos R$ 283.432,53 em 2026.",
+   "problema": "Documentos oficiais com números e CNPJ trocados impedem saber qual contrato vale e podem esconder pagamento em dobro. A própria Prefeitura reconhece problemas de qualidade na obra.",
+   "lei": "Lei 14.133/2021, art. 94 (publicação correta) e art. 119 e 120 (a empresa refaz o serviço mal feito às suas custas). LAI, art. 6º, II.",
+   "conferir": [
+    "Esclarecimento: existe um contrato ou dois?",
+    "Medições e pagamentos à Miramar",
+    "Resposta da empresa à notificação de 09/11/2026",
+    "Relatório da Caixa Econômica Federal sobre a obra"
+   ]
+  }
+ },
+ {
+  "objeto": "Centro de Convenções, 4ª etapa — Contrato 107/2025 (Concorrência 01/2025), R$ 1.521.837,67 após aditivo; cancelado em comum acordo",
+  "fornecedor": "Josemberg Vieira da Silva ME",
+  "cnpj": "11.975.294/0001-93",
+  "categoria": "Obras e habitação",
+  "modalidade": "Concorrência",
+  "valor": 1521837.67,
+  "tipo_valor": "Contratado (atualizado)",
+  "situacao": "Publicado em 2025 · cancelado em 06/11/2026; recebeu pagamentos em 2026",
+  "data": "2025-07-28",
+  "alerta": "Contrato de obra cancelado no meio; conferir se o que foi pago corresponde ao que foi construído",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/2FE3EAC1",
+  "id": "C75",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "O Contrato 107/2025 com Josemberg Vieira da Silva ME (CNPJ 11.975.294/0001-93), da 4ª etapa do Centro de Convenções, foi cancelado \"em comum acordo\" e publicado em 06/11/2026. Em 2026 a empresa recebeu R$ 417.458,49 de um empenho de R$ 600.000,00 (o portal não diz se foi deste contrato ou do contrato da drenagem).",
+   "problema": "Quando uma obra é cancelada no meio, existe o risco de a Prefeitura ter pago por serviço não feito e de ter de pagar de novo a outra empresa para terminar.",
+   "lei": "Lei 14.133/2021, art. 138 e 139 (no cancelamento faz-se o acerto de contas do que foi feito).",
+   "conferir": [
+    "Termo de rescisão completo com a medição final",
+    "Pagamentos feitos à empresa em 2025 e 2026",
+    "Quem vai terminar a 4ª etapa e por quanto"
+   ]
+  }
+ },
+ {
+  "objeto": "Drenagem de águas da chuva do conjunto habitacional Casa Verde e Amarela — Contrato 111/2025",
+  "fornecedor": "Josemberg Vieira da Silva ME",
+  "cnpj": "11.975.294/0001-93",
+  "categoria": "Obras e habitação",
+  "modalidade": "Concorrência",
+  "valor": 1628414.31,
+  "tipo_valor": "Contratado",
+  "situacao": "Publicado em 2025 · prazo prorrogado em junho de 2026; empresa notificada pela Prefeitura em 17/06/2026",
+  "data": "2025-08-13",
+  "alerta": "",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/0ACF4108",
+  "id": "C76",
+  "orgao": "Prefeitura"
+ },
+ {
+  "objeto": "Desenvolvimento institucional: mapeamento da cidade, plano de mobilidade, minuta do Plano Diretor e Código de Edificações — Contrato 89/2025, prorrogado em maio de 2026",
+  "fornecedor": "FEPESA — Fundação de Apoio ao Ensino, Extensão e Pesquisa de Alagoas",
+  "cnpj": "07.925.477/0001-27",
+  "categoria": "Consultoria",
+  "modalidade": "Não informada",
+  "valor": 2210400,
+  "tipo_valor": "Contratado",
+  "situacao": "Publicado em 2025 · com pagamentos em 2026 (R$ 1,17 mi pagos); prorrogado em 28/05/2026",
+  "data": "2025-05-26",
+  "alerta": "Modalidade não informada: procuramos o extrato do contrato, o aditivo de 2026 e a ratificação no Diário Oficial de 2025–2026 e não encontramos como a fundação foi escolhida; valor alto",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/34E8E05F",
+  "id": "C77",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "Contrato 89/2025 com a FEPESA (CNPJ 07.925.477/0001-27), de 26/05/2025, por R$ 2.210.400,00, para mapeamento georreferenciado, plano de mobilidade, minuta do Plano Diretor e Código de Edificações. Foi prorrogado em maio de 2026. Em 2026 a fundação tem R$ 1.383.035 reservados e R$ 1.166.400 pagos. Procuramos no Diário Oficial a forma de contratação e não encontramos.",
+   "problema": "É muito dinheiro para estudos e planos. Fundações de apoio costumam ser contratadas sem licitação, o que só é permitido se o objeto tiver relação com ensino ou pesquisa. O cidadão precisa saber o que já foi entregue.",
+   "lei": "Lei 14.133/2021, art. 75, XV (dispensa para instituição de pesquisa) e art. 140. Estatuto da Cidade, art. 40, § 4º (Plano Diretor exige audiências públicas).",
+   "conferir": [
+    "Processo de contratação e a justificativa da escolha da fundação",
+    "Produtos entregues: mapas, plano de mobilidade, minuta do Plano Diretor",
+    "Atas das audiências públicas",
+    "Notas fiscais e pagamentos por etapa"
+   ]
+  }
+ },
+ {
+  "objeto": "Atendimento de saúde pelo SUS na atenção primária e especializada por entidade privada — Termo de Colaboração 02/2026",
+  "fornecedor": "Instituto Riviera",
+  "cnpj": "12.299.963/0001-17",
+  "categoria": "Saúde",
+  "modalidade": "Não informada",
+  "valor": 5740920,
+  "tipo_valor": "Contratado",
+  "situacao": "Assinado em 01/09/2026; vale 12 meses (até set/2027); R$ 1,38 mi reservados",
+  "data": "2026-09-01",
+  "alerta": "Valor alto para um município de 7.944 habitantes; chamamento público não localizado: procuramos edital de chamamento e justificativa de dispensa no Diário Oficial de 2025–2026",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/26DFDD81",
+  "id": "C78",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "Termo de Colaboração 02/2026 com o Instituto Riviera (CNPJ 12.299.963/0001-17), assinado em 01/09/2026, por R$ 5.740.920,00 em 12 meses, para atendimento pelo SUS na atenção primária e especializada. Procuramos no Diário Oficial de 2025 e 2026 o edital de chamamento público e a justificativa para não fazê-lo e não encontramos.",
+   "problema": "São cerca de R$ 723 por morador por ano entregues a uma entidade privada para fazer um serviço que é dever da Prefeitura. A lei manda escolher a entidade por chamamento público aberto e exige prestação de contas detalhada.",
+   "lei": "Lei 13.019/2014, art. 24 (chamamento público), art. 32 (justificativa publicada se não houver chamamento) e art. 63 a 72 (prestação de contas). Constituição, art. 199, § 1º.",
+   "conferir": [
+    "Edital de chamamento público ou justificativa publicada",
+    "Plano de trabalho com metas de atendimento",
+    "Lista de profissionais pagos pela entidade",
+    "Prestação de contas e parecer do Conselho Municipal de Saúde"
+   ]
+  }
+ },
+ {
+  "objeto": "Programa Municipal de Gestão Estratégica, Comunicação, Inteligência Tributária e Fortalecimento Institucional — Termo de Colaboração 01/2026",
+  "fornecedor": "Rede Bridge de Ciência e Tecnologia",
+  "cnpj": "38.012.923/0001-36",
+  "categoria": "Consultoria",
+  "modalidade": "Não informada",
+  "valor": 792500,
+  "tipo_valor": "Contratado",
+  "situacao": "Assinado em 31/07/2026; vale 6 meses (até jan/2027); R$ 417.500 pagos",
+  "data": "2026-07-31",
+  "alerta": "Chamamento público não localizado: procuramos edital de chamamento e justificativa no Diário Oficial de 2025–2026; parceria usada para comunicação e cobrança de impostos",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/90B0B807",
+  "id": "C79",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "Termo de Colaboração 01/2026 com a Rede Bridge de Ciência e Tecnologia (CNPJ 38.012.923/0001-36), de 31/07/2026, por R$ 792.500,00 em 6 meses (cerca de R$ 132 mil por mês), para gestão estratégica, comunicação e inteligência tributária. Procuramos o edital de chamamento no Diário Oficial de 2025 e 2026 e não encontramos.",
+   "problema": "Comunicação e cobrança de impostos são tarefas da própria Prefeitura ou de empresa contratada por licitação. Usar uma parceria com entidade sem fins lucrativos para isso pode ser uma forma de evitar a licitação.",
+   "lei": "Lei 13.019/2014, art. 24 (chamamento) e art. 40 (é proibido delegar por parceria funções típicas do Estado, como fiscalização e cobrança de tributos).",
+   "conferir": [
+    "Edital de chamamento ou justificativa publicada",
+    "Plano de trabalho com metas",
+    "Lista de pessoas pagas pela entidade",
+    "Relatórios de prestação de contas e aumento real da arrecadação"
+   ]
+  }
+ },
+ {
+  "objeto": "Habilitação e reabilitação de pessoas com deficiência — Termo de Fomento 001/2023 da Secretaria de Saúde, 3º aditivo renovando por 12 meses",
+  "fornecedor": "Associação dos Amigos e Pais de Pessoas Especiais — AAPPE",
+  "cnpj": "24.479.149/0001-63",
+  "categoria": "Saúde",
+  "modalidade": "Aditivo",
+  "valor": 0,
+  "tipo_valor": "Não publicado no aditivo",
+  "situacao": "Publicado em 2023 · valendo até 25/07/2027; R$ 915.663 pagos em 2026",
+  "data": "2026-07-10",
+  "alerta": "Valor não publicado no aditivo",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/7E8F4F16",
+  "id": "C80",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "O Termo de Fomento 001/2023 com a AAPPE (CNPJ 24.479.149/0001-63), para reabilitação de pessoas com deficiência, foi renovado pela 3ª vez até 25/07/2027. O aditivo não informa o valor. Em 2026 a associação recebeu R$ 915.663.",
+   "problema": "O serviço é importante, mas o valor anual da parceria precisa estar publicado para que se saiba quanto será repassado e se bate com o número de atendimentos.",
+   "lei": "Lei 13.019/2014, art. 38 e 63 a 72 (publicidade e prestação de contas da parceria).",
+   "conferir": [
+    "Valor anual do termo de fomento e do 3º aditivo",
+    "Número de pessoas atendidas por mês",
+    "Prestação de contas de 2025 e 2026"
+   ]
+  }
+ },
+ {
+  "objeto": "Gêneros alimentícios: alimentação escolar (Ata 34/2026, R$ 359.307,00), não perecíveis para o Desenvolvimento Social (Ata 29/2026, R$ 296.179,00) e pescados da Semana Santa (Contrato 48/2026, R$ 110.000,00 com aditivo de 25%)",
+  "fornecedor": "SSJ Comércio Ltda",
+  "cnpj": "61.769.341/0001-10",
+  "categoria": "Alimentação",
+  "modalidade": "Pregão eletrônico",
+  "valor": 765486,
+  "tipo_valor": "Ata registrada",
+  "situacao": "Atas de abr/mai 2026, válidas por 1 ano; R$ 553.522 pagos em 2026",
+  "data": "2026-05-11",
+  "alerta": "",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/D3434E09",
+  "id": "C81",
+  "orgao": "Prefeitura"
+ },
+ {
+  "objeto": "Locação de veículos diversos para as secretarias — Contrato 73/2025",
+  "fornecedor": "OK Locadora de Veículos Ltda",
+  "cnpj": "07.173.027/0001-25",
+  "categoria": "Locação de veículos",
+  "modalidade": "Não informada",
+  "valor": 0,
+  "tipo_valor": "Não publicado",
+  "situacao": "Publicado em 2025 · com pagamentos em 2026 (R$ 926.789 reservados); apostilado em junho de 2026",
+  "data": "2026-06-24",
+  "alerta": "Valor não publicado: procuramos o extrato do Contrato 73/2025 no Diário Oficial de 2025–2026 e só achamos um apostilamento sem valor; inclui pagamento de \"despesas de anos anteriores\"",
+  "fonte": "https://www.diariomunicipal.com.br/ama/download/materia/3AF239C7",
+  "id": "C82",
+  "orgao": "Prefeitura",
+  "analise": {
+   "oque": "A OK Locadora de Veículos Ltda (CNPJ 07.173.027/0001-25) tem o Contrato 73/2025 de locação de veículos. Procuramos o extrato no Diário Oficial de 2025 e 2026 e só encontramos um apostilamento de junho de 2026, sem valor. Em 2026 a empresa tem R$ 926.789 reservados, incluindo R$ 17.388,84 de \"despesas de exercícios anteriores\" (dívida de 2025).",
+   "problema": "Sem o valor e a lista de veículos, não dá para saber quanto a Prefeitura gasta com aluguel de carros nem se os carros são usados. Despesa de ano anterior paga agora indica que o serviço foi usado sem reserva de dinheiro na época.",
+   "lei": "Lei 14.133/2021, art. 94 (publicação do contrato). Lei 4.320/1964, art. 37 e 60 (despesa de exercício anterior e empenho prévio).",
+   "conferir": [
+    "Contrato 73/2025 completo com valor e lista de veículos",
+    "Quais secretarias usam os carros e para quê",
+    "Controle de quilometragem e de uso",
+    "Explicação para a dívida de 2025 paga em novembro de 2026"
    ]
   }
  }

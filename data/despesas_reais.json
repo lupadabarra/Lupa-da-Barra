@@ -4281,7 +4281,7 @@
     "analise": {
      "nivel": "alerta",
      "titulo": "R$ 500 mil para um escritório de advocacia sem contrato publicado",
-     "contrato": "Não encontramos nenhum contrato com Gustavo Freitas Macedo - Sociedade Individual de Advocacia no Diário Oficial dos Municípios de 2024 a 2026.",
+     "contrato": "Não encontramos contrato com Gustavo Freitas Macedo - Sociedade Individual de Advocacia. Procuramos no Diário Oficial dos Municípios de 2024 a 2026 pelo nome, pelo CNPJ (41.146.282/0001-17), por \"advocacia\" e por \"Macedo\", e nos contratos de 2026 da Prefeitura no PNCP (o PNCP de 2025 estava fora do ar em 12/11/2026).",
      "como": "Desconhecido. Serviço de advocacia para prefeituras costuma ser contratado sem licitação (inexigibilidade), mas mesmo assim o contrato precisa ser publicado.",
      "confere": "Não confere: há um empenho de R$ 500.000,00 de \"serviços de consultoria\" em 05/01/2026, sem contrato localizado. Já foram pagos R$ 90.890,80.",
      "problema": "Sem o contrato publicado, não se sabe o que o escritório faz, quanto cobra por mês nem por que foi escolhido. É um escritório em nome de uma única pessoa. A Prefeitura já tem Procuradoria própria e contratou outro escritório para licitações em 2026.",
