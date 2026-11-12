@@ -244,20 +244,136 @@
     box.append(el('p', 'note', 'Os lançamentos não trazem a descrição do gasto (o campo "histórico" vem vazio no portal), o que dificulta saber o que foi pago. Todo dia a atualização automática acrescenta os novos lançamentos que aparecerem.'));
     const lk = el('div', 'chips'); const a = el('a', 'chip act', 'Abrir despesas da Câmara ↗'); a.href = C.fonte; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); box.append(lk);
   });
+  /* Prefeitura: ranking dos maiores gastos, detalhes para o fiscal e lista completa */
+  const NIV = {alerta: ['Alerta', 'nv-alerta'], atencao: ['Atenção', 'nv-atencao'], ok: ['Sem problema encontrado', 'nv-ok']};
+  const brl2 = v => (+v).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
+  function gastoDetalhe(x, a) {
+    const d = el('div', 'gd');
+    if (a.titulo) d.append(el('div', 'gd-t', a.titulo));
+    const row = (k, v) => { if (!v) return; const r = el('div', 'gd-r'); r.append(el('div', 'gd-k', k), el('div', 'gd-v', v)); d.append(r); };
+    row('Quem recebe', x.credor + (x.cnpj ? ' (CNPJ ' + x.cnpj + ')' : ''));
+    row('Quanto', brl2(x.valor) + ' reservados (empenho) em ' + brDate(x.data) + ' · ' + brl2(x.pago) + ' já pagos');
+    row('Existe contrato?', a.contrato);
+    row('Como foi contratado', a.como);
+    row('O valor confere?', a.confere);
+    row('Por que isso importa', a.problema);
+    row('O que a lei diz', a.lei);
+    if (a.conferir && a.conferir.length) { const r = el('div', 'gd-r'); r.append(el('div', 'gd-k', 'Documentos para pedir à Prefeitura')); const ol = el('ol'); a.conferir.forEach(c => ol.append(el('li', null, c))); const v = el('div', 'gd-v'); v.append(ol); r.append(v); d.append(r); }
+    const lk = el('div', 'gd-links');
+    (a.fontes || []).forEach((u, i) => { const l = el('a', null, 'Documento no Diário Oficial ' + (i + 1) + ' ↗'); l.href = u; l.target = '_blank'; l.rel = 'noopener'; lk.append(l); });
+    if (x.fonte) { const l = el('a', null, 'Portal da Prefeitura (Kalana) ↗'); l.href = x.fonte; l.target = '_blank'; l.rel = 'noopener'; lk.append(l); }
+    d.append(lk);
+    d.append(el('p', 'gd-note', 'Isto é um sinal para conferir, não uma acusação. Com a Lei de Acesso à Informação (Lei 12.527/2011), qualquer pessoa pode pedir esses documentos à Prefeitura, que tem até 20 dias para responder.'));
+    return d;
+  }
+  function gastoItem(x, a, pos) {
+    const li = el('li', 'gi' + (a ? ' ' + NIV[a.nivel][1] : ''));
+    const top = el('div', 'gi-top');
+    if (pos) top.append(el('span', 'gi-pos', String(pos)));
+    const mid = el('div', 'gi-mid');
+    mid.append(el('div', 'gi-cr', x.credor));
+    mid.append(el('div', 'gi-sub', brDate(x.data) + ' · ' + x.tipo + (x.pago > 0 ? ' · pago ' + F.brl(x.pago) : ' · ainda não pago')));
+    top.append(mid, el('span', 'gi-vl', F.brl(x.valor)));
+    li.append(top);
+    if (a) {
+      const bar = el('div', 'gi-bar');
+      bar.append(el('span', 'gi-nv', NIV[a.nivel][0]));
+      if (a.titulo) bar.append(el('span', 'gi-tt', a.titulo));
+      const b = el('button', 'gi-btn', 'Ver detalhes'); b.type = 'button'; b.setAttribute('aria-expanded', 'false');
+      let det = null;
+      b.addEventListener('click', () => { if (det) { det.remove(); det = null; b.textContent = 'Ver detalhes'; b.setAttribute('aria-expanded', 'false'); return; } det = gastoDetalhe(x, a); li.append(det); b.textContent = 'Fechar detalhes'; b.setAttribute('aria-expanded', 'true'); });
+      bar.append(b); li.append(bar);
+    }
+    return li;
+  }
   dash.draw('reaisPref', box => {
     box.replaceChildren();
     const D = realData(); if (!D || !D.prefeitura) return; const P = D.prefeitura;
-    const head = el('div', 'rr-head'); head.append(el('h3', null, 'Prefeitura: gastos pagos'), el('span', 'rr-sub', P.empenhos.length ? P.empenhos.length + ' lançamentos' : 'portal Kalana')); box.append(head);
-    if (!P.empenhos.length) {
-      const a = el('div', 'rr-alert amb'); a.append(el('b', null, 'Os pagamentos da Prefeitura não estão abertos'), document.createTextNode('O site da Prefeitura manda o cidadão para o portal Kalana, que não deixa os dados serem lidos de forma automática. Por isso ainda não dá para mostrar aqui quem recebeu, quanto e quando.'));
-      box.append(a);
-      const b = el('div', 'rr-blocked'); b.append(el('b', null, 'Como destravar:'));
-      const ol = el('ol', 'fl'); ['Abra o portal Kalana pelo botão abaixo num computador e use o botão de exportar (planilha) das despesas de 2026.', 'Mande o arquivo aqui na conversa: os pagamentos entram no site com alertas e explicações.', 'Ou peça pela Lei de Acesso à Informação a relação de empenhos, liquidações e pagamentos de 2026 por credor.'].forEach(s => ol.append(el('li', null, s)));
-      b.append(ol); box.append(b);
+    const head = el('div', 'rr-head'); head.append(el('h3', null, 'Prefeitura: para onde vai o dinheiro'), el('span', 'rr-sub', P.total_registros ? (+P.total_registros).toLocaleString('pt-BR') + ' gastos registrados em 2026 · dados de ' + brDate(P.consultado_em) : 'portal Kalana')); box.append(head);
+    if (!P.ranking || !P.ranking.length) {
+      const a = el('div', 'rr-alert amb'); a.append(el('b', null, 'Os pagamentos da Prefeitura não estão abertos'), document.createTextNode('Ainda não foi possível ler os gastos no portal da Prefeitura.')); box.append(a);
     } else {
-      const ul = el('ul', 'rr-list'); P.empenhos.slice().sort((a, b) => b.data.localeCompare(a.data)).forEach(x => { const li = el('li', +x.valor >= 50000 ? 'big' : ''); const cr = el('span', 'cr', x.credor); cr.append(el('small', null, [x.secretaria, x.historico].filter(Boolean).join(' · '))); li.append(el('span', 'dt', brDate(x.data)), cr, el('span', 'vl', F.brl(+x.valor))); ul.append(li); }); box.append(ul);
+      if (P.totais_2026) {
+        const T = P.totais_2026, g = el('div', 'gt');
+        [['Reservado', T.empenhado, 'dinheiro separado para pagar compras, obras e serviços (empenho)'], ['Entregue', T.liquidado, 'o que a Prefeitura diz que já recebeu (liquidado)'], ['Pago', T.pago, 'o que já saiu do cofre da Prefeitura']].forEach(([k, v, n]) => { const c = el('div', 'gt-c'); c.append(el('div', 'gt-k', k + ' em 2026'), el('div', 'gt-v', F.mi(v)), el('div', 'gt-n', n)); g.append(c); });
+        box.append(g);
+      }
+      box.append(el('h4', 'g-h', 'Os 20 maiores gastos do ano'));
+      box.append(el('p', 'g-p', 'Cada linha é um gasto registrado pela Prefeitura em 2026, do maior para o menor. Os salários e encargos dos servidores ficam de fora daqui porque aparecem no destaque da folha, mais abaixo. Toque em "Ver detalhes" para saber se existe contrato, como a empresa foi escolhida e se o valor confere.'));
+      const nAl = P.ranking.filter(x => x.analise && x.analise.nivel === 'alerta').length, nAt = P.ranking.filter(x => x.analise && x.analise.nivel === 'atencao').length;
+      const lg = el('div', 'g-leg'); [['nv-alerta', nAl + ' com alerta'], ['nv-atencao', nAt + ' pedem atenção'], ['nv-ok', (P.ranking.length - nAl - nAt) + ' sem problema encontrado']].forEach(([c, t]) => { const s = el('span', c); s.append(el('i'), document.createTextNode(t)); lg.append(s); }); box.append(lg);
+      const ul = el('ol', 'g-list'); P.ranking.forEach(x => ul.append(gastoItem(x, x.analise, x.posicao))); box.append(ul);
+      if (P.destaques && P.destaques.length) {
+        box.append(el('h4', 'g-h', 'Fora do ranking, mas merece atenção'));
+        const u2 = el('ol', 'g-list'); P.destaques.forEach(x => u2.append(gastoItem(x, x.analise))); box.append(u2);
+      }
+      const more = el('div', 'g-more'); const btn = el('button', 'g-morebtn', 'Ver todos os ' + (+P.total_registros || '').toLocaleString('pt-BR') + ' gastos'); btn.type = 'button'; more.append(btn); box.append(more);
+      btn.addEventListener('click', () => {
+        btn.disabled = true; btn.textContent = 'Carregando…';
+        fetch('data/empenhos_prefeitura_2026.json?v=' + Date.now()).then(r => r.json()).then(J => {
+          more.replaceChildren();
+          const AN = {}; (J.analises || []).forEach(a => { AN[a.empenho + '|' + a.cnpj + '|' + (+a.valor)] = a; });
+          const rows = J.linhas.map(r => ({empenho: r[0], data: r[1], credor: r[2], cnpj: r[3], tipo: r[4], valor: r[5], liquidado: r[6], pago: r[7], fonte: J.fonte}));
+          more.append(el('h4', 'g-h', 'Todos os gastos de 2026'));
+          const tools = el('div', 'g-tools');
+          const q = el('input', 'g-q'); q.type = 'search'; q.placeholder = 'Procurar empresa, pessoa ou tipo de gasto'; q.setAttribute('aria-label', 'Procurar nos gastos');
+          const ord = el('select', 'g-ord'); [['valor', 'Maior valor primeiro'], ['data', 'Mais recentes primeiro']].forEach(([v, t]) => { const o = el('option', null, t); o.value = v; ord.append(o); }); ord.setAttribute('aria-label', 'Ordem');
+          tools.append(q, ord); more.append(tools);
+          const info = el('p', 'g-p'); const list = el('ol', 'g-list all'); const pager = el('button', 'g-morebtn', 'Ver mais'); pager.type = 'button';
+          more.append(info, list, pager);
+          let cur = [], shown = 0;
+          const page = () => { cur.slice(shown, shown + 50).forEach(x => list.append(gastoItem(x, AN[x.empenho + '|' + x.cnpj + '|' + (+x.valor)]))); shown = Math.min(cur.length, shown + 50); pager.style.display = shown < cur.length ? '' : 'none'; pager.textContent = 'Ver mais (' + (cur.length - shown).toLocaleString('pt-BR') + ' restantes)'; };
+          const run = () => {
+            const t = q.value.trim().toLowerCase();
+            cur = rows.filter(x => !t || (x.credor + ' ' + x.tipo + ' ' + x.cnpj + ' ' + x.empenho).toLowerCase().includes(t));
+            cur.sort(ord.value === 'data' ? (a, b) => b.data.localeCompare(a.data) || b.valor - a.valor : (a, b) => b.valor - a.valor);
+            list.replaceChildren(); shown = 0;
+            info.textContent = cur.length.toLocaleString('pt-BR') + ' gastos · soma ' + F.brl(cur.reduce((s, x) => s + x.valor, 0)) + ' reservados, ' + F.brl(cur.reduce((s, x) => s + x.pago, 0)) + ' pagos';
+            page();
+          };
+          let tm; q.addEventListener('input', () => { clearTimeout(tm); tm = setTimeout(run, 200); }); ord.addEventListener('change', run); pager.addEventListener('click', page);
+          run();
+        }).catch(() => { btn.disabled = false; btn.textContent = 'Não foi possível carregar. Tentar de novo'; });
+      });
+      box.append(el('p', 'note', 'Fonte: planilha exportada do portal da transparência da Prefeitura (Kalana), com a Prefeitura e os fundos de Saúde, Educação e Assistência Social. O portal não diz a secretaria nem a descrição de cada gasto; os contratos foram procurados no Diário Oficial dos Municípios de Alagoas.'));
     }
     const lk = el('div', 'chips'); const a = el('a', 'chip act', 'Abrir despesas da Prefeitura (Kalana) ↗'); a.href = P.fonte; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); box.append(lk);
+  });
+
+  /* destaque: quanto custa a folha por mês */
+  const MESN = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  dash.draw('folhaMes', box => {
+    box.replaceChildren();
+    const D = realData(); const P = D && D.prefeitura; const M = P && P.folha_mensal; if (!M || !M.length) return;
+    const pop = (() => { const m = dash.data('municipio'); return m.status === 'ok' && m.data && m.data[0] ? +m.data[0].populacao : 7944; })();
+    const last = M[M.length - 1], mn = MESN[+last.mes.slice(5, 7) - 1];
+    const media = M.reduce((s, m) => s + m.total, 0) / M.length;
+    const hero = el('div', 'fm-hero');
+    const h1 = el('div', 'fm-big'); h1.append(el('div', 'fm-k', 'Custo da folha da Prefeitura em ' + mn + ' de ' + last.mes.slice(0, 4)), el('div', 'fm-v', F.brl(last.total)), el('div', 'fm-n', 'salários, contratos temporários e encargos, num único mês'));
+    const side = el('div', 'fm-side');
+    [['Por morador, no mês', F.brl(last.total / pop)], ['Média por mês em 2026', F.brl(media)], ['Total de janeiro a ' + mn, F.mi(M.reduce((s, m) => s + m.total, 0))]].forEach(([k, v]) => { const c = el('div', 'fm-s'); c.append(el('div', 'fm-sk', k), el('div', 'fm-sv', v)); side.append(c); });
+    hero.append(h1, side); box.append(hero);
+    const parts = [['efetivos', 'Servidores efetivos e comissionados', '#2563eb'], ['contratados', 'Contratos temporários', '#f59e0b'], ['encargos', 'Encargos (INSS e previdência)', '#94a3b8'], ['outros', 'Gratificações e outros', '#14b8a6']];
+    const legend = el('div', 'fm-leg'); parts.forEach(([, t, c]) => { const s = el('span'); const i = el('i'); i.style.background = c; s.append(i, document.createTextNode(t)); legend.append(s); }); box.append(legend);
+    const max = Math.max(...M.map(m => m.total));
+    const chart = el('div', 'fm-chart');
+    M.forEach(m => {
+      const col = el('div', 'fm-col'); const stack = el('div', 'fm-stack'); stack.style.height = (m.total / max * 100) + '%';
+      parts.forEach(([k, t, c]) => { if (!m[k]) return; const seg = el('i'); seg.style.background = c; seg.style.height = (m[k] / m.total * 100) + '%'; seg.title = t + ': ' + F.brl(m[k]); stack.append(seg); });
+      col.title = MESN[+m.mes.slice(5, 7) - 1] + ': ' + F.brl(m.total);
+      col.append(el('div', 'fm-cv', (m.total / 1e6).toLocaleString('pt-BR', {maximumFractionDigits: 1}) + ' mi'), stack, el('div', 'fm-cl', MESN[+m.mes.slice(5, 7) - 1].slice(0, 3)));
+      chart.append(col);
+    });
+    box.append(chart);
+    const sal = last.efetivos + last.contratados, pt = sal ? last.contratados / sal * 100 : 0;
+    if (pt >= 30) {
+      const o = el('div', 'fm-obs'); o.append(el('b', null, 'Quase ' + Math.round(pt) + '% dos salários vão para contratos temporários'),
+        document.createTextNode('Em ' + mn + ', a Prefeitura gastou ' + F.brl(last.contratados) + ' com contratados temporários e ' + F.brl(last.efetivos) + ' com servidores efetivos e comissionados. A Constituição manda contratar por concurso público; o contrato temporário só é permitido para necessidade passageira e excepcional (art. 37, II e IX). Quando os temporários ficam ano após ano, isso pode indicar que o concurso está sendo evitado. Peça à Prefeitura: a lista de contratados temporários com cargo, data de início e a lei que autorizou cada contratação.'));
+      box.append(o);
+    }
+    const sj = M.filter(m => m.sentencas > 100000);
+    if (sj.length) box.append(el('p', 'note', 'Fora da conta acima: ' + sj.map(m => F.brl(m.sentencas) + ' em condenações judiciais ligadas a pessoal em ' + MESN[+m.mes.slice(5, 7) - 1]).join('; ') + '.'));
+    box.append(el('p', 'note', 'Como calculamos: soma dos gastos com pessoal registrados a cada mês no portal da Prefeitura (Kalana). O mês atual só aparece depois que a Prefeitura registra a folha. O Relatório de Gestão Fiscal, mais abaixo, usa outra regra (soma de 12 meses) para comparar com o limite da lei.'));
   });
 
   /* contadores animados */

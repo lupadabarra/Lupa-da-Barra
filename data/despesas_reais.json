@@ -3902,6 +3902,722 @@
    "liquidado": 73870913.62,
    "pago": 70265556.26
   },
-  "obs": "Planilha exportada do próprio portal Kalana (Despesas, por empenho, 01/01 a 31/12/2026, todas as entidades: Prefeitura e fundos de Saúde, Educação e Assistência Social). Aqui aparecem os lançamentos dos últimos 30 dias e todos os de R$ 100 mil ou mais no ano; os totais valem para os 4781 empenhos de 2026. \"valor\" é o empenhado; \"pago\" é o que já saiu do caixa. O portal não informa a secretaria nem o histórico de cada gasto."
+  "obs": "Planilha exportada do próprio portal Kalana (Despesas, por empenho, 01/01 a 31/12/2026, todas as entidades: Prefeitura e fundos de Saúde, Educação e Assistência Social). Aqui aparecem os lançamentos dos últimos 30 dias e todos os de R$ 100 mil ou mais no ano; os totais valem para os 4781 empenhos de 2026. \"valor\" é o empenhado; \"pago\" é o que já saiu do caixa. O portal não informa a secretaria nem o histórico de cada gasto.",
+  "ranking": [
+   {
+    "empenho": "2026021000001",
+    "data": "2026-02-10",
+    "credor": "CONSTRUTORA CONCEITO A LTDA",
+    "cnpj": "07.621.799/0001-82",
+    "tipo": "Obras e instalações",
+    "valor": 3000000.0,
+    "liquidado": 317007.41,
+    "pago": 317007.41,
+    "posicao": 1,
+    "analise": {
+     "nivel": "atencao",
+     "titulo": "Reserva de R$ 3 milhões para a Construtora Conceito A",
+     "contrato": "Provavelmente o Contrato 110/2025, de manutenção de prédios, ruas e praças, no valor de R$ 4.378.000,00. O portal não diz a qual contrato cada empenho pertence.",
+     "como": "Com concorrência (Concorrência Eletrônica 03/2025, vencida pela Conceito A em julho de 2025). O contrato foi prorrogado por mais 1 ano em setembro de 2026.",
+     "confere": "Cabe dentro do valor do contrato. Até agora só R$ 317.007,41 desses R$ 3 milhões foram pagos.",
+     "problema": "\"Manutenção de prédios, ruas e praças\" é um serviço muito amplo: sem a lista do que foi feito, não dá para saber onde o dinheiro está indo. A mesma empresa concentra R$ 9,1 milhões empenhados em 2026 em pelo menos cinco obras e serviços diferentes (manutenção, duas arenas de esporte, a nova UBS 3 e uma parte do Centro de Convenções).",
+     "lei": "Lei 14.133/2021, art. 117 (cada serviço precisa ser acompanhado e registrado por um fiscal do contrato) e art. 140 (só se paga o que foi medido e recebido). LAI 12.527/2011, art. 8º (a Prefeitura deve divulgar os contratos e o que foi pago).",
+     "conferir": [
+      "Contrato 110/2025 completo, com a planilha de serviços e preços",
+      "Boletins de medição de 2026: que serviço foi feito, em qual rua, praça ou prédio",
+      "Relatórios e fotos do fiscal do contrato",
+      "Notas fiscais e comprovantes de pagamento"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/CA957C3D",
+      "https://www.diariomunicipal.com.br/ama/download/materia/551CB1D3",
+      "https://www.diariomunicipal.com.br/ama/download/materia/F1F1BFDF"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026063000001",
+    "data": "2026-06-30",
+    "credor": "OLIVEIRA E SILVA EMPREENDIMENTO LTDA",
+    "cnpj": "27.309.180/0001-44",
+    "tipo": "Obras e instalações",
+    "valor": 1910000.0,
+    "liquidado": 0.0,
+    "pago": 0.0,
+    "posicao": 2,
+    "analise": {
+     "nivel": "ok",
+     "titulo": "Construção do complexo esportivo",
+     "contrato": "Contrato 68/2026, com Oliveira e Silva Empreendimento Ltda, para construir um complexo esportivo, no valor de R$ 1.962.800,00.",
+     "como": "Com concorrência (Concorrência 01/2026, homologada em 15/05/2026, com recurso de outra empresa julgado antes).",
+     "confere": "Sim. O empenho de R$ 1.910.000,00 cabe no contrato. Nada foi pago ainda.",
+     "problema": "Não encontramos problema no papel. A mesma empresa ganhou também a reforma do Cais de São Pedro (R$ 1.119.003,00). Vale acompanhar se as duas obras andam ao mesmo tempo.",
+     "lei": "Lei 14.133/2021, art. 117 (fiscalização da obra) e art. 140 (pagamento só do que foi medido).",
+     "conferir": [
+      "Ordem de serviço com a data de início da obra",
+      "Boletins de medição e fotos do andamento",
+      "Endereço exato do complexo esportivo"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/1A446F56",
+      "https://www.diariomunicipal.com.br/ama/download/materia/C1543E4B"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026101900006",
+    "data": "2026-10-19",
+    "credor": "CONSTRUTORA CONCEITO A LTDA",
+    "cnpj": "07.621.799/0001-82",
+    "tipo": "Obras e instalações",
+    "valor": 1684221.24,
+    "liquidado": 0.0,
+    "pago": 0.0,
+    "posicao": 3,
+    "analise": {
+     "nivel": "atencao",
+     "titulo": "Parte da obra do Centro de Convenções repassada a outra empresa",
+     "contrato": "10º aditivo ao Contrato 13/2022, feito com outra empresa (Critério Engenharia EIRELI) para a 1ª e a 3ª etapas do Centro de Convenções. O aditivo autorizou passar parte da obra para a Conceito A, exatamente por R$ 1.684.221,24.",
+     "como": "O contrato original veio de uma concorrência de 2022 (Concorrência 02/2022), ainda pela lei antiga de licitações. A Conceito A entrou depois, sem disputa, como subcontratada.",
+     "confere": "Sim, o valor do empenho é igual ao do aditivo. Nada foi pago ainda.",
+     "problema": "A obra do Centro de Convenções começou em 2022 e já teve pelo menos 10 aditivos; o prazo agora vai até junho de 2027. Outra etapa da mesma obra (a 4ª etapa, com Josemberg Vieira da Silva ME) teve o contrato cancelado em novembro de 2026. Passar parte da obra para uma terceira empresa, que não disputou a licitação, exige justificativa forte.",
+     "lei": "Lei 8.666/1993, art. 72 (subcontratação só até o limite previsto no contrato) e art. 78, VI (subcontratar fora do permitido é motivo para rescindir). Lei 14.133/2021, art. 122 (mesma regra na lei nova).",
+     "conferir": [
+      "Os 10 aditivos do Contrato 13/2022, com o valor total atualizado",
+      "Cláusula do contrato que permite a subcontratação e o limite de percentual",
+      "Planilha da parte subcontratada e medições",
+      "Situação atual de cada etapa do Centro de Convenções (1ª, 3ª e 4ª)"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/F80499C0",
+      "https://www.diariomunicipal.com.br/ama/download/materia/0BEDA2A2",
+      "https://www.diariomunicipal.com.br/ama/download/materia/77B0EE5D",
+      "https://www.diariomunicipal.com.br/ama/download/materia/2FE3EAC1"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026091000001",
+    "data": "2026-09-10",
+    "credor": "INSTITUTO RIVIERA",
+    "cnpj": "12.299.963/0001-17",
+    "tipo": "Subvenções sociais",
+    "valor": 1200000.0,
+    "liquidado": 0.0,
+    "pago": 0.0,
+    "posicao": 4,
+    "analise": {
+     "nivel": "alerta",
+     "titulo": "R$ 5,7 milhões para uma entidade privada cuidar de parte da saúde",
+     "contrato": "Termo de Colaboração 02/2026 com o Instituto Riviera, assinado em 01/09/2026, no valor de R$ 5.740.920,00 por 12 meses, para atendimento pelo SUS na atenção primária e especializada.",
+     "como": "Parceria com uma organização da sociedade civil (Lei 13.019/2014). Não encontramos no Diário Oficial o edital de chamamento público que deveria escolher a entidade.",
+     "confere": "O empenho de R$ 1.200.000,00 cabe na parceria. Nada foi pago ainda.",
+     "problema": "São cerca de R$ 723 por morador por ano entregues a uma entidade privada para fazer um serviço que é dever da Prefeitura. Pela lei, a entidade deve ser escolhida por chamamento público, aberto a outras interessadas, e precisa prestar contas de cada real. Sem o chamamento publicado, não dá para saber por que foi essa entidade.",
+     "lei": "Lei 13.019/2014, art. 24 (a regra é o chamamento público), art. 32 (se não houver chamamento, a justificativa tem de ser publicada) e art. 63 a 72 (prestação de contas). Constituição, art. 199, § 1º (entidades privadas só podem atuar no SUS de forma complementar).",
+     "conferir": [
+      "Edital de chamamento público ou a justificativa publicada para não fazê-lo",
+      "Plano de trabalho com metas: quantos atendimentos, exames e profissionais",
+      "Lista de profissionais pagos pela entidade e seus salários",
+      "Relatórios de prestação de contas e parecer do Conselho Municipal de Saúde"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/26DFDD81"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026022500003",
+    "data": "2026-02-25",
+    "credor": "MIRAMAR CONSTRUTORA LTDA",
+    "cnpj": "11.035.491/0001-22",
+    "tipo": "Obras e instalações",
+    "valor": 960019.0,
+    "liquidado": 283432.53,
+    "pago": 283432.53,
+    "posicao": 5,
+    "analise": {
+     "nivel": "alerta",
+     "titulo": "Obra da Orla Saquarema: contrato com números que não conferem e serviço mal feito",
+     "contrato": "Construção da Orla Saquarema (Lagoa do Porto) com a Miramar Construtora Ltda, por R$ 1.242.100,02. O mesmo contrato foi publicado duas vezes com números diferentes: 114/2025 (em 25/09/2025) e 131/2025 (em 17/10/2025), com o mesmo processo e o mesmo valor.",
+     "como": "Com licitação (homologada em setembro de 2025). Prazo prorrogado até 12/03/2027.",
+     "confere": "Não confere. Além dos dois números de contrato, um dos extratos do aditivo saiu com o CNPJ de outra construtora (07.621.799/0001-82, que é da Conceito A). Em 09/11/2026 a própria Prefeitura notificou a Miramar por muro fora do projeto, calçadas atrasadas, drenagem entupida e falta de operários. Já foram pagos R$ 283.432,53.",
+     "problema": "Documentos oficiais com números e CNPJ trocados impedem saber qual contrato vale e podem esconder pagamento em duplicidade. A própria Prefeitura reconhece problemas na qualidade da obra.",
+     "lei": "Lei 14.133/2021, art. 94 (publicação correta do contrato) e art. 119 e 120 (a empresa tem de refazer, às suas custas, o serviço mal feito). LAI 12.527/2011, art. 6º, II (informação íntegra e verdadeira).",
+     "conferir": [
+      "Esclarecimento oficial: existe um contrato ou dois (114/2025 e 131/2025)?",
+      "Todas as medições e pagamentos feitos à Miramar, com notas fiscais",
+      "Resposta da empresa à notificação de 09/11/2026 e prazo para refazer o muro",
+      "Relatório da Caixa Econômica Federal sobre a obra (ela acompanha o repasse)"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/6B677BE9",
+      "https://www.diariomunicipal.com.br/ama/download/materia/651F5733",
+      "https://www.diariomunicipal.com.br/ama/download/materia/B0C6C472",
+      "https://www.diariomunicipal.com.br/ama/download/materia/0326F2EA"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026052200001",
+    "data": "2026-05-22",
+    "credor": "LEARNING SET LTDA",
+    "cnpj": "36.223.628/0001-01",
+    "tipo": "Outros serviços de terceiros - pessoa jurídica",
+    "valor": 953550.0,
+    "liquidado": 953550.0,
+    "pago": 862680.0,
+    "posicao": 6,
+    "analise": {
+     "nivel": "alerta",
+     "titulo": "Programa escolar de R$ 1 milhão sem licitação",
+     "contrato": "Contrato 67/2026 com Learning Set Ltda, assinado em 20/05/2026, para o Programa de Educação Socioemocional nas escolas municipais, por R$ 1.078.350,00 e 5 meses.",
+     "como": "Sem concorrência (inexigibilidade, art. 74, III — \"serviço técnico especializado\").",
+     "confere": "Cabe no contrato. Já foram pagos R$ 862.680,00.",
+     "problema": "Programas pedagógicos costumam ser oferecidos por várias empresas. Para contratar sem disputa, a Prefeitura precisa provar que este era o único capaz de fazer o serviço. São mais de R$ 1 milhão em 5 meses, mais de R$ 200 mil por mês.",
+     "lei": "Lei 14.133/2021, art. 74, III (inexigibilidade só para serviço técnico singular e profissional de notória especialização) e art. 72 (o processo precisa de justificativa de preço e da escolha do fornecedor).",
+     "conferir": [
+      "Processo da inexigibilidade com a justificativa de por que não houve disputa",
+      "Quantos alunos e professores participaram e que material foi entregue",
+      "Preço pago por outras prefeituras pelo mesmo programa",
+      "Relatório final de resultados nas escolas"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/8D533FE8"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026010500046",
+    "data": "2026-01-05",
+    "credor": "FUNDACAO DE APOIO AO ENSINO, EXTENSAO E PESQUISA DE ALAGOAS",
+    "cnpj": "07.925.477/0001-27",
+    "tipo": "Outros serviços de terceiros - pessoa jurídica",
+    "valor": 890300.0,
+    "liquidado": 890100.0,
+    "pago": 890100.0,
+    "posicao": 7,
+    "analise": {
+     "nivel": "atencao",
+     "titulo": "Fundação contratada para plano diretor e mapeamento da cidade",
+     "contrato": "Contrato 89/2025 com a FEPESA (Fundação de Apoio ao Ensino, Extensão e Pesquisa de Alagoas), de 26/05/2025, por R$ 2.210.400,00, para mapeamento georreferenciado, plano de mobilidade, minuta do Plano Diretor e Código de Edificações. Prorrogado em maio de 2026.",
+     "como": "O extrato não informa a modalidade. Contratos com fundações de apoio costumam ser feitos sem licitação (dispensa).",
+     "confere": "Em 2026 foram empenhados R$ 1.383.035,00 para a fundação (este e outro de R$ 492.735,00), dentro do contrato.",
+     "problema": "É um contrato grande para estudos e planos. O cidadão precisa saber o que já foi entregue: o Plano Diretor já virou lei? O mapeamento existe e está disponível?",
+     "lei": "Lei 14.133/2021, art. 75, XV (dispensa para instituição de pesquisa só se o objeto tiver relação com ensino ou pesquisa) e art. 140 (pagamento só pelo que foi entregue). Estatuto da Cidade (Lei 10.257/2001), art. 40, § 4º (o Plano Diretor precisa de audiências públicas).",
+     "conferir": [
+      "Processo de contratação com a justificativa da escolha da fundação",
+      "Produtos já entregues (mapas, plano de mobilidade, minuta do Plano Diretor)",
+      "Atas das audiências públicas do Plano Diretor",
+      "Notas fiscais e pagamentos por etapa"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/34E8E05F",
+      "https://www.diariomunicipal.com.br/ama/download/materia/5335B5F5"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026010500072",
+    "data": "2026-01-05",
+    "credor": "INSTITUTO NACIONAL DO SEGURO SOCIAL - INSS",
+    "cnpj": "29.979.036/0001-40",
+    "tipo": "Principal da dívida por contrato",
+    "valor": 800000.0,
+    "liquidado": 664938.6,
+    "pago": 664938.6,
+    "posicao": 8,
+    "analise": {
+     "nivel": "ok",
+     "titulo": "Pagamento de dívida antiga com o INSS",
+     "contrato": "Não é contrato: é o pagamento da dívida previdenciária parcelada da Prefeitura com o INSS.",
+     "como": "Parcelamento de dívida (pagamento obrigatório).",
+     "confere": "Foram pagos R$ 664.938,60 do valor reservado.",
+     "problema": "Não é irregular, mas mostra que a Prefeitura deixou de recolher a previdência no passado e hoje paga a dívida com juros, tirando dinheiro de outras áreas.",
+     "lei": "LRF (Lei Complementar 101/2000), art. 29 a 31 (controle da dívida) e Constituição, art. 195 (contribuições à previdência são obrigatórias).",
+     "conferir": [
+      "Termo de parcelamento com o INSS: valor total, número de parcelas e juros",
+      "Período em que a contribuição deixou de ser recolhida"
+     ],
+     "fontes": []
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026080500001",
+    "data": "2026-08-05",
+    "credor": "REDE BRIDGE DE CIENCIA E TECNOLOGIA",
+    "cnpj": "38.012.923/0001-36",
+    "tipo": "Serviços de consultoria",
+    "valor": 792500.0,
+    "liquidado": 542500.0,
+    "pago": 417500.0,
+    "posicao": 9,
+    "analise": {
+     "nivel": "alerta",
+     "titulo": "R$ 792 mil para uma entidade cuidar de comunicação e arrecadação",
+     "contrato": "Termo de Colaboração 01/2026 com a Rede Bridge de Ciência e Tecnologia, assinado em 31/07/2026, por R$ 792.500,00 e 6 meses, para \"gestão estratégica, comunicação, inteligência tributária e fortalecimento institucional\".",
+     "como": "Parceria com organização da sociedade civil. Não encontramos no Diário Oficial o edital de chamamento público.",
+     "confere": "O empenho é igual ao valor da parceria. Já foram pagos R$ 417.500,00.",
+     "problema": "Comunicação e cobrança de impostos são tarefas do dia a dia da Prefeitura, que normalmente são feitas pelos próprios servidores ou por empresa contratada com licitação. Usar uma \"parceria\" com entidade sem fins lucrativos para isso, a cerca de R$ 132 mil por mês, pode ser uma forma de evitar a licitação.",
+     "lei": "Lei 13.019/2014, art. 24 (chamamento público obrigatório) e art. 40 (é proibido usar parceria para delegar funções típicas do Estado, como a fiscalização e a cobrança de tributos). Lei 14.133/2021, art. 2º (serviços comuns precisam de licitação).",
+     "conferir": [
+      "Edital de chamamento público ou a justificativa publicada para não fazê-lo",
+      "Plano de trabalho com metas e produtos",
+      "Lista de pessoas pagas pela entidade e o que cada uma faz",
+      "Relatórios de prestação de contas e aumento real da arrecadação"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/90B0B807"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026020200002",
+    "data": "2026-02-02",
+    "credor": "JOSEMBERG VIEIRA DA SILVA",
+    "cnpj": "11.975.294/0001-93",
+    "tipo": "Outros serviços de terceiros - pessoa jurídica",
+    "valor": 600000.0,
+    "liquidado": 491109.22,
+    "pago": 417458.49,
+    "posicao": 10,
+    "analise": {
+     "nivel": "alerta",
+     "titulo": "Empresa de obras com um contrato cancelado e outro notificado",
+     "contrato": "Josemberg Vieira da Silva ME tem dois contratos: o 107/2025, da 4ª etapa do Centro de Convenções (R$ 1.521.837,67 após aditivo), cancelado \"em comum acordo\" em novembro de 2026; e o 111/2025, da drenagem do conjunto habitacional Casa Verde e Amarela (R$ 1.628.414,31), que recebeu notificação da Prefeitura em junho de 2026. O portal não diz a qual dos dois pertence este empenho.",
+     "como": "Com concorrência (Concorrência 01/2025 para o Centro de Convenções).",
+     "confere": "Foram pagos R$ 417.458,49 deste empenho. É preciso conferir se o que foi pago corresponde ao que foi construído antes do cancelamento.",
+     "problema": "Quando um contrato de obra é cancelado no meio, existe o risco de a Prefeitura ter pago por serviço não feito e de ter de contratar outra empresa para terminar, pagando de novo. A empresa é firma individual, de Aracaju (SE).",
+     "lei": "Lei 14.133/2021, art. 138 e 139 (no cancelamento, faz-se o acerto de contas do que foi executado) e art. 156 (multas e punições por descumprimento).",
+     "conferir": [
+      "Termo de rescisão completo, com o acerto de contas (medição final)",
+      "Notificação 01/2026 do contrato da drenagem e a resposta da empresa",
+      "Todos os pagamentos feitos à empresa em 2025 e 2026",
+      "Como e com quem a 4ª etapa do Centro de Convenções será terminada"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/2FE3EAC1",
+      "https://www.diariomunicipal.com.br/ama/download/materia/02474A68",
+      "https://www.diariomunicipal.com.br/ama/download/materia/0ACF4108",
+      "https://www.diariomunicipal.com.br/ama/download/materia/5E95D1CE"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026082000001",
+    "data": "2026-08-20",
+    "credor": "BARRASUL EMPREENDIMENTOS LTDA",
+    "cnpj": "04.673.359/0001-80",
+    "tipo": "Aquisição de imóveis",
+    "valor": 520515.0,
+    "liquidado": 520515.0,
+    "pago": 520515.0,
+    "posicao": 11,
+    "analise": {
+     "nivel": "ok",
+     "titulo": "Compra de terreno para a nova UBS",
+     "contrato": "Desapropriação amigável de imóveis da Barrasul Empreendimentos Ltda para construir uma Unidade Básica de Saúde (Decreto 64, de 30/07/2026), por R$ 520.515,00 fixados em laudo de avaliação.",
+     "como": "Desapropriação por utilidade pública, com concordância da proprietária.",
+     "confere": "Sim. O valor pago (R$ 520.515,00, já quitado) é igual ao do decreto.",
+     "problema": "Não encontramos problema no papel. O ponto a conferir é se o preço do laudo está de acordo com o valor de mercado dos terrenos na região.",
+     "lei": "Decreto-Lei 3.365/1941 (desapropriação) e Constituição, art. 5º, XXIV (indenização justa e prévia).",
+     "conferir": [
+      "Laudo técnico de avaliação dos imóveis e quem o assinou",
+      "Escritura e registro dos imóveis em nome do Município",
+      "Preço de terrenos parecidos no mesmo bairro"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/03F9F627"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026010500012",
+    "data": "2026-01-05",
+    "credor": "CONSORCIO INTERMUNICIPAL DO SUL DO ESTADO DE ALAGOAS - CONIS",
+    "cnpj": "18.538.208/0001-24",
+    "tipo": "Outros serviços de terceiros - pessoa jurídica",
+    "valor": 500655.0,
+    "liquidado": 248390.38,
+    "pago": 222863.66,
+    "posicao": 12,
+    "analise": {
+     "nivel": "ok",
+     "titulo": "Consórcio de municípios do sul de Alagoas",
+     "contrato": "Pagamento ao CONISUL, consórcio de prefeituras da região para serviços em conjunto.",
+     "como": "Contrato de programa com consórcio público (Lei 11.107/2005).",
+     "confere": "Foram pagos R$ 222.863,66 deste empenho. Em 2026 o consórcio já tem R$ 2,2 milhões empenhados.",
+     "problema": "Não é irregular, mas é muito dinheiro e quase ninguém sabe o que o consórcio entrega ao município.",
+     "lei": "Lei 11.107/2005, art. 8º (contrato de rateio) e art. 9º (o consórcio também presta contas ao Tribunal de Contas).",
+     "conferir": [
+      "Contrato de rateio ou de programa de 2026 com o consórcio",
+      "Lista dos serviços prestados a Barra de São Miguel (consultas, exames, transporte)",
+      "Prestação de contas do consórcio"
+     ],
+     "fontes": []
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026010500038",
+    "data": "2026-01-05",
+    "credor": "GUSTAVO FREITAS MACEDO - SOCIEDADE INDIVIDUAL DE ADVOCACIA",
+    "cnpj": "41.146.282/0001-17",
+    "tipo": "Serviços de consultoria",
+    "valor": 500000.0,
+    "liquidado": 90890.8,
+    "pago": 90890.8,
+    "posicao": 13,
+    "analise": {
+     "nivel": "alerta",
+     "titulo": "R$ 500 mil para um escritório de advocacia sem contrato publicado",
+     "contrato": "Não encontramos nenhum contrato com Gustavo Freitas Macedo - Sociedade Individual de Advocacia no Diário Oficial dos Municípios de 2024 a 2026.",
+     "como": "Desconhecido. Serviço de advocacia para prefeituras costuma ser contratado sem licitação (inexigibilidade), mas mesmo assim o contrato precisa ser publicado.",
+     "confere": "Não confere: há um empenho de R$ 500.000,00 de \"serviços de consultoria\" em 05/01/2026, sem contrato localizado. Já foram pagos R$ 90.890,80.",
+     "problema": "Sem o contrato publicado, não se sabe o que o escritório faz, quanto cobra por mês nem por que foi escolhido. É um escritório em nome de uma única pessoa. A Prefeitura já tem Procuradoria própria e contratou outro escritório para licitações em 2026.",
+     "lei": "Lei 14.133/2021, art. 72, parágrafo único, e art. 94 (todo contrato, inclusive sem licitação, tem de ser publicado no PNCP para valer) e art. 74, III, \"e\" (advocacia só sem licitação se for serviço singular). Lei 4.320/1964, art. 60 e 61 (o empenho precisa indicar o credor e a origem da despesa).",
+     "conferir": [
+      "Contrato com o escritório e o processo de contratação",
+      "Justificativa de por que a Procuradoria do Município não faz o serviço",
+      "Relatórios mensais do que o escritório fez (processos, pareceres)",
+      "Notas fiscais e pagamentos de 2026"
+     ],
+     "fontes": []
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026052600010",
+    "data": "2026-05-26",
+    "credor": "FUNDACAO DE APOIO AO ENSINO, EXTENSAO E PESQUISA DE ALAGOAS",
+    "cnpj": "07.925.477/0001-27",
+    "tipo": "Outros serviços de terceiros - pessoa jurídica",
+    "valor": 492735.0,
+    "liquidado": 345375.0,
+    "pago": 276300.0,
+    "posicao": 14,
+    "analise": {
+     "nivel": "atencao",
+     "titulo": "Segunda reserva para a fundação do plano diretor",
+     "contrato": "Mesmo Contrato 89/2025 com a FEPESA (R$ 2.210.400,00), prorrogado em 28/05/2026.",
+     "como": "O extrato não informa a modalidade.",
+     "confere": "Somado ao empenho de janeiro, dá R$ 1.383.035,00 em 2026. Já foram pagos R$ 276.300,00 deste.",
+     "problema": "Veja a explicação do empenho de R$ 890.300,00 para a mesma fundação. O importante é saber o que já foi entregue.",
+     "lei": "Lei 14.133/2021, art. 140 (pagamento só pelo que foi entregue).",
+     "conferir": [
+      "Produtos entregues pela fundação até agora",
+      "Aditivo de prorrogação de maio de 2026 e a justificativa"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/5335B5F5"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026010500032",
+    "data": "2026-01-05",
+    "credor": "SECRETARIA DA RECEITA FEDERAL",
+    "cnpj": "00.394.460/0058-87",
+    "tipo": "Obrigações tributárias e contributivas",
+    "valor": 450000.0,
+    "liquidado": 374743.04,
+    "pago": 374664.04,
+    "posicao": 15,
+    "analise": {
+     "nivel": "ok",
+     "titulo": "Tributos federais (Receita Federal)",
+     "contrato": "Não é contrato: é o recolhimento de tributos e contribuições federais devidos pela Prefeitura (como o PASEP).",
+     "como": "Obrigação legal.",
+     "confere": "Foram pagos R$ 374.664,04.",
+     "problema": "Não é irregular. É uma despesa obrigatória.",
+     "lei": "Lei 9.715/1998 (PASEP) e Constituição, art. 239.",
+     "conferir": [
+      "Guias de recolhimento (DARF) pagas em 2026"
+     ],
+     "fontes": []
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026102000003",
+    "data": "2026-10-20",
+    "credor": "CIGIP ( CONSORCIO INTERMUNICIPAL PARA GESTAO DA ILUMINACAO PUBLICA )",
+    "cnpj": "08.917.588/0001-54",
+    "tipo": "Material de consumo",
+    "valor": 444526.81,
+    "liquidado": 372526.81,
+    "pago": 372526.81,
+    "posicao": 16,
+    "analise": {
+     "nivel": "ok",
+     "titulo": "Consórcio da iluminação pública",
+     "contrato": "Pagamento ao CIGIP, consórcio de municípios que cuida da iluminação pública e da energia elétrica.",
+     "como": "Consórcio público (Lei 11.107/2005).",
+     "confere": "Foram pagos R$ 372.526,81. Em 2026 o consórcio já tem R$ 2,48 milhões empenhados.",
+     "problema": "Não é irregular. A iluminação pública é paga pela taxa (COSIP) cobrada na conta de luz; vale conferir se o dinheiro arrecadado está indo para isso.",
+     "lei": "Constituição, art. 149-A (contribuição de iluminação pública só pode ser usada na iluminação) e Lei 11.107/2005.",
+     "conferir": [
+      "Contrato de rateio com o CIGIP",
+      "Quanto a Prefeitura arrecadou de taxa de iluminação em 2026",
+      "Lista de pontos de luz trocados ou consertados"
+     ],
+     "fontes": []
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026100800003",
+    "data": "2026-10-08",
+    "credor": "CONSTRUTORA CONCEITO A LTDA",
+    "cnpj": "07.621.799/0001-82",
+    "tipo": "Obras e instalações",
+    "valor": 433063.28,
+    "liquidado": 0.0,
+    "pago": 0.0,
+    "posicao": 17,
+    "analise": {
+     "nivel": "atencao",
+     "titulo": "Dois empenhos iguais no mesmo dia para a Conceito A",
+     "contrato": "Provavelmente a construção da nova UBS 3 (Concorrência 03/2026, vencida pela Conceito A por R$ 1.890.000,00 em junho de 2026). O portal não informa o contrato.",
+     "como": "Com concorrência.",
+     "confere": "Há dois empenhos de exatamente R$ 433.063,28 no mesmo dia (08/10/2026), números 2026100800001 e 2026100800003. Nada foi pago ainda.",
+     "problema": "Dois lançamentos idênticos no mesmo dia podem ser parcelas de fontes diferentes (dinheiro federal e municipal, por exemplo), mas também podem ser duplicidade. É preciso conferir antes de qualquer pagamento.",
+     "lei": "Lei 4.320/1964, art. 58 a 63 (cada empenho reserva dinheiro para uma despesa determinada) e Lei 14.133/2021, art. 140.",
+     "conferir": [
+      "Notas de empenho 2026100800001 e 2026100800003 completas (dotação e fonte do dinheiro)",
+      "Contrato da UBS 3 e a ordem de serviço",
+      "Boletins de medição da obra"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/9A690FCC",
+      "https://www.diariomunicipal.com.br/ama/download/materia/2F36AD1E"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026100800001",
+    "data": "2026-10-08",
+    "credor": "CONSTRUTORA CONCEITO A LTDA",
+    "cnpj": "07.621.799/0001-82",
+    "tipo": "Obras e instalações",
+    "valor": 433063.28,
+    "liquidado": 0.0,
+    "pago": 0.0,
+    "posicao": 18,
+    "analise": {
+     "nivel": "atencao",
+     "titulo": "Dois empenhos iguais no mesmo dia para a Conceito A",
+     "contrato": "Provavelmente a construção da nova UBS 3 (Concorrência 03/2026, vencida pela Conceito A por R$ 1.890.000,00 em junho de 2026). O portal não informa o contrato.",
+     "como": "Com concorrência.",
+     "confere": "Há dois empenhos de exatamente R$ 433.063,28 no mesmo dia (08/10/2026), números 2026100800001 e 2026100800003. Nada foi pago ainda.",
+     "problema": "Dois lançamentos idênticos no mesmo dia podem ser parcelas de fontes diferentes (dinheiro federal e municipal, por exemplo), mas também podem ser duplicidade. É preciso conferir antes de qualquer pagamento.",
+     "lei": "Lei 4.320/1964, art. 58 a 63 (cada empenho reserva dinheiro para uma despesa determinada) e Lei 14.133/2021, art. 140.",
+     "conferir": [
+      "Notas de empenho 2026100800001 e 2026100800003 completas (dotação e fonte do dinheiro)",
+      "Contrato da UBS 3 e a ordem de serviço",
+      "Boletins de medição da obra"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/9A690FCC",
+      "https://www.diariomunicipal.com.br/ama/download/materia/2F36AD1E"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026040700001",
+    "data": "2026-04-07",
+    "credor": "CONSTRUTORA CONCEITO A LTDA",
+    "cnpj": "07.621.799/0001-82",
+    "tipo": "Obras e instalações",
+    "valor": 428684.75,
+    "liquidado": 0.0,
+    "pago": 0.0,
+    "posicao": 19,
+    "analise": {
+     "nivel": "ok",
+     "titulo": "Arena de esporte da Avenida Estiva da Barra",
+     "contrato": "Contrato 05/2026 com a Construtora Conceito A, para a arena de esporte da Av. Estiva da Barra (Alto da Barra), por R$ 428.684,75.",
+     "como": "Com concorrência (Concorrência Eletrônica 07/2025).",
+     "confere": "Sim, o empenho é igual ao valor do contrato. Nada foi pago ainda; o prazo foi prorrogado até 02/01/2027.",
+     "problema": "Não encontramos problema no papel. Vale ver se a obra está andando, já que nada foi pago em 7 meses.",
+     "lei": "Lei 14.133/2021, art. 117 (fiscalização) e art. 111 (prorrogação de prazo de obra precisa de justificativa).",
+     "conferir": [
+      "Ordem de serviço e boletins de medição",
+      "Justificativa do aditivo de prazo",
+      "Fotos da obra"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/3BA11953",
+      "https://www.diariomunicipal.com.br/ama/download/materia/5FE6DD83"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   },
+   {
+    "empenho": "2026010500011",
+    "data": "2026-01-05",
+    "credor": "ASSOCIACAO DOS AMIGOS E PAIS DE PESSOAS ESPECIAIS",
+    "cnpj": "24.479.149/0001-63",
+    "tipo": "Subvenções sociais",
+    "valor": 408298.84,
+    "liquidado": 408298.84,
+    "pago": 408298.84,
+    "posicao": 20,
+    "analise": {
+     "nivel": "ok",
+     "titulo": "Apoio à associação de pessoas com deficiência",
+     "contrato": "Termo de Fomento 001/2023 com a Associação dos Amigos e Pais de Pessoas Especiais (AAPPE), para reabilitação de pessoas com deficiência, renovado até julho de 2027.",
+     "como": "Parceria com organização da sociedade civil (Lei 13.019/2014).",
+     "confere": "O valor foi pago integralmente (R$ 408.298,84).",
+     "problema": "Não encontramos problema no papel. Como toda parceria, a entidade precisa prestar contas do atendimento.",
+     "lei": "Lei 13.019/2014, art. 63 a 72 (prestação de contas).",
+     "conferir": [
+      "Plano de trabalho e número de pessoas atendidas",
+      "Prestação de contas de 2025 e 2026"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/7E8F4F16"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   }
+  ],
+  "destaques": [
+   {
+    "empenho": "2026111000001",
+    "data": "2026-11-10",
+    "credor": "MDB SHOWS LTDA",
+    "cnpj": "13.019.646/0001-62",
+    "tipo": "Outros serviços de terceiros - pessoa jurídica",
+    "valor": 300000.0,
+    "liquidado": 300000.0,
+    "pago": 0.0,
+    "analise": {
+     "nivel": "alerta",
+     "titulo": "Show de R$ 300 mil registrado depois de acontecer",
+     "contrato": "Contrato 81/2026 com MDB Shows Ltda, assinado em 23/07/2026, para o show de Marcynho Sensação na festa de Emancipação Política 2026, por R$ 300.000,00.",
+     "como": "Sem concorrência (inexigibilidade para contratar artista pelo empresário exclusivo).",
+     "confere": "Não confere com a regra: o contrato é de julho, para a festa de Emancipação (julho/agosto), mas o empenho só foi registrado em 10/11/2026, já com o serviço dado como entregue (liquidado) no mesmo dia. Ainda não foi pago.",
+     "problema": "A lei manda reservar o dinheiro (empenhar) antes de contratar a despesa, justamente para a Prefeitura não gastar o que não tem. Registrar o empenho três meses depois do show indica que a despesa foi feita sem reserva de dinheiro. Além disso, R$ 300 mil por um único show é mais que o orçamento do ano inteiro da Agricultura (R$ 299.576).",
+     "lei": "Lei 4.320/1964, art. 60 (é proibido fazer despesa sem empenho prévio). Lei 14.133/2021, art. 74, II (artista só sem licitação pelo empresário exclusivo) e art. 72, VII (justificativa de preço). LRF, art. 15 e 16 (despesa sem cobertura é irregular).",
+     "conferir": [
+      "Nota de empenho 2026111000001 e a explicação para a data de 10/11",
+      "Contrato de exclusividade entre o artista e a MDB Shows",
+      "Notas fiscais de outros shows do artista no mesmo período, para comparar o cachê",
+      "Data exata do show e o que estava incluído nos R$ 300 mil (cachê, palco, som, hospedagem)"
+     ],
+     "fontes": [
+      "https://www.diariomunicipal.com.br/ama/download/materia/B9213BC4"
+     ]
+    },
+    "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false"
+   }
+  ],
+  "folha_mensal": [
+   {
+    "mes": "2026-01",
+    "efetivos": 1694168.54,
+    "contratados": 1154830.04,
+    "encargos": 1390026.79,
+    "outros": 155858.19,
+    "sentencas": 0,
+    "total": 4394883.56,
+    "pago": 4328933.24
+   },
+   {
+    "mes": "2026-02",
+    "efetivos": 1705110.69,
+    "contratados": 1370128.24,
+    "encargos": 363044.41,
+    "outros": 123100.68,
+    "sentencas": 0,
+    "total": 3561384.02,
+    "pago": 3561384.02
+   },
+   {
+    "mes": "2026-03",
+    "efetivos": 1755930.49,
+    "contratados": 1425780.5,
+    "encargos": 273919.99,
+    "outros": 51733.49,
+    "sentencas": 2065.48,
+    "total": 3507364.47,
+    "pago": 3509429.9
+   },
+   {
+    "mes": "2026-04",
+    "efetivos": 1652412.92,
+    "contratados": 1470667.87,
+    "encargos": 320988.35,
+    "outros": 27821.11,
+    "sentencas": 1830464.74,
+    "total": 3471890.25,
+    "pago": 5302354.99
+   },
+   {
+    "mes": "2026-05",
+    "efetivos": 1667528.33,
+    "contratados": 1475936.7,
+    "encargos": 1091224.97,
+    "outros": 73402.81,
+    "sentencas": 0,
+    "total": 4308092.81,
+    "pago": 4308092.81
+   },
+   {
+    "mes": "2026-06",
+    "efetivos": 1792947.51,
+    "contratados": 1323785.55,
+    "encargos": 411361.8,
+    "outros": 56553.53,
+    "sentencas": 13373.96,
+    "total": 3584648.39,
+    "pago": 3597332.85
+   },
+   {
+    "mes": "2026-07",
+    "efetivos": 1692522.77,
+    "contratados": 1497273.45,
+    "encargos": 450371.31,
+    "outros": 65627.25,
+    "sentencas": 0,
+    "total": 3705794.78,
+    "pago": 3692982.33
+   },
+   {
+    "mes": "2026-08",
+    "efetivos": 1748163.95,
+    "contratados": 1566196.44,
+    "encargos": 340849.01,
+    "outros": 48019.05,
+    "sentencas": 0,
+    "total": 3703228.45,
+    "pago": 3667468.91
+   },
+   {
+    "mes": "2026-09",
+    "efetivos": 1657006.32,
+    "contratados": 1553083.36,
+    "encargos": 676578.88,
+    "outros": 37471.4,
+    "sentencas": 0,
+    "total": 3924139.96,
+    "pago": 3423757.43
+   }
+  ],
+  "folha_obs": "Soma dos empenhos de pessoal registrados em cada mês no portal Kalana (Prefeitura e fundos). \"Efetivos\" = salário de servidores concursados e comissionados; \"contratados\" = contratos temporários; \"encargos\" = contribuição patronal ao INSS e à previdência; \"outros\" = gratificações e despesas variáveis. Não inclui condenações judiciais (mostradas à parte). O mês em curso pode estar incompleto até a Prefeitura registrar a folha."
  }
 }
