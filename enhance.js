@@ -219,6 +219,47 @@
     [['ck-red', 'Vermelho', 'alerta grave: pede explicação'], ['ck-amb', 'Laranja', 'atenção: precisa conferir'], ['ck-neu', 'Cinza e azul', 'informação, sem problema encontrado']].forEach(([c, t, d]) => { const s = el('span', 'ck ' + c); s.append(el('b', null, t), document.createTextNode(' = ' + d)); box.append(s); });
   });
 
+
+  /* gastos reais (empenhos e pagamentos) */
+  const realData = () => { const d = dash.data('despesas_reais'); return d.status === 'ok' && d.data && !Array.isArray(d.data) ? d.data : null; };
+  const brDate = s => s ? s.split('-').reverse().join('/') : '';
+  const daysSince = s => Math.floor((Date.now() - new Date(s + 'T12:00:00-03:00').getTime()) / 864e5);
+  dash.draw('reaisCamara', box => {
+    box.replaceChildren();
+    const D = realData(); if (!D || !D.camara) return; const C = D.camara;
+    const head = el('div', 'rr-head'); head.append(el('h3', null, 'Câmara: últimos gastos publicados'), el('span', 'rr-sub', (+C.total_registros).toLocaleString('pt-BR') + ' empenhos no portal'));
+    box.append(head);
+    const late = daysSince(C.ultima_data);
+    if (late > 3) {
+      const a = el('div', 'rr-alert'); a.append(el('b', null, 'Portal parado há ' + late + ' dias'), document.createTextNode('O último gasto publicado pela Câmara é de ' + brDate(C.ultima_data) + '. A lei manda divulgar cada despesa em tempo real, até o primeiro dia útil depois do registro (LRF, art. 48-A, e Decreto 10.540/2020). Sem isso, ninguém sabe o que a Câmara gastou desde então.'));
+      box.append(a);
+    }
+    const L = C.empenhos.slice().sort((a, b) => b.data.localeCompare(a.data) || b.empenho.localeCompare(a.empenho));
+    const grp = d3.rollups(L, v => d3.sum(v, x => +x.valor), x => /folha/i.test(x.credor) ? 'Folha de pessoal' : /INSS/i.test(x.credor) ? 'Encargos (INSS)' : 'Fornecedores e serviços').sort((a, b) => b[1] - a[1]);
+    const gs = el('div', 'rr-groups'); grp.forEach(([k, v]) => { const s = el('span'); s.append(document.createTextNode(k + ': '), el('b', null, F.brl(v))); gs.append(s); }); box.append(gs);
+    const ul = el('ul', 'rr-list');
+    L.forEach(x => { const li = el('li', +x.valor >= 10000 ? 'big' : ''); const cr = el('span', 'cr', x.credor); if (x.cnpj) cr.append(el('small', null, 'CNPJ ' + x.cnpj + ' · empenho ' + x.empenho)); else cr.append(el('small', null, 'empenho ' + x.empenho)); li.append(el('span', 'dt', brDate(x.data)), cr, el('span', 'vl', F.brl(+x.valor))); ul.append(li); });
+    box.append(ul);
+    const t = el('div', 'rr-tot'); t.append(el('span', null, L.length + ' lançamentos mostrados'), el('b', null, F.brl(d3.sum(L, x => +x.valor)))); box.append(t);
+    box.append(el('p', 'note', 'Os lançamentos não trazem a descrição do gasto (o campo "histórico" vem vazio no portal), o que dificulta saber o que foi pago. A cada 4 horas a atualização automática acrescenta os novos lançamentos que aparecerem.'));
+    const lk = el('div', 'chips'); const a = el('a', 'chip act', 'Abrir despesas da Câmara ↗'); a.href = C.fonte; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); box.append(lk);
+  });
+  dash.draw('reaisPref', box => {
+    box.replaceChildren();
+    const D = realData(); if (!D || !D.prefeitura) return; const P = D.prefeitura;
+    const head = el('div', 'rr-head'); head.append(el('h3', null, 'Prefeitura: gastos pagos'), el('span', 'rr-sub', P.empenhos.length ? P.empenhos.length + ' lançamentos' : 'portal Kalana')); box.append(head);
+    if (!P.empenhos.length) {
+      const a = el('div', 'rr-alert amb'); a.append(el('b', null, 'Os pagamentos da Prefeitura não estão abertos'), document.createTextNode('O site da Prefeitura manda o cidadão para o portal Kalana, que não deixa os dados serem lidos de forma automática. Por isso ainda não dá para mostrar aqui quem recebeu, quanto e quando.'));
+      box.append(a);
+      const b = el('div', 'rr-blocked'); b.append(el('b', null, 'Como destravar:'));
+      const ol = el('ol', 'fl'); ['Abra o portal Kalana pelo botão abaixo num computador e use o botão de exportar (planilha) das despesas de 2026.', 'Mande o arquivo aqui na conversa: os pagamentos entram no site com alertas e explicações.', 'Ou peça pela Lei de Acesso à Informação a relação de empenhos, liquidações e pagamentos de 2026 por credor.'].forEach(s => ol.append(el('li', null, s)));
+      b.append(ol); box.append(b);
+    } else {
+      const ul = el('ul', 'rr-list'); P.empenhos.slice().sort((a, b) => b.data.localeCompare(a.data)).forEach(x => { const li = el('li', +x.valor >= 50000 ? 'big' : ''); const cr = el('span', 'cr', x.credor); cr.append(el('small', null, [x.secretaria, x.historico].filter(Boolean).join(' · '))); li.append(el('span', 'dt', brDate(x.data)), cr, el('span', 'vl', F.brl(+x.valor))); ul.append(li); }); box.append(ul);
+    }
+    const lk = el('div', 'chips'); const a = el('a', 'chip act', 'Abrir despesas da Prefeitura (Kalana) ↗'); a.href = P.fonte; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); box.append(lk);
+  });
+
   /* contadores animados */
   function countUp(node) {
     const txt = node.textContent; const m = txt.match(/^(.*?)(\d{1,3}(?:\.\d{3})*(?:,\d+)?)(.*)$/);

@@ -1,0 +1,106 @@
+{
+ "camara": {
+  "total_registros": 4445,
+  "ultima_data": "2026-09-30",
+  "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas",
+  "consultado_em": "2026-11-12",
+  "empenhos": [
+   {
+    "empenho": "2026093000002",
+    "data": "2026-09-30",
+    "credor": "União dos Vereadores do Estado de Alagoas – UVEAL",
+    "cnpj": "11.918.182/0001-09",
+    "valor": 450.0,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   },
+   {
+    "empenho": "2026093000001",
+    "data": "2026-09-30",
+    "credor": "INSS",
+    "cnpj": "29.979.036/0001-40",
+    "valor": 22604.23,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   },
+   {
+    "empenho": "2026092500001",
+    "data": "2026-09-25",
+    "credor": "Banco do Brasil S.A.",
+    "cnpj": "",
+    "valor": 13.27,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   },
+   {
+    "empenho": "2026092400001",
+    "data": "2026-09-24",
+    "credor": "Banco do Brasil S.A.",
+    "cnpj": "",
+    "valor": 26.54,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   },
+   {
+    "empenho": "2026092300001",
+    "data": "2026-09-23",
+    "credor": "P S Telecom Ltda",
+    "cnpj": "12.621.414/0001-17",
+    "valor": 500.0,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   },
+   {
+    "empenho": "2026092100001",
+    "data": "2026-09-21",
+    "credor": "Equatorial (energia)",
+    "cnpj": "12.272.084/0001-00",
+    "valor": 175.68,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   },
+   {
+    "empenho": "2026091800007",
+    "data": "2026-09-18",
+    "credor": "Folha de pessoal",
+    "cnpj": "",
+    "valor": 196.41,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   },
+   {
+    "empenho": "2026091800006",
+    "data": "2026-09-18",
+    "credor": "Folha de pessoal",
+    "cnpj": "",
+    "valor": 1178.45,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   },
+   {
+    "empenho": "2026091800005",
+    "data": "2026-09-18",
+    "credor": "Folha de pessoal",
+    "cnpj": "",
+    "valor": 1621.0,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   },
+   {
+    "empenho": "2026091800004",
+    "data": "2026-09-18",
+    "credor": "Folha de pessoal",
+    "cnpj": "",
+    "valor": 65305.37,
+    "historico": "",
+    "fonte": "https://www.camaradebarradesaomiguel.al.gov.br/despesas"
+   }
+  ]
+ },
+ "prefeitura": {
+  "status": "bloqueado",
+  "fonte": "https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false",
+  "consultado_em": "2026-11-12",
+  "empenhos": []
+ }
+}

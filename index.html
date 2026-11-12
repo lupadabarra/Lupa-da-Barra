@@ -359,6 +359,27 @@ html body #ocultos .part .num{background:linear-gradient(135deg,#f59e0b,#f97316)
 html body #pessoal .part .num{background:linear-gradient(135deg,#f59e0b,#f97316)!important}
 html body .bsm .sumline b{color:var(--alert)}
 html body .bsm .spot.amber{background:transparent;border:0;padding:0}
+
+/* gastos reais */
+html body #gastos-reais .part .num{font-size:15px!important;background:linear-gradient(135deg,#0f766e,#14b8a6)!important}
+.rr-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:8px;margin-bottom:10px}
+.rr-head h3{margin:0}
+.rr-sub{font-size:13px;color:#55627d}
+.rr-alert{border-radius:14px;padding:12px 14px;margin:8px 0 14px;font-size:14px;line-height:1.55;background:linear-gradient(135deg,#e11d48,#f43f5e);color:#fff;box-shadow:0 14px 30px -16px rgba(225,29,72,.7)}
+.rr-alert b{color:#fff!important;display:block;font-size:15.5px;margin-bottom:2px}
+.rr-alert.amb{background:linear-gradient(135deg,#f59e0b,#f97316);box-shadow:0 14px 30px -16px rgba(245,158,11,.7)}
+.rr-list{display:flex;flex-direction:column;gap:2px;margin:0;padding:0;list-style:none}
+.rr-list li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;padding:10px 6px;border-bottom:1px solid #eef2f8;font-size:14px}
+.rr-list .dt{font-variant-numeric:tabular-nums;color:#7a879f;font-size:12.5px;white-space:nowrap}
+.rr-list .cr{color:#33415c}.rr-list .cr small{display:block;color:#94a3b8;font-size:11.5px}
+.rr-list .vl{font-family:'Space Grotesk',sans-serif;font-weight:700;color:#0b1b3a;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rr-list li.big .vl{color:#b45309}
+.rr-tot{display:flex;justify-content:space-between;align-items:baseline;padding:12px 6px 4px;font-weight:600;color:#0b1b3a}
+.rr-tot b{font-family:'Space Grotesk',sans-serif;font-size:22px}
+.rr-groups{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 12px}
+.rr-groups span{font-size:12.5px;padding:6px 10px;border-radius:999px;background:#f1f5f9;color:#475569}
+.rr-groups span b{color:#0b1b3a}
+.rr-blocked{border-radius:16px;padding:18px;background:#f8fafc;border:1.5px dashed #cbd5e1;color:#33415c;font-size:14.5px;line-height:1.6}
 </style></head><body>
 
 <style>
@@ -514,7 +535,7 @@ html body .bsm .spot.amber{background:transparent;border:0;padding:0}
 
 <div class="progress" aria-hidden="true"><i></i></div>
 <header class="topbar"><a class="tb-brand" href="#topo"><span class="tb-logo" aria-hidden="true"></span>Lupa<em>da</em>Barra<span class="tb-sub">Barra de São Miguel/AL</span></a>
-<nav class="tb-nav" aria-label="Seções"><a href="#incomuns">Alertas</a><a href="#pessoal">Funcionários</a><a href="#ocultos">O que não aparece</a><a href="#prefeitura">Prefeitura</a><a href="#lrf">Limites</a><a href="#contratacoes">Fornecedores</a><a href="#camara">Câmara</a><a href="#fontes">Fontes</a></nav></header>
+<nav class="tb-nav" aria-label="Seções"><a href="#incomuns">Alertas</a><a href="#gastos-reais">Gastos reais</a><a href="#pessoal">Funcionários</a><a href="#ocultos">O que não aparece</a><a href="#prefeitura">Prefeitura</a><a href="#lrf">Limites</a><a href="#contratacoes">Fornecedores</a><a href="#camara">Câmara</a><a href="#fontes">Fontes</a></nav></header>
 <button class="totop" type="button" aria-label="Voltar ao topo">↑</button>
 <div class="bsm" data-read lang="pt-BR">
   <header class="hero" id="topo">
@@ -548,6 +569,15 @@ html body .bsm .spot.amber{background:transparent;border:0;padding:0}
         <div><b data-source="inc_resumo" data-field="valor" data-where="indicador=sem" data-draw="i_sem">—</b>foram feitos sem concorrência</div>
       </div>
       <div class="incgrid" data-source="contratacoes" data-draw="incomuns"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="gastos-reais">
+    <div class="part"><div class="num">R$</div><div><p class="eyebrow">Dinheiro que já saiu do cofre</p><h2>Gastos reais: empenhos e pagamentos</h2></div></div>
+    <p class="lead" style="margin:0">Aqui não é edital nem contrato: é a despesa de verdade, o dinheiro que a Prefeitura e a Câmara já comprometeram (empenho) ou pagaram, como aparece nos portais da transparência.</p>
+    <div class="grid2">
+      <div class="card" id="reais-camara"><div data-draw="reaisCamara"></div></div>
+      <div class="card" id="reais-prefeitura"><div data-draw="reaisPref"></div></div>
     </div>
   </section>
 
@@ -703,6 +733,6 @@ data(id){if(DS[id])return{status:'ok',data:DS[id]};const c=this._c[id];if(c){if(
 calc(id,o){this._c[id]=o},draw(n,fn){if(fn)this._d[n]=fn;else this._run(n)},onData(f){this._on.push(f)},
 _run(n){const fn=this._d[n];document.querySelectorAll('[data-draw="'+n+'"]').forEach(el=>{try{fn(el)}catch(e){console.error(n,e)}})},
 _all(){Object.keys(this._d).forEach(n=>this._run(n));this._on.forEach(f=>f())}};
-const IDS=['pessoal','funcao','orgao','loa','modalidades','contratacoes','vereadores','camara_amostras','camara_registros','municipio','status'];
+const IDS=['despesas_reais','pessoal','funcao','orgao','loa','modalidades','contratacoes','vereadores','camara_amostras','camara_registros','municipio','status'];
 Promise.all(IDS.map(i=>fetch('data/'+i+'.json?v='+Date.now()).then(r=>r.json()).then(j=>{DS[i]=j}).catch(()=>{}))).then(()=>{const s=document.createElement('script');s.src='app.js?v='+Date.now();s.onload=()=>{const e=document.createElement('script');e.src='enhance.js?v='+Date.now();e.onload=()=>dash._all();document.body.appendChild(e);};document.body.appendChild(s);});</script>
 </body></html>
