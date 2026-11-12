@@ -439,6 +439,59 @@ html body #gastos-reais .part .num{font-size:15px!important;background:linear-gr
 .fm-obs{margin:14px 0 6px;border-radius:14px;padding:14px 16px;background:#fff8eb;border:2px solid #f59e0b;color:#5b3203;font-size:14.5px;line-height:1.6}
 .fm-obs b{display:block;font-size:16px;color:#7c2d12;margin-bottom:4px}
 @media (max-width:640px){.gt{grid-template-columns:1fr}.gd-r{grid-template-columns:1fr}.fm-hero{grid-template-columns:1fr}.gi-top{grid-template-columns:auto 1fr}.gi-vl{grid-column:2}.fm-cv{font-size:9.5px}.gi-btn{margin-left:0;width:100%}}
+
+/* ===== versão limpa: menu de botões, seções que abrem e fecham, tudo explicável ===== */
+.menu-grid{max-width:1180px;margin:8px auto 18px;padding:0 16px}
+.mg-t{font-size:clamp(20px,3vw,26px);margin:6px 0 12px;color:#0b1b3a}
+.mg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.mg-b{display:flex;flex-direction:column;gap:4px;padding:14px 14px 16px;border-radius:18px;background:#fff;border:1.5px solid #dbe4f3;text-decoration:none;color:#0b1b3a;box-shadow:0 10px 24px -20px rgba(11,27,58,.5);transition:transform .15s,border-color .15s,box-shadow .15s;min-height:112px}
+.mg-b:hover,.mg-b:focus-visible{transform:translateY(-2px);border-color:#2563eb;box-shadow:0 16px 30px -18px rgba(37,99,235,.55)}
+.mg-b b{font-size:16px;line-height:1.25}.mg-b small{font-size:13px;line-height:1.4;color:#55627d}
+.mg-i{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font:800 14px/1 'Space Grotesk',sans-serif;color:#fff;background:linear-gradient(135deg,#2563eb,#0ea5e9);margin-bottom:4px}
+.mg-b.hot{border-color:#fecdd3;background:linear-gradient(180deg,#fff1f3,#fff)}.mg-b.hot .mg-i{background:linear-gradient(135deg,#e11d48,#f43f5e)}
+.mg-n{margin:12px 2px 0;font-size:13.5px;color:#55627d}
+html body .bsm .hstat[data-xp]{cursor:pointer}
+html body .bsm .hstat[data-xp] .hn{text-decoration:underline dotted;text-underline-offset:3px}
+section.sec.fold{padding-top:10px!important;padding-bottom:10px!important}
+.sec-head{all:unset;box-sizing:border-box;display:block;width:100%;cursor:pointer;border-radius:20px;padding:14px 16px;background:#fff;border:1.5px solid #dbe4f3;box-shadow:0 10px 24px -22px rgba(11,27,58,.5);position:relative}
+.sec-head:hover,.sec-head:focus-visible{border-color:#2563eb}
+.sec-head:focus-visible{outline:3px solid #93c5fd;outline-offset:2px}
+.sec-head .part{margin:0!important;pointer-events:none}
+.sec-head h2{font-size:clamp(19px,2.6vw,26px)!important;margin:0!important}
+.sec-sum{display:block;margin:6px 0 0;font-size:14px;color:#55627d;padding-right:84px}
+.sec-cta{position:absolute;right:14px;bottom:14px;padding:8px 14px;border-radius:999px;background:#2563eb;color:#fff;font:600 13.5px 'Inter',sans-serif}
+.sec-cta::after{content:" ▾"}.is-open .sec-cta{background:#0b1b3a}.is-open .sec-cta::after{content:" ▴"}
+.is-open .sec-head{border-color:#2563eb;background:#f5f8ff}
+.sec-body{padding-top:16px}
+.sec-body[hidden]{display:none!important}
+.xp{cursor:pointer}
+.xp:focus-visible{outline:3px solid #93c5fd;outline-offset:2px;border-radius:8px}
+b.xp,span.xp:not(.gi-tt),.hv.xp,div.v.xp{text-decoration:underline dotted #94a3b8;text-underline-offset:4px}
+.gt-c.xp::after,.fm-s.xp::after,.fm-big.xp::after,.rr-tot.xp::after,.hstat[data-xp] .hk::after{content:"ⓘ";font-size:13px;opacity:.6;margin-left:6px}
+.gt-c.xp,.fm-s.xp,.fm-big.xp{position:relative}.gt-c.xp::after,.fm-s.xp::after,.fm-big.xp::after{position:absolute;top:8px;right:10px}
+.rr-list li.xp:hover,.gi-top.xp:hover{background:#f5f8ff;border-radius:10px}
+.fm-col.xp:hover .fm-stack{filter:brightness(1.08)}
+body.xp-open{overflow:hidden}
+.xp-ov{position:fixed;inset:0;z-index:1000;background:rgba(11,27,58,.45);display:flex;align-items:flex-end;justify-content:center;padding:0;animation:xpf .15s ease}
+@keyframes xpf{from{opacity:0}to{opacity:1}}
+.xp-card{position:relative;width:min(640px,100%);max-height:88vh;overflow:auto;background:#fff;border-radius:22px 22px 0 0;padding:20px 18px 18px;box-shadow:0 -20px 60px -20px rgba(0,0,0,.4);font-family:'Inter',sans-serif;color:#33415c}
+@media (min-width:720px){.xp-ov{align-items:center;padding:20px}.xp-card{border-radius:22px}}
+.xp-x{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:0;background:#f1f5f9;font-size:24px;line-height:1;cursor:pointer;color:#0b1b3a}
+.xp-k{font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#2563eb;padding-right:44px}
+.xp-v{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(26px,6vw,38px);color:#0b1b3a;margin:4px 0 6px}
+.xp-s{margin-top:12px}.xp-sk{font-size:13px;font-weight:700;color:#0b1b3a;margin-bottom:2px}
+.xp-s p,.xp-s li{font-size:15px;line-height:1.6;margin:0}.xp-s ul{margin:0;padding-left:20px}
+.xp-act{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.xp-b,.xp-b2{flex:1 1 160px;text-align:center;padding:12px 16px;border-radius:14px;font:700 14.5px 'Inter',sans-serif;cursor:pointer;text-decoration:none}
+.xp-b{border:0;background:linear-gradient(135deg,#2563eb,#0ea5e9);color:#fff}.xp-b2{border:1.5px solid #c9d5ee;background:#fff;color:#1d4ed8}
+@media (max-width:860px){.mg{grid-template-columns:repeat(2,minmax(0,1fr))}.mg-b{min-height:0}}
+@media (max-width:420px){.mg-b small{font-size:12.5px}.sec-sum{padding-right:0;margin-bottom:40px}}
+
+.sec-head .rv,.sec-head .part{opacity:1!important;transform:none!important}
+.bsm>section.sec.fold+section.sec.fold{margin-top:calc(var(--cds-gap-xl)*-1.6 + 12px)}
+.bsm>section.sec.fold.is-open{margin-bottom:12px}
+
+.bsm .hstat.alert::after{display:none!important}
 </style></head><body>
 
 <style>
@@ -594,7 +647,7 @@ html body #gastos-reais .part .num{font-size:15px!important;background:linear-gr
 
 <div class="progress" aria-hidden="true"><i></i></div>
 <header class="topbar"><a class="tb-brand" href="#topo"><span class="tb-logo" aria-hidden="true"></span>Lupa<em>da</em>Barra<span class="tb-sub">Barra de São Miguel/AL</span></a>
-<nav class="tb-nav" aria-label="Seções"><a href="#incomuns">Alertas</a><a href="#gastos-reais">Gastos reais</a><a href="#pessoal">Funcionários</a><a href="#ocultos">O que não aparece</a><a href="#prefeitura">Prefeitura</a><a href="#lrf">Limites</a><a href="#contratacoes">Fornecedores</a><a href="#camara">Câmara</a><a href="#fontes">Fontes</a></nav></header>
+<nav class="tb-nav" aria-label="Seções"><a href="#incomuns">Alertas</a><a href="#gastos-reais">Gastos da Prefeitura</a><a href="#pessoal">Funcionários</a><a href="#camara">Câmara</a><a href="#contratacoes">Contratos</a><a href="#prefeitura">Orçamento</a><a href="#fontes">Fontes</a></nav></header>
 <button class="totop" type="button" aria-label="Voltar ao topo">↑</button>
 <div class="bsm" data-read lang="pt-BR">
   <header class="hero" id="topo">
@@ -608,16 +661,28 @@ html body #gastos-reais .part .num{font-size:15px!important;background:linear-gr
       <p class="tag-line">Em palavras simples: quanto a Prefeitura e a Câmara têm para gastar, com quem gastam e o que parece fora do normal. Cada número tem a fonte. Toque em qualquer cartão, barra ou linha para ver mais.</p>
     </div>
     <div class="hstats">
-      <a class="hstat" href="#prefeitura"><div class="hk">Orçamento 2026</div><div class="hv" data-source="resumo" data-field="valor" data-where="indicador=total" data-draw="h_total">—</div><div class="hn">da Prefeitura · <span data-draw="h_pc">—</span> por morador</div></a>
-      <a class="hstat alert" href="#incomuns"><div class="hk">Gastos incomuns</div><div class="hv" data-source="inc_resumo" data-field="valor" data-where="indicador=total" data-draw="h_inc">—</div><div class="hn"><span data-source="inc_resumo" data-field="valor" data-where="indicador=qtd" data-draw="h_inc_qtd">—</span> contratos que chamam atenção</div></a>
-      <a class="hstat" href="#rank-modalidade"><div class="hk">Sem concorrência</div><div class="hv" data-source="ctr_resumo" data-field="valor" data-where="indicador=sem_licit" data-draw="h_sem">—</div><div class="hn">pagos sem disputa entre empresas</div></a>
-      <a class="hstat" href="#camara"><div class="hk">Câmara Municipal</div><div class="hv" data-source="orgao" data-field="total" data-where="orgao=Câmara Municipal" data-draw="h_cam">—</div><div class="hn">orçamento 2026 · 9 vereadores</div></a>
+      <div class="hstat" data-xp="h_pago" data-go="#gastos-reais"><div class="hk">Prefeitura já pagou em 2026</div><div class="hv" data-draw="h_pago">—</div><div class="hn">toque para entender</div></div>
+      <div class="hstat" data-xp="h_folha" data-go="#pessoal"><div class="hk">Folha da Prefeitura no mês</div><div class="hv" data-draw="h_folha">—</div><div class="hn" data-draw="h_folha_mes">toque para entender</div></div>
+      <div class="hstat alert" data-xp="h_inc" data-go="#incomuns"><div class="hk">Contratos</div><div class="hv" data-source="inc_resumo" data-field="valor" data-where="indicador=total" data-draw="h_inc">—</div><div class="hn"><span data-source="inc_resumo" data-field="valor" data-where="indicador=qtd" data-draw="h_inc_qtd">—</span> contratos para conferir</div></div>
+      <div class="hstat" data-xp="h_cam" data-go="#camara"><div class="hk">Câmara: orçamento 2026</div><div class="hv" data-source="orgao" data-field="total" data-where="orgao=Câmara Municipal" data-draw="h_cam">—</div><div class="hn">9 vereadores · toque para entender</div></div>
     </div>
-    <nav class="tabs" id="menu"><a class="hot" href="#incomuns">Gastos incomuns</a><a href="#ocultos">O que não aparece</a><a href="#prefeitura">Prefeitura</a><a href="#rank-fornecedores">Fornecedores</a><a href="#tetos">Tetos legais</a><a href="#camara">Câmara e vereadores</a><a href="#fontes">Fontes</a></nav>
   </header>
 
-  <div class="ticker" data-draw="ticker" aria-label="Maiores alertas"></div>
-  <div class="colorkey" data-draw="colorKey"></div>
+  <nav class="menu-grid" aria-label="O que você quer ver?">
+    <h2 class="mg-t">O que você quer ver?</h2>
+    <div class="mg">
+      <a class="mg-b hot" href="#incomuns"><span class="mg-i" aria-hidden="true">!</span><b>Alertas</b><small>Gastos e contratos que pedem explicação</small></a>
+      <a class="mg-b" href="#gastos-reais"><span class="mg-i" aria-hidden="true">R$</span><b>Gastos da Prefeitura</b><small>Os 20 maiores e todos os pagamentos de 2026</small></a>
+      <a class="mg-b" href="#pessoal"><span class="mg-i" aria-hidden="true">%</span><b>Funcionários</b><small>Quanto custa a folha por mês</small></a>
+      <a class="mg-b" href="#camara"><span class="mg-i" aria-hidden="true">9</span><b>Câmara de Vereadores</b><small>Vereadores, gastos e contratos da Câmara</small></a>
+      <a class="mg-b" href="#contratacoes"><span class="mg-i" aria-hidden="true">✎</span><b>Contratos</b><small>Quem recebe e como foi escolhido</small></a>
+      <a class="mg-b" href="#prefeitura"><span class="mg-i" aria-hidden="true">≡</span><b>Orçamento e limites</b><small>Para onde vai o dinheiro e o que a lei permite</small></a>
+      <a class="mg-b" href="#ocultos"><span class="mg-i" aria-hidden="true">?</span><b>O que não aparece</b><small>Informações que a Prefeitura não publica</small></a>
+      <a class="mg-b" href="#fontes"><span class="mg-i" aria-hidden="true">i</span><b>Fontes e palavras</b><small>De onde vêm os dados e o que significam</small></a>
+    </div>
+    <p class="mg-n">Dica: toque em qualquer número, barra ou linha para ver o que ele significa e de onde veio.</p>
+  </nav>
+
 
   <section class="sec" id="incomuns">
     <div class="part red"><div class="num">01</div><div><p class="eyebrow">Alertas</p><h2>Gastos incomuns</h2></div></div>
@@ -632,10 +697,9 @@ html body #gastos-reais .part .num{font-size:15px!important;background:linear-gr
   </section>
 
   <section class="sec" id="gastos-reais">
-    <div class="part"><div class="num">R$</div><div><p class="eyebrow">Dinheiro que já saiu do cofre</p><h2>Gastos reais: empenhos e pagamentos</h2></div></div>
-    <p class="lead" style="margin:0">Aqui não é edital nem contrato: é a despesa de verdade, o dinheiro que a Prefeitura e a Câmara já comprometeram (empenho) ou pagaram, como aparece nos portais da transparência.</p>
+    <div class="part"><div class="num">R$</div><div><p class="eyebrow">Dinheiro que já saiu do cofre</p><h2>Gastos da Prefeitura</h2></div></div>
+    <p class="lead" style="margin:0">Aqui não é edital nem contrato: é a despesa de verdade, o dinheiro que a Prefeitura já comprometeu (empenho) ou pagou, como aparece nos portais da transparência.</p>
     <div class="card" id="reais-prefeitura"><div data-draw="reaisPref"></div></div>
-    <div class="card" id="reais-camara" style="margin-top:var(--cds-gap-lg,20px)"><div data-draw="reaisCamara"></div></div>
   </section>
 
   <section class="sec" id="pessoal">
@@ -734,6 +798,7 @@ html body #gastos-reais .part .num{font-size:15px!important;background:linear-gr
 
   <section class="sec" id="camara">
     <div class="part"><div class="num">06</div><div><p class="eyebrow">Câmara Municipal de Barra de São Miguel/AL</p><h2>Os 9 vereadores e os gastos da Câmara</h2></div></div>
+    <div class="card" id="reais-camara"><div data-draw="reaisCamara"></div></div>
     <div class="regs" data-source="camara_registros" data-draw="camRegs"></div>
     <div class="vgrid" data-source="vereadores" data-draw="vereadores"></div>
     <div class="grid2">

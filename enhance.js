@@ -224,6 +224,16 @@
   const realData = () => { const d = dash.data('despesas_reais'); return d.status === 'ok' && d.data && !Array.isArray(d.data) ? d.data : null; };
   const brDate = s => s ? s.split('-').reverse().join('/') : '';
   const daysSince = s => Math.floor((Date.now() - new Date(s + 'T12:00:00-03:00').getTime()) / 864e5);
+  const CAMX = [[/folha/i, 'Salários pagos pela Câmara (vereadores e servidores). O portal da Câmara divide a folha do mês em vários lançamentos, por isso aparecem valores diferentes no mesmo dia.', 'A Constituição proíbe a Câmara de gastar mais de 70% do que recebe com folha (art. 29-A, § 1º).'],
+    [/INSS|seguro social/i, 'Contribuição que a Câmara paga ao INSS sobre os salários. É obrigatória.', 'Atraso nessa contribuição gera multa e juros pagos com dinheiro público.'],
+    [/banco do brasil/i, 'Tarifa cobrada pelo banco onde a Câmara tem conta.', 'Valor pequeno; vale conferir se a Câmara negociou isenção de tarifas.'],
+    [/equatorial|energia/i, 'Conta de energia elétrica do prédio da Câmara.', ''],
+    [/telecom|veloo/i, 'Internet da Câmara (P S Telecom / Veloo Telecom). O contrato foi feito sem licitação em 2023 e prorrogado pela 3ª vez em outubro de 2026, sem o valor publicado no aditivo.', 'Internet é serviço comum, oferecido por várias empresas. Veja o alerta deste contrato na lista de contratos da Câmara.'],
+    [/vereadores|UVEAL/i, 'Contribuição à União dos Vereadores do Estado de Alagoas, associação que reúne vereadores do estado.', 'Pagar associação com dinheiro público precisa de autorização em lei e de benefício claro para a Câmara.']];
+  function camExplain(x, C) {
+    const m = CAMX.find(([r]) => r.test(x.credor)) || [null, 'Gasto registrado pela Câmara com este credor.', ''];
+    return {t: x.credor, v: F.brl(+x.valor), o: m[1], c: ['Empenho nº ' + x.empenho + ', registrado em ' + brDate(x.data) + '.', x.cnpj ? 'CNPJ do credor: ' + x.cnpj + '.' : 'O portal não informa CNPJ para este credor.', 'O portal da Câmara deixa vazio o campo "histórico", que deveria dizer para que foi o gasto.'], p: m[2] || 'A lei manda publicar cada gasto em tempo real e com a descrição do que foi pago (LRF, art. 48-A).', f: 'Portal da transparência da Câmara Municipal.', link: C.fonte, linkT: 'Abrir o portal da Câmara ↗'};
+  }
   dash.draw('reaisCamara', box => {
     box.replaceChildren();
     const D = realData(); if (!D || !D.camara) return; const C = D.camara;
@@ -236,11 +246,12 @@
     }
     const L = C.empenhos.slice().sort((a, b) => b.data.localeCompare(a.data) || b.empenho.localeCompare(a.empenho));
     const grp = d3.rollups(L, v => d3.sum(v, x => +x.valor), x => /folha/i.test(x.credor) ? 'Folha de pessoal' : /INSS/i.test(x.credor) ? 'Encargos (INSS)' : 'Fornecedores e serviços').sort((a, b) => b[1] - a[1]);
-    const gs = el('div', 'rr-groups'); grp.forEach(([k, v]) => { const s = el('span'); s.append(document.createTextNode(k + ': '), el('b', null, F.brl(v))); gs.append(s); }); box.append(gs);
+    const GEXP = {'Folha de pessoal': 'Salários de vereadores e servidores da Câmara. O portal da Câmara divide a folha do mês em vários lançamentos.', 'Encargos (INSS)': 'Contribuição obrigatória da Câmara ao INSS sobre os salários que paga.', 'Fornecedores e serviços': 'Pagamentos a empresas e entidades: internet, energia, tarifas do banco, associações etc.'};
+    const gs = el('div', 'rr-groups'); grp.forEach(([k, v]) => { const s = el('span'); s.append(document.createTextNode(k + ': '), el('b', null, F.brl(v))); xpd(s, {t: k + ' (Câmara)', v: F.brl(v), o: GEXP[k], c: 'Soma dos lançamentos desse tipo entre os ' + L.length + ' mostrados abaixo (os mais recentes publicados no portal da Câmara).', f: 'Portal da transparência da Câmara Municipal.', link: C.fonte, linkT: 'Abrir o portal da Câmara ↗'}); gs.append(s); }); box.append(gs);
     const ul = el('ul', 'rr-list');
-    L.forEach(x => { const li = el('li', +x.valor >= 10000 ? 'big' : ''); const cr = el('span', 'cr', x.credor); if (x.cnpj) cr.append(el('small', null, 'CNPJ ' + x.cnpj + ' · empenho ' + x.empenho)); else cr.append(el('small', null, 'empenho ' + x.empenho)); li.append(el('span', 'dt', brDate(x.data)), cr, el('span', 'vl', F.brl(+x.valor))); ul.append(li); });
+    L.forEach(x => { const li = el('li', +x.valor >= 10000 ? 'big' : ''); const cr = el('span', 'cr', x.credor); if (x.cnpj) cr.append(el('small', null, 'CNPJ ' + x.cnpj + ' · empenho ' + x.empenho)); else cr.append(el('small', null, 'empenho ' + x.empenho)); li.append(el('span', 'dt', brDate(x.data)), cr, el('span', 'vl', F.brl(+x.valor))); xpd(li, () => camExplain(x, C)); ul.append(li); });
     box.append(ul);
-    const t = el('div', 'rr-tot'); t.append(el('span', null, L.length + ' lançamentos mostrados'), el('b', null, F.brl(d3.sum(L, x => +x.valor)))); box.append(t);
+    const t = el('div', 'rr-tot'); t.append(el('span', null, L.length + ' lançamentos mostrados'), el('b', null, F.brl(d3.sum(L, x => +x.valor)))); xpd(t, {t: 'Total dos lançamentos mostrados', v: F.brl(d3.sum(L, x => +x.valor)), o: 'Soma dos ' + L.length + ' gastos mais recentes que o portal da Câmara mostra na primeira página.', c: 'O portal da Câmara tem ' + (+C.total_registros).toLocaleString('pt-BR') + ' gastos registrados desde 2023, mas só mostra 10 de cada vez, sem permitir baixar tudo. Por isso aqui aparecem só os mais recentes de 2026.', f: 'Portal da transparência da Câmara Municipal.', link: C.fonte, linkT: 'Abrir o portal da Câmara ↗'}); box.append(t);
     box.append(el('p', 'note', 'Os lançamentos não trazem a descrição do gasto (o campo "histórico" vem vazio no portal), o que dificulta saber o que foi pago. Todo dia a atualização automática acrescenta os novos lançamentos que aparecerem.'));
     const lk = el('div', 'chips'); const a = el('a', 'chip act', 'Abrir despesas da Câmara ↗'); a.href = C.fonte; a.target = '_blank'; a.rel = 'noopener'; lk.append(a); box.append(lk);
   });
@@ -266,6 +277,11 @@
     d.append(el('p', 'gd-note', 'Isto é um sinal para conferir, não uma acusação. Com a Lei de Acesso à Informação (Lei 12.527/2011), qualquer pessoa pode pedir esses documentos à Prefeitura, que tem até 20 dias para responder.'));
     return d;
   }
+  const TIPOX = [[/obras e instala/i, 'Construção ou reforma (obra).'], [/material de consumo/i, 'Compra de materiais que se gastam com o uso: combustível, remédios, alimentos, material de escritório, peças.'], [/outros servi.os de terceiros - pessoa jur/i, 'Serviço prestado por uma empresa: locação, manutenção, shows, transporte, consultoria etc.'], [/pessoa f.sica/i, 'Serviço prestado por uma pessoa física (sem empresa).'], [/consultoria/i, 'Contratação de consultoria ou assessoria.'], [/subven/i, 'Dinheiro repassado a uma entidade sem fins lucrativos (associação, instituto) para um serviço de interesse público.'], [/equipamento|permanente/i, 'Compra de equipamentos e móveis que duram anos.'], [/exerc.cios anteriores/i, 'Dívida de anos anteriores paga agora (despesa que não foi registrada no ano em que aconteceu).'], [/obriga..es tribut/i, 'Pagamento de impostos e contribuições.'], [/distribui..o gratuita/i, 'Compra de bens para doar à população (cestas, kits, materiais).'], [/tecnologia da informa/i, 'Sistemas, internet e serviços de informática.'], [/d.vida/i, 'Pagamento de dívida da Prefeitura.'], [/im.ve/i, 'Compra ou desapropriação de imóvel.'], [/aux.lio/i, 'Ajuda em dinheiro paga a pessoas (benefícios sociais).']];
+  function gastoSimples(x) {
+    const tp = (TIPOX.find(([r]) => r.test(x.tipo)) || [null, ''])[1];
+    return {t: x.credor, v: F.brl(x.valor), o: 'Tipo de gasto: ' + x.tipo + '.' + (tp ? ' ' + tp : ''), c: ['Reservado (empenho) em ' + brDate(x.data) + ': ' + F.brl(x.valor) + '.', 'Dado como entregue (liquidado): ' + F.brl(x.liquidado) + '.', 'Já pago: ' + F.brl(x.pago) + '.', 'Número do empenho: ' + x.empenho + (x.cnpj ? ' · CNPJ ' + x.cnpj : '') + '.'], p: x.pago < x.liquidado ? 'Há ' + F.brl(x.liquidado - x.pago) + ' entregues e ainda não pagos: é dinheiro que a Prefeitura deve ao credor.' : 'Ainda não analisamos este gasto em detalhe. Se achar estranho, peça à Prefeitura a nota de empenho e o contrato, com base na Lei de Acesso à Informação.', f: 'Portal da transparência da Prefeitura (Kalana).', link: x.fonte || KALANA, linkT: 'Abrir o portal da Prefeitura ↗'};
+  }
   function gastoItem(x, a, pos) {
     const li = el('li', 'gi' + (a ? ' ' + NIV[a.nivel][1] : ''));
     const top = el('div', 'gi-top');
@@ -275,6 +291,7 @@
     mid.append(el('div', 'gi-sub', brDate(x.data) + ' · ' + x.tipo + (x.pago > 0 ? ' · pago ' + F.brl(x.pago) : ' · ainda não pago')));
     top.append(mid, el('span', 'gi-vl', F.brl(x.valor)));
     li.append(top);
+    if (!a) xpd(top, () => gastoSimples(x));
     if (a) {
       const bar = el('div', 'gi-bar');
       bar.append(el('span', 'gi-nv', NIV[a.nivel][0]));
@@ -283,6 +300,8 @@
       let det = null;
       b.addEventListener('click', () => { if (det) { det.remove(); det = null; b.textContent = 'Ver detalhes'; b.setAttribute('aria-expanded', 'false'); return; } det = gastoDetalhe(x, a); li.append(det); b.textContent = 'Fechar detalhes'; b.setAttribute('aria-expanded', 'true'); });
       bar.append(b); li.append(bar);
+      top.classList.add('xp'); top.tabIndex = 0; top.setAttribute('role', 'button'); top.setAttribute('aria-label', x.credor + ', ' + F.brl(x.valor) + '. Toque para ver os detalhes.');
+      top.addEventListener('click', () => b.click()); top.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); b.click(); } });
     }
     return li;
   }
@@ -295,13 +314,16 @@
     } else {
       if (P.totais_2026) {
         const T = P.totais_2026, g = el('div', 'gt');
-        [['Reservado', T.empenhado, 'dinheiro separado para pagar compras, obras e serviços (empenho)'], ['Entregue', T.liquidado, 'o que a Prefeitura diz que já recebeu (liquidado)'], ['Pago', T.pago, 'o que já saiu do cofre da Prefeitura']].forEach(([k, v, n]) => { const c = el('div', 'gt-c'); c.append(el('div', 'gt-k', k + ' em 2026'), el('div', 'gt-v', F.mi(v)), el('div', 'gt-n', n)); g.append(c); });
+        [['Reservado', T.empenhado, 'dinheiro separado para pagar compras, obras e serviços (empenho)'], ['Entregue', T.liquidado, 'o que a Prefeitura diz que já recebeu (liquidado)'], ['Pago', T.pago, 'o que já saiu do cofre da Prefeitura']].forEach(([k, v, n]) => { const c = el('div', 'gt-c'); c.append(el('div', 'gt-k', k + ' em 2026'), el('div', 'gt-v', F.mi(v)), el('div', 'gt-n', n));
+          const XPT = {Reservado: {o: 'Empenho é a reserva do dinheiro: antes de comprar ou contratar, a Prefeitura separa o valor no orçamento. É o primeiro passo do gasto.', c: 'Soma da coluna "valor empenhado" de todos os gastos de 2026.'}, Entregue: {o: 'Liquidação é quando a Prefeitura confere e declara que recebeu o produto, a obra ou o serviço. Só depois disso pode pagar.', c: 'Soma da coluna "valor liquidado" de todos os gastos de 2026.'}, Pago: {o: 'É o dinheiro que de fato saiu da conta da Prefeitura para o fornecedor, o servidor ou o órgão.', c: 'Soma da coluna "valor pago" de todos os gastos de 2026.'}}[k];
+          xpd(c, {t: k + ' em 2026', v: F.brl(v), o: XPT.o, c: XPT.c + ' São ' + (+P.total_registros).toLocaleString('pt-BR') + ' gastos de janeiro até ' + brDate(P.ultima_data) + ', da Prefeitura e dos fundos de Saúde, Educação e Assistência Social.', p: 'A diferença entre reservado e pago mostra quanto ainda está para ser pago. Gasto entregue e não pago pode virar dívida com o fornecedor.', f: 'Portal da transparência da Prefeitura (Kalana).', link: KALANA, linkT: 'Abrir o portal da Prefeitura ↗'});
+          g.append(c); });
         box.append(g);
       }
       box.append(el('h4', 'g-h', 'Os 20 maiores gastos do ano'));
       box.append(el('p', 'g-p', 'Cada linha é um gasto registrado pela Prefeitura em 2026, do maior para o menor. Os salários e encargos dos servidores ficam de fora daqui porque aparecem no destaque da folha, mais abaixo. Toque em "Ver detalhes" para saber se existe contrato, como a empresa foi escolhida e se o valor confere.'));
       const nAl = P.ranking.filter(x => x.analise && x.analise.nivel === 'alerta').length, nAt = P.ranking.filter(x => x.analise && x.analise.nivel === 'atencao').length;
-      const lg = el('div', 'g-leg'); [['nv-alerta', nAl + ' com alerta'], ['nv-atencao', nAt + ' pedem atenção'], ['nv-ok', (P.ranking.length - nAl - nAt) + ' sem problema encontrado']].forEach(([c, t]) => { const s = el('span', c); s.append(el('i'), document.createTextNode(t)); lg.append(s); }); box.append(lg);
+      const lg = el('div', 'g-leg'); [['nv-alerta', nAl + ' com alerta'], ['nv-atencao', nAt + ' pedem atenção'], ['nv-ok', (P.ranking.length - nAl - nAt) + ' sem problema encontrado']].forEach(([c, t]) => { const s = el('span', c); s.append(el('i'), document.createTextNode(t)); xpd(s, {t: 'O que significam as cores', o: ['Vermelho (alerta): encontramos algo que não confere ou que a lei exige e não foi publicado, como contrato não localizado, número de contrato trocado ou empenho feito depois do serviço.', 'Laranja (atenção): o contrato existe, mas tem um ponto que vale acompanhar, como obra com muitos aditivos, parte da obra repassada a outra empresa ou objeto muito amplo.', 'Verde (sem problema encontrado): o contrato existe, foi por concorrência ou é uma obrigação legal, e o valor confere.'], p: 'As cores são sinais para conferir, não acusações. Toque em "Ver detalhes" em cada gasto para ver o motivo.'}); lg.append(s); }); box.append(lg);
       const ul = el('ol', 'g-list'); P.ranking.forEach(x => ul.append(gastoItem(x, x.analise, x.posicao))); box.append(ul);
       if (P.destaques && P.destaques.length) {
         box.append(el('h4', 'g-h', 'Fora do ranking, mas merece atenção'));
@@ -342,6 +364,8 @@
 
   /* destaque: quanto custa a folha por mês */
   const MESN = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+  window.lupaFolhaMes = (m, pop) => { const mn = MESN[+m.mes.slice(5, 7) - 1]; return {t: 'Folha de ' + mn + ' de ' + m.mes.slice(0, 4), v: F.brl(m.total), o: 'Quanto a Prefeitura gastou com quem trabalha para ela neste mês.', c: [F.brl(m.efetivos) + ' com servidores efetivos e comissionados', F.brl(m.contratados) + ' com contratados temporários', F.brl(m.encargos) + ' de encargos (INSS e previdência)', F.brl(m.outros) + ' de gratificações e outros', 'Total: ' + F.brl(m.total) + ' (' + F.brl(m.total / pop) + ' por morador). Já pago: ' + F.brl(m.pago) + '.'].concat(m.sentencas ? ['Fora da conta: ' + F.brl(m.sentencas) + ' de condenações judiciais ligadas a pessoal.'] : []), f: 'Portal da transparência da Prefeitura (Kalana), gastos de pessoal registrados no mês.', link: KALANA, linkT: 'Abrir o portal da Prefeitura ↗'}; };
+  const lupaFolhaMes = (m, pop) => window.lupaFolhaMes(m, pop);
   dash.draw('folhaMes', box => {
     box.replaceChildren();
     const D = realData(); const P = D && D.prefeitura; const M = P && P.folha_mensal; if (!M || !M.length) return;
@@ -352,15 +376,18 @@
     const h1 = el('div', 'fm-big'); h1.append(el('div', 'fm-k', 'Custo da folha da Prefeitura em ' + mn + ' de ' + last.mes.slice(0, 4)), el('div', 'fm-v', F.brl(last.total)), el('div', 'fm-n', 'salários, contratos temporários e encargos, num único mês'));
     const side = el('div', 'fm-side');
     [['Por morador, no mês', F.brl(last.total / pop)], ['Média por mês em 2026', F.brl(media)], ['Total de janeiro a ' + mn, F.mi(M.reduce((s, m) => s + m.total, 0))]].forEach(([k, v]) => { const c = el('div', 'fm-s'); c.append(el('div', 'fm-sk', k), el('div', 'fm-sv', v)); side.append(c); });
+    const L0 = last; xpd(h1, () => lupaFolhaMes(L0, pop));
+    [...side.children].forEach((c, i) => xpd(c, i === 0 ? {t: 'Folha por morador', v: F.brl(last.total / pop), o: 'O custo da folha do mês dividido pelo número de moradores.', c: F.brl(last.total) + ' ÷ ' + pop.toLocaleString('pt-BR') + ' moradores (IBGE, Censo 2022).', p: 'Ajuda a comparar com outras cidades do mesmo tamanho.'} : i === 1 ? {t: 'Média por mês em 2026', v: F.brl(media), o: 'Quanto a folha custou, em média, a cada mês do ano.', c: 'Soma da folha de ' + M.length + ' meses ÷ ' + M.length + '.', p: 'Meses com 13º, férias ou pagamento de encargos atrasados ficam acima da média (janeiro e maio, por exemplo).'} : {t: 'Folha de janeiro a ' + mn, v: F.brl(M.reduce((s, m) => s + m.total, 0)), o: 'Tudo o que a Prefeitura gastou com pessoal no ano até agora.', c: 'Soma da folha de cada mês, de janeiro a ' + mn + '.', f: 'Portal da transparência da Prefeitura (Kalana).'}));
     hero.append(h1, side); box.append(hero);
     const parts = [['efetivos', 'Servidores efetivos e comissionados', '#2563eb'], ['contratados', 'Contratos temporários', '#f59e0b'], ['encargos', 'Encargos (INSS e previdência)', '#94a3b8'], ['outros', 'Gratificações e outros', '#14b8a6']];
-    const legend = el('div', 'fm-leg'); parts.forEach(([, t, c]) => { const s = el('span'); const i = el('i'); i.style.background = c; s.append(i, document.createTextNode(t)); legend.append(s); }); box.append(legend);
+    const PEXP = {efetivos: 'Salário de quem entrou por concurso (efetivo) e de quem ocupa cargo de confiança indicado pelo prefeito (comissionado). No portal aparece como "vencimentos e vantagens fixas".', contratados: 'Salário de quem foi contratado por tempo determinado, sem concurso. A Constituição só permite isso para necessidade passageira e excepcional (art. 37, IX).', encargos: 'Contribuição que a Prefeitura, como patrão, paga ao INSS ou ao regime de previdência sobre os salários. É obrigatória.', outros: 'Gratificações, horas extras, adicionais e outras despesas variáveis com pessoal.'};
+    const legend = el('div', 'fm-leg'); parts.forEach(([k, t, c]) => { const s = el('span'); const i = el('i'); i.style.background = c; s.append(i, document.createTextNode(t)); xpd(s, {t: t, v: F.brl(last[k]) + ' em ' + mn, o: PEXP[k], c: 'Soma dos gastos desse tipo registrados em ' + mn + '. No gráfico, é a parte desta cor em cada barra.', f: 'Portal da transparência da Prefeitura (Kalana).'}); legend.append(s); }); box.append(legend);
     const max = Math.max(...M.map(m => m.total));
     const chart = el('div', 'fm-chart');
     M.forEach(m => {
       const col = el('div', 'fm-col'); const stack = el('div', 'fm-stack'); stack.style.height = (m.total / max * 100) + '%';
       parts.forEach(([k, t, c]) => { if (!m[k]) return; const seg = el('i'); seg.style.background = c; seg.style.height = (m[k] / m.total * 100) + '%'; seg.title = t + ': ' + F.brl(m[k]); stack.append(seg); });
-      col.title = MESN[+m.mes.slice(5, 7) - 1] + ': ' + F.brl(m.total);
+      col.title = MESN[+m.mes.slice(5, 7) - 1] + ': ' + F.brl(m.total); const mm = m; xpd(col, () => lupaFolhaMes(mm, pop)); col.setAttribute('aria-label', 'Folha de ' + MESN[+m.mes.slice(5, 7) - 1] + ': ' + F.brl(m.total) + '. Toque para ver a composição.');
       col.append(el('div', 'fm-cv', (m.total / 1e6).toLocaleString('pt-BR', {maximumFractionDigits: 1}) + ' mi'), stack, el('div', 'fm-cl', MESN[+m.mes.slice(5, 7) - 1].slice(0, 3)));
       chart.append(col);
     });
@@ -423,4 +450,129 @@
     addEventListener('scroll', onScroll, {passive: true}); onScroll();
     if (top) top.addEventListener('click', () => scrollTo({top: 0, behavior: reduce ? 'auto' : 'smooth'}));
   });
+
+  /* ================= tudo clicável: janela "o que é este número?" ================= */
+  const POPN = () => { const m = dash.data('municipio'); return m.status === 'ok' && m.data && m.data[0] ? +m.data[0].populacao : 7944; };
+  const PREF = () => { const D = realData(); return D && D.prefeitura ? D.prefeitura : null; };
+  let sheet = null, lastFocus = null;
+  function closeSheet() { if (!sheet) return; sheet.remove(); sheet = null; document.body.classList.remove('xp-open'); if (lastFocus && lastFocus.focus) lastFocus.focus(); }
+  window.lupaExplain = function (x) {
+    closeSheet(); lastFocus = document.activeElement;
+    sheet = el('div', 'xp-ov'); sheet.setAttribute('role', 'dialog'); sheet.setAttribute('aria-modal', 'true'); sheet.setAttribute('aria-label', x.t || 'Explicação');
+    const card = el('div', 'xp-card');
+    const close = el('button', 'xp-x', '×'); close.type = 'button'; close.setAttribute('aria-label', 'Fechar'); close.addEventListener('click', closeSheet);
+    card.append(close, el('div', 'xp-k', x.t || ''));
+    if (x.v) card.append(el('div', 'xp-v', x.v));
+    const sec = (k, v) => { if (!v) return; const d = el('div', 'xp-s'); d.append(el('div', 'xp-sk', k)); if (Array.isArray(v)) { const ul = el('ul'); v.forEach(i => ul.append(el('li', null, i))); d.append(ul); } else d.append(el('p', null, v)); card.append(d); };
+    sec('O que é', x.o); sec('Como chegamos a este número', x.c); sec('Por que importa', x.p); sec('De onde vem', x.f);
+    const act = el('div', 'xp-act');
+    if (x.link) { const a = el('a', 'xp-b2', x.linkT || 'Abrir a fonte ↗'); a.href = x.link; a.target = '_blank'; a.rel = 'noopener'; act.append(a); }
+    if (x.go) { const b = el('button', 'xp-b', x.goT || 'Ver os detalhes'); b.type = 'button'; b.addEventListener('click', () => { closeSheet(); openSection(x.go, true); }); act.append(b); }
+    const ok = el('button', 'xp-b2', 'Entendi'); ok.type = 'button'; ok.addEventListener('click', closeSheet); act.append(ok);
+    card.append(act); sheet.append(card);
+    sheet.addEventListener('click', e => { if (e.target === sheet) closeSheet(); });
+    document.body.append(sheet); document.body.classList.add('xp-open'); close.focus();
+  };
+  addEventListener('keydown', e => { if (e.key === 'Escape') closeSheet(); });
+
+  const txt = n => (n && n.textContent || '').trim();
+  const KALANA = 'https://www.kalana.com.br/transparencia/12263869000108/0000/despesas?m=false';
+  const FONTE_CTR = 'Extratos do Diário Oficial dos Municípios de Alagoas, Portal Nacional de Contratações Públicas (por meio de agregadores) e imprensa. Cada contrato tem o link do documento na lista de contratos.';
+  const FONTE_LOA = 'Lei Orçamentária Anual (LOA) 2026 do município, aprovada pela Câmara.';
+  const EXPL = {
+    lastUpd: n => ({t: 'Última atualização', v: txt(n), o: 'Data e hora em que o Lupa da Barra buscou os dados pela última vez.', c: 'Todo dia, de manhã cedo, uma rotina automática consulta os portais da Prefeitura e da Câmara, o Diário Oficial e o Tesouro Nacional e atualiza o site.', f: 'Portais oficiais listados na seção "Fontes e palavras".', go: '#fontes', goT: 'Ver as fontes'}),
+    h_pago: n => { const P = PREF(); const T = P && P.totais_2026; return {t: 'Prefeitura já pagou em 2026', v: txt(n), o: 'Todo o dinheiro que já saiu do cofre da Prefeitura em 2026 para pagar fornecedores, obras, serviços, salários e encargos.', c: T ? 'Somamos a coluna "valor pago" de ' + (+P.total_registros).toLocaleString('pt-BR') + ' gastos registrados de janeiro até ' + brDate(P.ultima_data) + '. Além disso, ' + F.mi(T.empenhado) + ' já foram reservados (empenhados) e ' + F.mi(T.liquidado) + ' foram dados como entregues.' : '', p: 'É o gasto de verdade, diferente do orçamento (que é só a previsão). Equivale a ' + (T ? F.brl(T.pago / POPN()) : '—') + ' por morador.', f: 'Portal da transparência da Prefeitura (Kalana), planilha de despesas de 2026.', link: KALANA, linkT: 'Abrir o portal da Prefeitura ↗', go: '#gastos-reais', goT: 'Ver os maiores gastos'}; },
+    h_folha: n => { const P = PREF(); const M = P && P.folha_mensal; const L = M && M[M.length - 1]; return {t: 'Folha da Prefeitura no mês', v: txt(n), o: 'Quanto a Prefeitura gastou num único mês com quem trabalha para ela: servidores efetivos e comissionados, contratados temporários e os encargos (INSS e previdência).', c: L ? 'Somamos os gastos de pessoal registrados em ' + MESN[+L.mes.slice(5, 7) - 1] + ': ' + F.brl(L.efetivos) + ' com efetivos e comissionados, ' + F.brl(L.contratados) + ' com temporários, ' + F.brl(L.encargos) + ' de encargos e ' + F.brl(L.outros) + ' de gratificações e outros.' : '', p: 'É o maior gasto fixo da Prefeitura. A lei limita quanto pode ser gasto com pessoal.', f: 'Portal da transparência da Prefeitura (Kalana).', link: KALANA, linkT: 'Abrir o portal da Prefeitura ↗', go: '#pessoal', goT: 'Ver a folha mês a mês'}; },
+    h_inc: n => ({t: 'Contratos com alerta', v: txt(n), o: 'Soma dos contratos da Prefeitura e da Câmara que marcamos com um sinal de alerta: sem concorrência para serviço comum, valor alto para uma cidade de 8 mil moradores, valor não publicado, fornecedor pessoa física ou valores que não conferem.', c: 'Somamos o valor de cada contrato marcado com alerta na lista de contratos. Contratos sem valor publicado entram com zero.', p: 'Não é prova de irregularidade: são os casos que a Prefeitura e a Câmara precisam explicar.', f: FONTE_CTR, go: '#incomuns', goT: 'Ver os alertas'}),
+    h_inc_qtd: n => ({t: 'Quantidade de contratos com alerta', v: txt(n), o: 'Número de contratos marcados com algum sinal de alerta.', c: 'Contamos os contratos da lista que têm um alerta.', f: FONTE_CTR, go: '#incomuns', goT: 'Ver os alertas'}),
+    h_cam: n => ({t: 'Câmara: orçamento 2026', v: txt(n), o: 'Quanto a Câmara de Vereadores pode gastar em 2026, segundo o orçamento. O dinheiro vem da Prefeitura, em parcelas mensais (o chamado duodécimo).', c: 'Valor fixado para a Câmara Municipal na lei do orçamento.', p: 'A Constituição limita esse repasse (art. 29-A) e manda a Câmara gastar no máximo 70% dele com folha.', f: FONTE_LOA, go: '#camara', goT: 'Ver a Câmara'}),
+    h_total: n => ({t: 'Orçamento da Prefeitura em 2026', v: txt(n), o: 'Quanto a Prefeitura pode gastar no ano, segundo a lei do orçamento. É uma previsão, não o gasto real.', c: 'Soma de todas as áreas de governo (saúde, educação, urbanismo etc.) na lei do orçamento.', f: FONTE_LOA, go: '#prefeitura', goT: 'Ver para onde vai'}),
+    h_pc: n => ({t: 'Orçamento por morador', v: txt(n), o: 'O orçamento dividido pelo número de moradores.', c: 'Orçamento total ÷ ' + POPN().toLocaleString('pt-BR') + ' moradores (IBGE, Censo 2022).', f: FONTE_LOA + ' População: IBGE.'}),
+    h_sem: n => ({t: 'Contratado sem concorrência', v: txt(n), o: 'Valor dos contratos feitos sem disputa entre empresas (dispensa ou inexigibilidade de licitação).', c: 'Soma dos contratos com modalidade "Dispensa" ou "Inexigibilidade".', p: 'A regra é licitar. Contratar direto só vale nos casos que a Lei 14.133/2021 lista, com justificativa.', f: FONTE_CTR, go: '#contratacoes', goT: 'Ver os contratos'}),
+    i_total: n => EXPL.h_inc(n),
+    i_pct: n => ({t: 'Parte do dinheiro com alerta', v: txt(n), o: 'Quanto do valor de todos os contratos levantados está nos contratos com alerta.', c: 'Valor dos contratos com alerta ÷ valor de todos os contratos levantados × 100.', f: FONTE_CTR}),
+    i_sem: n => ({t: 'Alertas sem concorrência', v: txt(n), o: 'Entre os contratos com alerta, quantos foram feitos sem disputa entre empresas.', c: 'Contamos os contratos com alerta cuja modalidade é dispensa ou inexigibilidade.', f: FONTE_CTR}),
+    c_qtd: n => ({t: 'Contratos encontrados', v: txt(n), o: 'Quantos contratos, atas, aditivos e editais de 2026 (ou ainda valendo) encontramos para a Prefeitura e a Câmara.', c: 'Contagem da lista de contratos. Registros vencidos ou repetidos são retirados.', f: FONTE_CTR, go: '#contratacoes', goT: 'Ver a lista'}),
+    c_total: n => ({t: 'Valor dos contratos encontrados', v: txt(n), o: 'Soma dos valores de todos os contratos levantados.', c: 'Soma da lista de contratos. Quando parte de um credenciamento já virou contrato, só o saldo é contado, para não contar o mesmo dinheiro duas vezes.', p: 'Contrato não é pagamento: é o máximo que pode ser gasto. O que foi pago de fato está em "Gastos da Prefeitura".', f: FONTE_CTR}),
+    c_sem: n => EXPL.h_sem(n),
+    c_sem_pct: n => ({t: 'Parte sem concorrência', v: txt(n), o: 'Quanto do dinheiro contratado foi sem disputa entre empresas.', c: 'Valor dos contratos por dispensa ou inexigibilidade ÷ valor total dos contratos × 100.', f: FONTE_CTR}),
+    f_top: n => ({t: 'Fornecedor que mais recebe', v: txt(n), o: 'A empresa com o maior valor somado de contratos identificados.', c: 'Somamos os contratos de cada fornecedor e ordenamos do maior para o menor.', f: FONTE_CTR, go: '#contratacoes', goT: 'Ver o ranking'}),
+    f_top_pct: n => ({t: 'Parte do fornecedor que mais recebe', v: txt(n), o: 'Quanto do valor contratado com fornecedores identificados ficou com o primeiro colocado.', c: 'Valor do primeiro ÷ valor de todos os fornecedores identificados × 100.', f: FONTE_CTR}),
+    f_top3_pct: n => ({t: 'Parte dos três que mais recebem', v: txt(n), o: 'Quanto do valor contratado ficou com os três maiores fornecedores juntos.', c: 'Soma dos três primeiros ÷ total dos fornecedores identificados × 100.', p: 'Quando poucos fornecedores ficam com quase tudo, vale perguntar se houve concorrência de verdade.', f: FONTE_CTR}),
+    t_laz: n => ({t: 'Esporte, cultura, turismo e comércio', v: txt(n), o: 'Parte do orçamento de 2026 reservada para esporte e lazer, cultura e comércio e serviços (onde entram turismo e eventos).', c: 'Soma dessas três áreas ÷ orçamento total × 100.', f: FONTE_LOA}),
+    o_esp: n => ({t: 'Secretaria de Esportes, Cultura e Eventos', v: txt(n), o: 'Quanto o orçamento de 2026 reserva para essa secretaria.', c: 'Valor fixado para a secretaria na lei do orçamento.', f: FONTE_LOA}),
+    o_soc: n => ({t: 'Assistência social', v: txt(n), o: 'Quanto o orçamento de 2026 reserva para a Secretaria de Desenvolvimento Social, Trabalho e Habitação.', c: 'Valor fixado para a secretaria na lei do orçamento.', p: 'Comparar as duas ajuda a ver as prioridades da Prefeitura.', f: FONTE_LOA}),
+    f_urb: n => ({t: 'Urbanismo', v: txt(n), o: 'Quanto o orçamento de 2026 reserva para urbanismo (ruas, praças, iluminação, obras urbanas).', c: 'Valor fixado para a área na lei do orçamento.', f: FONTE_LOA})
+  };
+  const XP_DRAWS = Object.keys(EXPL);
+  function markScalars() {
+    XP_DRAWS.forEach(k => document.querySelectorAll('[data-draw="' + k + '"]').forEach(n => {
+      if (n.closest('[data-xp]') && n.closest('[data-xp]') !== n) return;
+      if (n.closest('a')) { const a = n.closest('a'); if (!a.dataset.xp) { a.dataset.xp = k; } return; }
+      n.dataset.xp = k;
+    }));
+    document.querySelectorAll('[data-xp]').forEach(n => { if (n.__xpOk) return; n.__xpOk = true; n.classList.add('xp'); if (!/^(A|BUTTON)$/.test(n.tagName)) { n.tabIndex = 0; n.setAttribute('role', 'button'); } n.setAttribute('aria-label', (n.getAttribute('aria-label') || txt(n)) + ' — toque para entender'); });
+  }
+  const xpFor = n => { if (n.__xp) return typeof n.__xp === 'function' ? n.__xp() : n.__xp; const k = n.dataset.xp; const f = EXPL[k]; if (!f) return null; const val = n.querySelector('[data-draw="' + k + '"]') || n.querySelector('.hv') || n; const r = f(val); if (n.dataset.go && !r.go) r.go = n.dataset.go; return r; };
+  document.addEventListener('click', e => {
+    const n = e.target.closest('[data-xp], .xpd');
+    if (!n || e.target.closest('.xp-ov')) return;
+    if (e.target.closest('a[href]:not([data-xp])') && !n.matches('a')) return;
+    const x = xpFor(n); if (!x) return;
+    e.preventDefault(); e.stopPropagation(); lupaExplain(x);
+  }, true);
+  document.addEventListener('keydown', e => { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('[data-xp], .xpd')) { const x = xpFor(e.target); if (x) { e.preventDefault(); lupaExplain(x); } } });
+  /* torna um elemento gerado aqui explicável */
+  const xpd = (n, x) => { n.classList.add('xpd', 'xp'); n.__xp = x; n.tabIndex = 0; n.setAttribute('role', 'button'); return n; };
+  window.lupaXp = xpd;
+
+  /* números novos do topo */
+  dash.draw('h_pago', n => { const P = PREF(); n.textContent = P && P.totais_2026 ? F.mi(P.totais_2026.pago) : '—'; });
+  dash.draw('h_folha', n => { const P = PREF(); const M = P && P.folha_mensal; n.textContent = M && M.length ? F.mi(M[M.length - 1].total) : '—'; });
+  dash.draw('h_folha_mes', n => { const P = PREF(); const M = P && P.folha_mensal; if (M && M.length) { const L = M[M.length - 1]; n.textContent = MESN[+L.mes.slice(5, 7) - 1] + ' de ' + L.mes.slice(0, 4) + ' · toque para entender'; } });
+
+  /* ================= seções que abrem e fecham ================= */
+  const ORDER = ['incomuns', 'gastos-reais', 'pessoal', 'camara', 'contratacoes', 'prefeitura', 'lrf', 'ocultos', 'fontes'];
+  const SUM = {incomuns: 'Contratos que merecem explicação, do maior para o menor', 'gastos-reais': 'Os 20 maiores gastos de 2026, com detalhes, e a lista completa', pessoal: 'Quanto a folha custa por mês e se cabe no limite da lei', camara: 'Os 9 vereadores, os gastos e os contratos da Câmara', contratacoes: 'Quem recebe, quanto e se houve concorrência', prefeitura: 'Como o orçamento de 2026 está dividido', lrf: 'Se a Prefeitura respeita os limites que a lei impõe', ocultos: 'O que a Prefeitura deveria publicar e não publica', fontes: 'De onde vêm os dados e o que as palavras significam'};
+  function sectionize() {
+    if (window.__lupaSec) return; window.__lupaSec = true;
+    const host = document.getElementById('incomuns') && document.getElementById('incomuns').parentElement;
+    if (!host) return;
+    const anchor = document.getElementById('fontes') ? document.getElementById('fontes').nextSibling : null;
+    ORDER.forEach(id => { const s = document.getElementById(id); if (s) host.insertBefore(s, anchor); });
+    const ck = document.querySelector('[data-draw="colorKey"]'); if (ck) { /* legenda de cores fica dentro de Alertas */ }
+    ORDER.forEach(id => {
+      const s = document.getElementById(id); if (!s) return;
+      const part = s.querySelector(':scope > .part'); if (!part) return;
+      const body = el('div', 'sec-body'); body.id = id + '-corpo';
+      [...s.children].filter(c => c !== part).forEach(c => body.append(c));
+      s.append(body); s.classList.add('fold');
+      const nb = part.querySelector('.num'); if (nb) nb.textContent = String(ORDER.indexOf(id) + 1).padStart(2, '0');
+      const hd = el('button', 'sec-head'); hd.type = 'button'; hd.setAttribute('aria-expanded', 'false'); hd.setAttribute('aria-controls', body.id);
+      part.parentNode.insertBefore(hd, part); hd.append(part);
+      hd.append(el('span', 'sec-sum', SUM[id] || ''), el('span', 'sec-cta', 'Abrir'));
+      body.hidden = true;
+      hd.addEventListener('click', () => toggleSection(s, body.hidden));
+    });
+    if (id0()) openSection('#' + id0(), false);
+  }
+  const id0 = () => (location.hash || '').slice(1);
+  function toggleSection(s, open) {
+    const body = s.querySelector(':scope > .sec-body'), hd = s.querySelector(':scope > .sec-head'); if (!body) return;
+    body.hidden = !open; hd.setAttribute('aria-expanded', String(open)); hd.querySelector('.sec-cta').textContent = open ? 'Fechar' : 'Abrir'; s.classList.toggle('is-open', open);
+    if (open) { body.querySelectorAll('[data-draw]').forEach(n => { const k = n.dataset.draw; if (k) dash.draw(k); }); markScalars(); body.querySelectorAll('.rv').forEach(t => t.classList.add('in')); }
+  }
+  function openSection(hash, scroll) {
+    const t = document.querySelector(hash); if (!t) return;
+    const s = t.closest('section.sec') || t; if (s.classList.contains('fold') && !s.classList.contains('is-open')) toggleSection(s, true);
+    if (scroll) requestAnimationFrame(() => (t === s ? s : t).scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block: 'start'}));
+  }
+  window.lupaOpen = openSection;
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a || a.closest('.xp-ov')) return;
+    const h = a.getAttribute('href'); if (h.length < 2) return; const t = document.querySelector(h); if (!t) return;
+    const s = t.closest('section.sec'); if (!s || !s.classList.contains('fold')) return;
+    e.preventDefault(); openSection(h, true); history.replaceState(null, '', h);
+  });
+  dash.onData(() => { sectionize(); markScalars(); });
 })();
