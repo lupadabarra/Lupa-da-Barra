@@ -40,6 +40,62 @@
     });
   });
 
+
+  /* manchetes do que não aparece */
+  dash.draw('ocHead', box => {
+    box.replaceChildren();
+    const L = contratos(); if (!L.length) return;
+    const n = L.length, semV = L.filter(c => /^Não identificado/.test(c.fornecedor || '')).length;
+    const semVal = L.filter(c => !(+c.valor > 0)).length;
+    const semObj = L.filter(c => /não descrit/i.test((c.objeto || '') + (c.alerta || ''))).length;
+    const semObjV = d3.sum(L.filter(c => /não descrit/i.test((c.objeto || '') + (c.alerta || ''))), c => +c.valor);
+    const card = (num, txt) => { const d = el('div', 'big'); d.append(el('b', null, num), el('span', null, txt)); box.append(d); };
+    card(Math.round(semV / n * 100) + '%', 'dos ' + n + ' contratos encontrados não dizem quem ganhou (' + semV + ' contratos). O povo paga e não sabe a quem.');
+    if (semObj) card(F.mi(semObjV), 'comprometidos em ' + semObj + ' contratos cuja publicação nem diz o que foi comprado.');
+    if (semVal) card(String(semVal), semVal === 1 ? 'contrato publicado sem dizer quanto custa.' : 'contratos ou renovações publicados sem dizer quanto custam.');
+  });
+
+  /* busca e filtros na lista de contratos */
+  dash.draw('ctrFilter', box => {
+    box.replaceChildren();
+    const inp = el('input'); inp.type = 'search'; inp.placeholder = 'Buscar: empresa, CNPJ, objeto, valor…'; inp.setAttribute('aria-label', 'Buscar contratos');
+    const F_ = [['Todos', () => true], ['Com alerta', c => !!c.alerta], ['Sem concorrência', c => c.modalidade === 'Inexigibilidade' || c.modalidade === 'Dispensa'], ['Câmara', c => c.orgao === 'Câmara'], ['Sem vencedor', c => /^Não identificado/.test(c.fornecedor || '')]];
+    let cur = 0;
+    const cnt = el('div', 'cnt');
+    const btns = F_.map(([t], i) => { const b = el('button', i ? '' : 'on', t); b.type = 'button'; b.addEventListener('click', () => { cur = i; btns.forEach((x, j) => x.classList.toggle('on', j === i)); apply(); }); return b; });
+    const norm = s => String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+    function apply() {
+      const q = norm(inp.value).trim(); const byId = new Map(contratos().map(c => [c.id, c]));
+      let shown = 0, tot = 0;
+      document.querySelectorAll('#rank-contratacoes tbody tr.clk').forEach(tr => {
+        const c = byId.get(tr.dataset.key); if (!c) return;
+        const hay = norm([c.objeto, c.fornecedor, c.cnpj, c.categoria, c.modalidade, c.orgao, c.valor, F.brl(+c.valor || 0), c.alerta].join(' '));
+        const ok = F_[cur][1](c) && (!q || q.split(/\s+/).every(w => hay.includes(w)));
+        tr.style.display = ok ? '' : 'none';
+        const nx = tr.nextElementSibling; if (nx && nx.classList.contains('detrow')) nx.style.display = ok ? '' : 'none';
+        if (ok) { shown++; tot += +c.valor || 0; }
+      });
+      cnt.textContent = shown + ' contrato(s) · ' + F.brl(tot);
+    }
+    inp.addEventListener('input', apply);
+    box.append(inp, ...btns, cnt);
+    setTimeout(apply, 0);
+  });
+
+  /* baixar os dados */
+  dash.draw('downloads', box => {
+    box.replaceChildren();
+    const csvBtn = el('button', 'chip act', 'Planilha de contratos (CSV) ↓'); csvBtn.type = 'button';
+    csvBtn.addEventListener('click', () => {
+      const cols = ['id', 'orgao', 'objeto', 'fornecedor', 'cnpj', 'categoria', 'modalidade', 'valor', 'tipo_valor', 'situacao', 'data', 'alerta', 'fonte'];
+      const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
+      const csv = '﻿' + cols.join(';') + '\n' + contratos().map(c => cols.map(k => q(k === 'valor' ? String(c[k]).replace('.', ',') : c[k])).join(';')).join('\n');
+      const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([csv], {type: 'text/csv;charset=utf-8'})); a.download = 'lupa-da-barra-contratos.csv'; document.body.append(a); a.click(); a.remove();
+    });
+    box.append(csvBtn);
+    [['data/contratacoes.json', 'Contratos (JSON)'], ['data/vereadores.json', 'Vereadores (JSON)'], ['data/orgao.json', 'Orçamento por secretaria (JSON)']].forEach(([u, t]) => { const a = el('a', 'chip act', t + ' ↓'); a.href = u; a.download = ''; box.append(a); });
+  });
+
   /* contadores animados */
   function countUp(node) {
     const txt = node.textContent; const m = txt.match(/^(.*?)(\d{1,3}(?:\.\d{3})*(?:,\d+)?)(.*)$/);
@@ -57,7 +113,10 @@
   }
 
   dash.onData(() => {
-    document.querySelectorAll('.hstat .hv, .sumline b').forEach(countUp);
+    document.querySelectorAll('.hstat .hv, .sumline b, .ochead .big b').forEach(countUp);
+    /* link direto para um alerta abre a análise */
+    const hh = location.hash.slice(1);
+    if (/^inc-/.test(hh)) { const t = document.getElementById(hh); if (t) setTimeout(() => { t.scrollIntoView({block: 'start'}); if (t.getAttribute('aria-expanded') !== 'true') t.click(); }, 300); }
 
     /* revelar ao rolar */
     const targets = document.querySelectorAll('.bsm .part, .bsm .card, .bsm .spot, .bsm .lrf, .bsm .ver, .bsm .inc, .bsm .tiles > *, .pod');

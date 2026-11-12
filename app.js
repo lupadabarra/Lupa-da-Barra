@@ -273,6 +273,16 @@ function fiscalBox(c) {
     .forEach(([t]) => how.append(E('li', null, t)));
   sec('6. Como cobrar', how);
   const lk = E('div', 'chips'); [['https://www.tceal.tc.br', 'TCE-AL ↗'], ['https://www.mpal.mp.br', 'MP-AL ↗'], [c.fonte, 'Documento original ↗']].forEach(([u, t]) => { const l = link(u, t); l.className = 'chip'; lk.append(l); }); box.append(lk);
+  const pedido = 'À ' + (c.orgao === 'Câmara' ? 'Câmara Municipal' : 'Prefeitura Municipal') + ' de Barra de São Miguel/AL\n\nCom base na Lei de Acesso à Informação (Lei 12.527/2011), solicito cópia dos seguintes documentos referentes a: ' + c.objeto + (c.fornecedor && !/^Não identificado/.test(c.fornecedor) ? ' (fornecedor: ' + c.fornecedor + (c.cnpj ? ', CNPJ ' + c.cnpj : '') + ')' : '') + '.\n\n' + docs.map((d, i) => (i + 1) + '. ' + d).join('\n') + '\n\nPeço resposta no prazo do art. 11 da Lei 12.527/2011.\n\nNome:\nCPF ou e-mail para resposta:';
+  const pb = E('div', 'fs'); pb.append(E('div', 'ft', '7. Pedido pronto para copiar'));
+  const pre = E('pre', 'pedido', pedido); pb.append(pre);
+  const acts = E('div', 'chips');
+  const cp = E('button', 'chip act', 'Copiar pedido'); cp.type = 'button';
+  cp.addEventListener('click', (e) => { e.stopPropagation(); const done = () => { cp.textContent = 'Copiado ✓'; setTimeout(() => { cp.textContent = 'Copiar pedido'; }, 2000); }; if (navigator.clipboard) navigator.clipboard.writeText(pedido).then(done, () => {}); });
+  const url = (typeof location !== 'undefined' && /^https?:/.test(location.href)) ? location.origin + location.pathname + '#inc-' + c.id : '';
+  const msg = '⚑ Lupa da Barra: ' + c.objeto + ' — ' + money(c) + '. ' + (an.problema ? an.problema.split('. ')[0] + '.' : c.alerta) + (url ? ' Veja: ' + url : '');
+  const wa = link('https://wa.me/?text=' + encodeURIComponent(msg), 'Compartilhar no WhatsApp ↗'); wa.className = 'chip act wa';
+  acts.append(cp, wa); pb.append(acts); box.append(pb);
   box.append(E('p', 'fn', 'Isto é um sinal para checagem baseado nos documentos publicados, não uma acusação. A ' + org + ' pode ter documentos que expliquem o caso; se tiver, deve publicá-los.'));
   return box;
 }
@@ -425,7 +435,7 @@ const ORG_CAT = {
   'Sec. de Infraestrutura e Acessibilidade': ['Materiais de construção', 'Obras e habitação'],
   'Sec. de Urbanismo Transportes e Serv. Públicos': ['Materiais e equipamentos', 'Manutenção', 'Combustível', 'Locação de veículos', 'Limpeza urbana', 'Frota e veículos'],
   'Sec. de Desenv. Social Trabalho e Habitação': ['Alimentação', 'Obras e habitação'],
-  'Gabinete do Prefeito': ['Gabinete'], 'Câmara Municipal': ['Câmara Municipal'],
+  'Gabinete do Prefeito': ['Gabinete'], 'Câmara Municipal': ['Câmara Municipal'], 'Superintendência de Trânsito': ['Transporte'],
   'Sec. de Administração Finanças e Planejamento': ['Consultoria', 'Material de expediente']
 };
 function budgetBars(el, id, keyCol) {

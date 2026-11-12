@@ -76,6 +76,20 @@ html body #rank-fornecedores > p.lead{display:none}
 html body #rank-fornecedores td:nth-child(2),html body #rank-fornecedores th:nth-child(2){text-align:left;white-space:normal;min-width:180px}
 html body .bsm .hero{min-height:min(84vh,720px)}
 @media (max-width:600px){html body .bsm .hero{min-height:auto}}
+
+html body .bsm .fis pre.pedido{white-space:pre-wrap;font-family:inherit;font-size:12px;background:var(--color-panel);border:1px dashed var(--color-border-line);border-radius:10px;padding:10px 12px;margin:4px 0 0;max-height:220px;overflow:auto}
+html body .bsm .chip.act{cursor:pointer;font-family:inherit;color:var(--color-fg);text-decoration:none;padding:6px 12px;font-size:12px}
+html body .bsm .chip.wa{background:#25d366;border-color:#25d366;color:#08331a}
+.filt{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;align-items:center}
+.filt input{flex:1 1 220px;min-width:0;font:inherit;font-size:15px;padding:11px 14px;border-radius:12px;border:1px solid var(--color-border-line);background:var(--color-bg);color:var(--color-fg);outline:none}
+.filt input:focus{border-color:var(--color-fg-muted)}
+.filt button{font:inherit;font-size:13px;padding:8px 13px;border-radius:999px;border:1px solid var(--color-border-line);background:var(--color-panel);color:var(--color-fg-muted);cursor:pointer}
+.filt button.on{background:var(--color-fg);color:var(--color-bg);border-color:var(--color-fg)}
+.filt .cnt{font-size:12px;color:var(--color-fg-muted);width:100%}
+.ochead{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px;margin:0 0 16px}
+.ochead .big{border-radius:18px;padding:16px 18px;background:var(--color-panel);border:1px solid color-mix(in srgb,var(--color-warn) 35%,var(--color-border-line))}
+.ochead .big b{display:block;font-family:var(--font-anthropic-serif);font-weight:400;font-size:clamp(34px,5vw,52px);line-height:1;color:var(--color-warn)}
+.ochead .big span{font-size:14px;line-height:1.45;display:block;margin-top:6px}
 </style></head><body>
 
 <style>
@@ -271,6 +285,7 @@ html body .bsm .hero{min-height:min(84vh,720px)}
     <div class="part"><div class="num">02</div><div><p class="eyebrow">Transparência</p><h2>O que não aparece</h2></div></div>
     <div class="spot amber">
       <p class="lead" style="margin:0 0 var(--cds-gap-md)">O que a lei manda mostrar ao público e não está à vista, ou aparece com números que não batem.</p>
+      <div class="ochead" data-draw="ocHead"></div>
       <div class="lrfgrid" data-source="ocultos" data-draw="ocultos"></div>
       <ul class="plain" style="margin-top:var(--cds-gap-lg);font-size:var(--cds-font-size-caption)" data-draw="ocultosExtra"></ul>
     </div>
@@ -336,7 +351,8 @@ html body .bsm .hero{min-height:min(84vh,720px)}
     </div>
     <div class="card" id="rank-contratacoes">
       <h3>Todos os contratos encontrados</h3>
-      <p class="hint">Marca vermelha = contrato que chama atenção.</p>
+      <p class="hint">Marca vermelha = contrato que chama atenção. Busque por empresa, objeto ou valor.</p>
+      <div class="filt" data-draw="ctrFilter"></div>
       <div class="tw">
         <table data-source="contratacoes" data-row-key="id">
           <thead><tr><th data-field="objeto">Objeto</th><th data-field="orgao">Órgão</th><th data-field="modalidade">Modalidade</th><th data-field="valor">Valor</th><th data-field="situacao">Situação</th></tr></thead>
@@ -366,6 +382,9 @@ html body .bsm .hero{min-height:min(84vh,720px)}
     <div class="part"><div class="num">07</div><div><p class="eyebrow">Método</p><h2>Fontes e atualização</h2></div></div>
     <div class="grid2">
       <div class="card">
+        <h3>Baixe os dados</h3>
+        <p class="note" style="margin-top:0">Tudo o que está neste site pode ser baixado e conferido por qualquer pessoa.</p>
+        <div class="chips" data-draw="downloads" style="margin:8px 0 18px"></div>
         <h3>Fontes oficiais</h3>
         <ul class="plain">
           <li><a href="https://barradesaomiguel.al.gov.br/transparencia/" target="_blank" rel="noopener">Portal da Transparência da Prefeitura ↗</a></li>
