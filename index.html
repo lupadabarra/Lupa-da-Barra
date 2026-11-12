@@ -3,7 +3,7 @@
 <title>Lupa da Barra — para onde vai o dinheiro de Barra de São Miguel/AL</title>
 <meta name="description" content="Dossiê aberto das despesas da Prefeitura e da Câmara de Barra de São Miguel, Alagoas: fornecedores, contratos sem concorrência, gastos incomuns, vereadores e limites da lei. Atualizado a cada 4 horas.">
 <meta property="og:title" content="Lupa da Barra"><meta property="og:description" content="Cada real tem dono, destino e explicação. As despesas da Prefeitura e da Câmara de Barra de São Miguel/AL, sem filtro.">
-<meta name="theme-color" content="#08080a"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='27' cy='27' r='18' fill='none' stroke='%23c4302b' stroke-width='7'/%3E%3Cpath d='M40 40l16 16' stroke='%23c4302b' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#fff8ec"><link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='27' cy='27' r='18' fill='none' stroke='%23c4302b' stroke-width='7'/%3E%3Cpath d='M40 40l16 16' stroke='%23c4302b' stroke-width='8' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Inter:wght@400;500;600&display=swap">
 <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
 <style>:root{--color-fg:#16161a;--color-fg-muted:#5f5f6b;--color-bg:#f5f4f0;--color-panel:#ffffff;--color-border-line:#e4e2dc;--color-ok:#1f7a4a;--color-warn:#b26b00;--color-bad:#c4302b;
@@ -175,6 +175,81 @@ html body .totop{background:var(--lime);color:#0a0a0a;border:0}
 /* alertas em carrossel no celular */
 @media (max-width:760px){html body .bsm .incgrid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin:0 -14px;padding:4px 14px 14px;scrollbar-width:none}html body .bsm .incgrid::-webkit-scrollbar{display:none}html body .bsm .incgrid>.inc{flex:0 0 86%;scroll-snap-align:center}html body .bsm .inc.feat{flex-basis:92%}}
 html body .foot{color:#5f5f59}
+
+/* ================= V4 — alegre / claro e colorido ================= */
+:root{--color-fg:#1d1b2e;--color-fg-muted:#5d5a72;--color-bg:#fff8ec;--color-panel:#ffffff;--color-border-line:rgba(29,27,46,.10);--color-ok:#00a884;--color-warn:#f59e0b;--color-bad:#ff4f5e;
+--coral:#ff5a5f;--sun:#ffd23f;--teal:#00b4a6;--sky:#3a86ff;--grape:#8338ec;--lime:#ff5a5f;
+--cds-chart-grid:rgba(29,27,46,.08);--cds-chart-reference:#1d1b2e;--cds-surface-popover:#fff;--cds-border:rgba(29,27,46,.14);--cds-text-secondary:#5d5a72;color-scheme:light}
+html body{background:#fff8ec;background-image:radial-gradient(700px 420px at 92% 0%,rgba(255,210,63,.45),transparent 65%),radial-gradient(640px 480px at -8% 12%,rgba(255,90,95,.22),transparent 65%),radial-gradient(700px 500px at 60% 55%,rgba(58,134,255,.10),transparent 65%),radial-gradient(600px 500px at 0% 90%,rgba(0,180,166,.14),transparent 65%);color:var(--color-fg)}
+html body::before{background-image:radial-gradient(rgba(29,27,46,.10) 1px,transparent 1.2px);background-size:22px 22px;mask-image:radial-gradient(ellipse at 50% 0%,#000 25%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 25%,transparent 70%)}
+html body .bsm{--bad-tint:rgba(255,90,95,.10);--warn-tint:rgba(255,210,63,.18);--ok-tint:rgba(0,180,166,.10)}
+/* topo */
+html body .topbar{background:rgba(255,255,255,.78);border:1px solid rgba(29,27,46,.08);box-shadow:0 8px 30px -14px rgba(29,27,46,.25)}
+html body .tb-logo{border-color:var(--coral)}html body .tb-logo::after{background:var(--coral)}
+html body .tb-nav a{color:var(--color-fg-muted)}
+html body .tb-nav a.on{background:var(--coral);color:#fff}
+html body .progress i{background:linear-gradient(90deg,var(--coral),var(--sun),var(--teal),var(--sky))}
+/* abertura */
+html body .bsm .hero{color:var(--color-fg)}
+html body .bsm .hero h1 .glow{background:linear-gradient(100deg,var(--coral),#ff9f1c 55%,var(--sun));-webkit-background-clip:text;background-clip:text;color:transparent}
+html body .bsm .hero .eyebrow{color:var(--coral)}
+html body .bsm .live{border-color:rgba(0,180,166,.35);background:rgba(0,180,166,.10);color:var(--color-fg)}
+html body .bsm .live i{background:var(--teal);box-shadow:0 0 0 4px rgba(0,180,166,.22)}
+html body .bsm .hstat{border:0;color:#fff;box-shadow:0 18px 40px -22px rgba(29,27,46,.35)}
+html body .bsm .hstat .hk,html body .bsm .hstat .hn{opacity:.9}
+html body .bsm .hstat:nth-child(1){background:var(--sun);color:#2b2100}
+html body .bsm .hstat:nth-child(1)::after{content:"";position:absolute;right:-40px;top:-40px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.35)}
+html body .bsm .hstat.alert{background:linear-gradient(135deg,var(--coral),#ff8a3d)}
+html body .bsm .hstat.alert .hk,html body .bsm .hstat.alert .hn{color:#fff}
+html body .bsm .hstat.alert .hv{color:#fff!important}
+html body .bsm .hstat:nth-child(3){background:var(--teal)}
+html body .bsm .hstat:nth-child(4){background:var(--grape)}
+html body .bsm .hstat:hover{background-color:inherit;filter:brightness(1.04)}
+/* faixa */
+html body .ticker{background:#fff;border-color:rgba(29,27,46,.08);box-shadow:0 10px 30px -18px rgba(29,27,46,.3)}
+html body .tk-label{background:var(--coral);color:#fff}html body .tk-label i{background:#fff}
+html body .tk-item b{color:var(--coral)}
+/* seções */
+html body .bsm .part .num{background:var(--sky);color:#fff!important}
+html body .bsm .part.red .num{background:var(--coral)}
+html body #ocultos .part .num{background:#f59e0b}
+html body #prefeitura .part .num{background:var(--teal)}
+html body #lrf .part .num{background:var(--grape)}
+html body #camara .part .num{background:#ff006e}
+/* cartões brancos e alegres */
+html body .bsm .card,html body .bsm .lrf,html body .bsm .ver,html body .bsm .inc,html body .pod,html body .ochead .big{background:#fff;border:1px solid rgba(29,27,46,.07);box-shadow:0 14px 36px -24px rgba(29,27,46,.35)}
+html body .bsm .card:hover,html body .bsm .inc:hover,html body .bsm .ver:hover,html body .bsm .lrf:hover{border-color:rgba(58,134,255,.35);box-shadow:0 22px 50px -24px rgba(58,134,255,.45)}
+html body .bsm .lrf.ok{background:linear-gradient(180deg,rgba(0,180,166,.14),#fff 65%)}
+html body .bsm .lrf.atencao{background:linear-gradient(180deg,rgba(255,210,63,.30),#fff 65%)}
+html body .bsm .lrf.ruim{background:linear-gradient(180deg,rgba(255,90,95,.16),#fff 65%)}
+html body .bsm .lrf.semdado,html body .bsm .lrf.info{background:#fff}
+html body .bsm .inc.feat{background:linear-gradient(135deg,#fff1f1,#fff 55%);border-color:rgba(255,90,95,.35)}
+html body .bsm .inc::before{background:var(--sun)}html body .bsm .inc.sev3::before{background:var(--coral)}
+html body .bsm .inc .iv{color:var(--color-fg)}
+html body .bsm .chip{background:#f4f1ff;border-color:rgba(131,56,236,.18);color:#3a2a6b}
+html body .bsm .chip.c-bad{background:#ffe8ea;border-color:rgba(255,90,95,.35);color:#b3122a}
+html body .bsm .det{background:#fffaf2;border-color:rgba(29,27,46,.08)}
+html body .bsm .fis{background:linear-gradient(180deg,#fff0f0,#fffaf2 45%);border-color:rgba(255,90,95,.3)}
+html body .bsm .fis .fh{color:#e0283c}
+html body .bsm .fis pre.pedido{background:#fff}
+html body .bsm .chip.act{background:#fff}
+html body .pod.p1{background:linear-gradient(140deg,#fff3c4,#fff 65%);border-color:rgba(255,210,63,.8)}
+html body .pod .pn{-webkit-text-stroke:1.5px rgba(29,27,46,.18)}
+html body .pod .pbar i,html body .bsm .inc .meter i{background:linear-gradient(90deg,var(--coral),var(--sun))}
+html body .ochead .big{background:linear-gradient(140deg,#fff3c4,#fff 70%);border-color:rgba(245,158,11,.35)}
+html body .ochead .big b{color:#e07b00}
+html body .bsm table th{color:#8a87a0}
+html body .bsm tbody tr.clk:hover,html body .bsm tbody tr.clk[aria-expanded=true]{background:#fff6e5}
+html body .bsm .row:hover,html body .bsm .row[aria-expanded=true]{background:#fff6e5}
+html body .filt input{background:#fff;border-color:rgba(29,27,46,.14)}
+html body .filt button{background:#fff;border-color:rgba(29,27,46,.12)}
+html body .filt button.on{background:var(--sky);color:#fff;border-color:var(--sky)}
+html body .bsm .ver .av{background:linear-gradient(135deg,var(--coral),var(--sun));color:#fff}
+html body .bsm .ver .role{color:var(--grape)}
+html body .totop{background:var(--coral);color:#fff}
+html body .foot{color:#8a87a0}
+html body .bsm .hstat>*{position:relative;z-index:1}
+html body .bsm .hstat:nth-child(1)::after{z-index:0}
 </style></head><body>
 
 <style>
