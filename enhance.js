@@ -96,6 +96,60 @@
     [['data/contratacoes.json', 'Contratos (JSON)'], ['data/vereadores.json', 'Vereadores (JSON)'], ['data/orgao.json', 'Orçamento por secretaria (JSON)']].forEach(([u, t]) => { const a = el('a', 'chip act', t + ' ↓'); a.href = u; a.download = ''; box.append(a); });
   });
 
+
+  /* gráfico mês a mês */
+  const MESES = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  dash.draw('timeline', box => {
+    box.replaceChildren();
+    const L = contratos().filter(c => /^2026-\d\d/.test(c.data) && +c.valor > 0);
+    const now = new Date(); const last = now.getFullYear() === 2026 ? now.getMonth() : 11;
+    const rows = MESES.slice(0, last + 1).map((m, i) => { const mm = L.filter(c => +c.data.slice(5, 7) === i + 1); return {m, i, tot: d3.sum(mm, c => +c.valor), al: d3.sum(mm.filter(c => c.alerta), c => +c.valor), list: mm}; });
+    const W = 720, H = 260, pl = 8, pr = 8, pt = 26, pb = 26;
+    const x = d3.scaleBand().domain(rows.map(r => r.m)).range([pl, W - pr]).padding(.28);
+    const y = d3.scaleLinear().domain([0, d3.max(rows, r => r.tot) || 1]).nice().range([H - pb, pt]);
+    const svg = d3.create('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('role', 'img').attr('aria-label', 'Valor contratado por mês em 2026');
+    const defs = svg.append('defs'); const g = defs.append('linearGradient').attr('id', 'gb').attr('x1', 0).attr('x2', 0).attr('y1', 0).attr('y2', 1);
+    g.append('stop').attr('offset', 0).attr('stop-color', '#2563eb'); g.append('stop').attr('offset', 1).attr('stop-color', '#06b6d4');
+    y.ticks(4).forEach(t => svg.append('line').attr('x1', pl).attr('x2', W - pr).attr('y1', y(t)).attr('y2', y(t)).attr('stroke', '#e9eef8'));
+    const det = el('div', 'chart-det');
+    const bars = svg.append('g');
+    rows.forEach(r => {
+      const gg = bars.append('g').attr('class', 'bar').attr('tabindex', 0).attr('role', 'button').attr('aria-label', r.m + ': ' + F.brl(r.tot));
+      gg.append('rect').attr('x', x(r.m)).attr('width', x.bandwidth()).attr('y', y(r.tot)).attr('height', Math.max(0, y(0) - y(r.tot))).attr('rx', 6).attr('fill', 'url(#gb)');
+      if (r.al > 0) gg.append('rect').attr('x', x(r.m)).attr('width', x.bandwidth()).attr('y', y(r.al)).attr('height', Math.max(0, y(0) - y(r.al))).attr('rx', 6).attr('fill', '#ef4444');
+      if (r.tot > 0) gg.append('text').attr('class', 'vl').attr('x', x(r.m) + x.bandwidth() / 2).attr('y', y(r.tot) - 6).attr('text-anchor', 'middle').text(r.tot >= 1e6 ? (r.tot / 1e6).toLocaleString('pt-BR', {maximumFractionDigits: 1}) + ' mi' : Math.round(r.tot / 1e3) + ' mil');
+      gg.append('text').attr('class', 'axis').attr('x', x(r.m) + x.bandwidth() / 2).attr('y', H - 8).attr('text-anchor', 'middle').append('tspan').attr('style', 'font-size:11px;fill:#7a879f').text(r.m);
+      const open = () => { det.replaceChildren(); if (!r.list.length) { det.append(el('p', 'note', 'Nenhum contrato com data neste mês.')); return; } det.append(el('div', 'k', r.m + '/2026 · ' + r.list.length + ' contrato(s) · ' + F.brl(r.tot))); det.append(contractList(r.list)); };
+      gg.on('click', open).on('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); open(); } });
+    });
+    box.append(svg.node());
+    const lg = el('div', 'chart-legend'); const a = el('span'); const ai = el('i'); ai.style.background = 'linear-gradient(#2563eb,#06b6d4)'; a.append(ai, document.createTextNode('Total contratado no mês'));
+    const b = el('span'); const bi = el('i'); bi.style.background = '#ef4444'; b.append(bi, document.createTextNode('Parte com alerta'));
+    const semData = contratos().filter(c => !/^2026-\d\d/.test(c.data)).length;
+    lg.append(a, b); if (semData) lg.append(el('span', null, semData + ' contrato(s) sem mês de 2026 informado (atas de dez/2025 ainda valendo ou sem data) não entram no gráfico.'));
+    box.append(lg, det);
+  });
+
+  /* rosca: com ou sem concorrência */
+  dash.draw('modDonut', box => {
+    box.replaceChildren();
+    const L = contratos().filter(c => +c.valor > 0);
+    const G = [['Sem concorrência', c => c.modalidade === 'Inexigibilidade' || c.modalidade === 'Dispensa', '#ef4444'], ['Com concorrência', c => /Pregão|Concorrência/.test(c.modalidade), '#2563eb'], ['Credenciamento', c => c.modalidade === 'Credenciamento', '#06b6d4'], ['Renovações', c => c.modalidade === 'Aditivo', '#7c3aed'], ['Não informada', c => true, '#94a3b8']];
+    const used = new Set(); const parts = G.map(([n, f, col]) => { const list = L.filter(c => !used.has(c.id) && f(c)); list.forEach(c => used.add(c.id)); return {n, col, list, v: d3.sum(list, c => +c.valor)}; }).filter(p => p.v > 0);
+    const tot = d3.sum(parts, p => p.v);
+    const S = 220, R = S / 2, svg = d3.create('svg').attr('viewBox', `0 0 ${S} ${S}`).attr('role', 'img').attr('aria-label', 'Divisão do valor contratado por forma de contratação');
+    const arc = d3.arc().innerRadius(R * .62).outerRadius(R - 4).cornerRadius(6).padAngle(.02);
+    const pie = d3.pie().value(p => p.v).sort(null);
+    const gg = svg.append('g').attr('transform', `translate(${R},${R})`);
+    const det = el('div', 'chart-det'); const list = el('div', 'dlist'); const btns = [];
+    const sel = (i) => { btns.forEach((b, j) => b.classList.toggle('on', j === i)); gg.selectAll('path').attr('opacity', (d, j) => i == null || j === i ? 1 : .35); det.replaceChildren(); if (i != null) det.append(contractList(parts[i].list)); };
+    gg.selectAll('path').data(pie(parts)).join('path').attr('d', arc).attr('fill', d => d.data.col).style('cursor', 'pointer').on('click', (ev, d) => sel(d.index));
+    gg.append('text').attr('text-anchor', 'middle').attr('y', -4).attr('style', "font:700 22px 'Space Grotesk',sans-serif;fill:#0b1b3a").text(F.mi(tot));
+    gg.append('text').attr('text-anchor', 'middle').attr('y', 16).attr('style', 'font:12px Inter,sans-serif;fill:#7a879f').text('contratados');
+    parts.forEach((p, i) => { const b = el('button'); b.type = 'button'; const ic = el('i'); ic.style.background = p.col; b.append(ic, el('span', null, p.n + ' · ' + p.list.length), el('b', null, F.pct(p.v / tot * 100))); b.addEventListener('click', () => sel(btns[i].classList.contains('on') ? null : i)); btns.push(b); list.append(b); });
+    const wrap = el('div', 'donut-wrap'); wrap.append(svg.node(), list); box.append(wrap, det);
+  });
+
   /* contadores animados */
   function countUp(node) {
     const txt = node.textContent; const m = txt.match(/^(.*?)(\d{1,3}(?:\.\d{3})*(?:,\d+)?)(.*)$/);
